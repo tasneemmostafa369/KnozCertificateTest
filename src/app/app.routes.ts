@@ -34,6 +34,14 @@ export const routes: Routes = [
         component: CertificatePreview,
     },
     {
+        path: 'certificates/Verification/:sspId',
+        loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
+    },
+    {
+        path: 'certificates/verification/:sspId',
+        loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
+    },
+    {
         path: '**',
         redirectTo: 'login',
     },

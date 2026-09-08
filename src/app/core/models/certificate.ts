@@ -7,4 +7,5 @@ export interface Certificate {
     // template: string;
     templateId: 'classic' | 'elegant' | 'quran';
     signerId: string;
+    sspId?: number;
 }

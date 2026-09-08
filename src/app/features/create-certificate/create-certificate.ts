@@ -20,7 +20,7 @@ export class CreateCertificate {
   private readonly certificateService = inject(CertificateService);
   private readonly languageService = inject(LanguageService);
   selectedTemplate: 'classic' | 'elegant' | 'quran' = 'classic';
-
+  sspId?: number;
 
   certificateForm = this.fb.nonNullable.group({
     studentName: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,6 +43,8 @@ export class CreateCertificate {
         courseName: data.courseName
       });
       
+      this.sspId = data.sspId;
+
       if (data.issueDate) {
         finalIssueDate = new Date(data.issueDate).toISOString().split('T')[0];
       }
@@ -84,6 +86,7 @@ export class CreateCertificate {
       templateId: this.selectedTemplate,
 
       signerId: 'signer-001',
+      sspId: this.sspId
     };
 
     // Save in LocalStorage

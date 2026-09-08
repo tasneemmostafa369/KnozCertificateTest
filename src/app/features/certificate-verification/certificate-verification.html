@@ -1,0 +1,118 @@
+<div class="min-h-screen bg-[#F7F3E8] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal']" dir="rtl">
+  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-[#DDE3E0]">
+    
+    <!-- Header -->
+    <div class="bg-[#0F392B] px-6 py-8 text-center text-white">
+      <img src="assets/logo.jpeg" alt="Knoz Academy" class="h-20 w-auto mx-auto mb-4 rounded-full border-2 border-[#C8A559]">
+      <h1 class="text-3xl font-bold text-[#C8A559] mb-2 font-['Amiri']">أكاديمية كنوز</h1>
+      <p class="text-lg opacity-90">نظام التحقق الإلكتروني من الشهادات</p>
+    </div>
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+      <div class="p-12 text-center">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#C8A559] mx-auto mb-4"></div>
+        <p class="text-lg text-[#6B7280]">جاري التحقق من بيانات الشهادة...</p>
+      </div>
+    }
+
+    <!-- Error State -->
+    @if (!isLoading() && error()) {
+      <div class="p-12 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
+          <i class="fas fa-times text-2xl text-red-600"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-red-600 mb-2">تعذر التحقق</h2>
+        <p class="text-[#6B7280] text-lg">{{ error() }}</p>
+      </div>
+    }
+
+    <!-- Success State -->
+    @if (!isLoading() && courseData()) {
+      <div class="p-8 sm:p-10">
+        
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+            <i class="fas fa-check text-2xl text-green-600"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-[#1F2933] mb-4">شهادة معتمدة وموثقة</h2>
+          <p class="text-lg text-[#1F2933] leading-relaxed max-w-2xl mx-auto">
+            تشهد أكاديمية كنوز أن هذا الكورس قد تم إنجازه بنجاح وفقاً للمعايير الأكاديمية المعتمدة لدينا.
+          </p>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
+          <h3 class="text-xl font-bold text-[#0F392B] mb-6 border-b border-gray-200 pb-3">تفاصيل الكورس</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Data item -->
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">اسم الباقة</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().planName }}</p>
+            </div>
+            
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">المادة</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().subjectName }}</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">المعلم/ة</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().teacherName }}</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">المشرف/ة</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().monitorName }}</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">عدد الحصص</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().sessionsCount }} حصة</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">مدة الحصة</p>
+              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().duration }} دقيقة</p>
+            </div>
+
+            @if (firstSessionDate) {
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">تاريخ أول حصة</p>
+              <p class="font-semibold text-lg text-[#1F2933]" dir="ltr">{{ firstSessionDate | date:'yyyy/MM/dd' }}</p>
+            </div>
+            }
+
+            @if (lastSessionDate) {
+            <div>
+              <p class="text-sm text-[#6B7280] mb-1">تاريخ آخر حصة</p>
+              <p class="font-semibold text-lg text-[#1F2933]" dir="ltr">{{ lastSessionDate | date:'yyyy/MM/dd' }}</p>
+            </div>
+            }
+          </div>
+
+          @if (courseData().coursePattern && courseData().coursePattern.length > 0) {
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <h4 class="text-md font-bold text-[#0F392B] mb-4">مواعيد الحصص الأسبوعية</h4>
+            <div class="flex flex-wrap gap-3">
+              @for (pattern of courseData().coursePattern; track pattern) {
+                <div class="bg-white border border-[#DDE3E0] rounded-lg px-4 py-2 text-sm font-medium text-[#1F2933] shadow-sm flex items-center gap-2">
+                  <i class="far fa-clock text-[#C8A559]"></i>
+                  <span>{{ getDayName(pattern.dayOfWeek) }}</span>
+                  <span dir="ltr">{{ pattern.time }}</span>
+                </div>
+              }
+            </div>
+          </div>
+          }
+        </div>
+
+      </div>
+    }
+
+    <!-- Footer -->
+    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 text-center">
+      <p class="text-sm text-[#6B7280]">جميع الحقوق محفوظة &copy; أكاديمية كنوز {{ currentYear() }}</p>
+    </div>
+  </div>
+</div>

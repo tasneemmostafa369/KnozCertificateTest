@@ -105,7 +105,8 @@ export class ExpiredCoursesComponent implements OnInit, OnDestroy {
         prefillData: {
           studentName: course.studentName,
           courseName: course.planName,
-          issueDate: course.endDate
+          issueDate: course.endDate,
+          sspId: course.sspId
         }
       }
     });

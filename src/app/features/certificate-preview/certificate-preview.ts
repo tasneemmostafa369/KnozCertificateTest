@@ -38,8 +38,9 @@ export class CertificatePreview implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.certificate?.id) {
-      this.generateQrCode(this.certificate.id);
+    if (this.certificate) {
+      const qrData = this.certificate.sspId ? `https://knoz-certificate.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate.vercel.app/certificates/Verification/${this.certificate.id}`;
+      this.generateQrCode(qrData);
     }
   }
 
@@ -98,6 +99,28 @@ export class CertificatePreview implements OnInit {
       const pdfHeight = (elementHeight * pdfWidth) / elementWidth;
 
       pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+
+      // Add clickable link over the verify button
+      const verifyBtn = document.getElementById('verify-link');
+      if (verifyBtn) {
+        const btnRect = verifyBtn.getBoundingClientRect();
+        const containerRect = element.getBoundingClientRect();
+
+        // Calculate position relative to the container
+        const relativeX = btnRect.left - containerRect.left;
+        const relativeY = btnRect.top - containerRect.top;
+
+        // Scale to PDF dimensions
+        const pdfX = (relativeX / elementWidth) * pdfWidth;
+        const pdfY = (relativeY / elementHeight) * pdfHeight;
+        const pdfW = (btnRect.width / elementWidth) * pdfWidth;
+        const pdfH = (btnRect.height / elementHeight) * pdfHeight;
+
+        const qrDataUrl = this.certificate?.sspId ? `https://knoz-certificate.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate.vercel.app/certificates/Verification/${this.certificate?.id}`;
+        
+        pdf.link(pdfX, pdfY, pdfW, pdfH, { url: qrDataUrl });
+      }
+
       pdf.save(`${this.certificate?.studentName ?? 'certificate'}.pdf`);
     } catch (error) {
       console.error('Error downloading certificate:', error);

@@ -145,6 +145,7 @@ export const DICTIONARY = {
       'تحميل الشهادة',
       
     printCertificate: 'طباعة الشهادة',
+    verifyCertificateBtn: 'التحقق',
 
     back: 'رجوع',
 
@@ -320,6 +321,7 @@ export const DICTIONARY = {
       'Download Certificate',
       
     printCertificate: 'Print Certificate',
+    verifyCertificateBtn: 'Verify',
 
     back: 'Back',
 

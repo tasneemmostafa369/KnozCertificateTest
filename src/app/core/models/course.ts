@@ -9,6 +9,7 @@ export interface ExpiredCourse {
   monitorName: string;
   monitorPhone: string;
   daysSinceExpiration?: number;
+  sspId?: number;
 }
 
 export interface ExpiredCoursesResponse {
