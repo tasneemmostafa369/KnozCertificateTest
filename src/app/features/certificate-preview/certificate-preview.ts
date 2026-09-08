@@ -39,7 +39,7 @@ export class CertificatePreview implements OnInit {
 
   ngOnInit(): void {
     if (this.certificate) {
-      const qrData = this.certificate.sspId ? `https://knozcertificatetesting.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knozcertificatetesting.vercel.app/certificates/Verification/${this.certificate.id}`;
+      const qrData = this.certificate.sspId ? `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.id}`;
       this.generateQrCode(qrData);
     }
   }
@@ -116,7 +116,7 @@ export class CertificatePreview implements OnInit {
         const pdfW = (btnRect.width / elementWidth) * pdfWidth;
         const pdfH = (btnRect.height / elementHeight) * pdfHeight;
 
-        const qrDataUrl = this.certificate?.sspId ? `https://knozcertificatetesting.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knozcertificatetesting.vercel.app/certificates/Verification/${this.certificate?.id}`;
+        const qrDataUrl = this.certificate?.sspId ? `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate?.id}`;
         
         pdf.link(pdfX, pdfY, pdfW, pdfH, { url: qrDataUrl });
       }
