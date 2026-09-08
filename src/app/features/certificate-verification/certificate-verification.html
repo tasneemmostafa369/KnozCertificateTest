@@ -1,105 +1,151 @@
-<div class="min-h-screen bg-[#F7F3E8] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal']" dir="rtl">
-  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-[#DDE3E0]">
+<div class="min-h-screen gradient-bg py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-500" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+  
+  <!-- Language Toggle -->
+  <div class="absolute top-4 right-4 sm:top-8 sm:right-8 z-50">
+    <button (click)="toggleLang()" class="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-[#C8A559]/30 text-[#0F392B] px-4 py-2 rounded-full shadow-sm hover:shadow-md hover:bg-white/80 transition-all font-semibold">
+      <i class="fas fa-globe text-[#C8A559]"></i>
+      <span>{{ lang() === 'ar' ? 'English' : 'عربي' }}</span>
+    </button>
+  </div>
+
+  <div class="w-full max-w-4xl mx-auto glass-card rounded-3xl shadow-2xl overflow-hidden animate-[fadeIn_0.5s_ease-out]">
     
     <!-- Header -->
-    <div class="bg-[#0F392B] px-6 py-8 text-center text-white">
-      <img src="assets/logo.jpeg" alt="Knoz Academy" class="h-20 w-auto mx-auto mb-4 rounded-full border-2 border-[#C8A559]">
-      <h1 class="text-3xl font-bold text-[#C8A559] mb-2 font-['Amiri']">أكاديمية كنوز</h1>
-      <p class="text-lg opacity-90">نظام التحقق الإلكتروني من الشهادات</p>
+    <div class="bg-[#0F392B] px-8 py-10 text-center text-white relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
+      <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-[#C8A559] rounded-full blur-3xl opacity-20"></div>
+      <div class="absolute -top-10 -left-10 w-40 h-40 bg-white rounded-full blur-3xl opacity-10"></div>
+      
+      <div class="relative z-10">
+        <img src="assets/logo.jpeg" alt="Knoz Academy" class="h-24 w-24 object-cover mx-auto mb-6 rounded-full border-2 border-[#C8A559] shadow-[0_0_15px_rgba(200,165,89,0.5)] transition-transform duration-500 hover:scale-110">
+        <h1 class="text-3xl sm:text-4xl font-bold text-[#C8A559] mb-3 font-['Amiri'] drop-shadow-md">{{ texts()['academyName'] }}</h1>
+        <p class="text-lg sm:text-xl font-light opacity-90">{{ texts()['verificationTitle'] }}</p>
+      </div>
     </div>
 
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="p-12 text-center">
-        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#C8A559] mx-auto mb-4"></div>
-        <p class="text-lg text-[#6B7280]">جاري التحقق من بيانات الشهادة...</p>
+      <div class="p-20 text-center">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#C8A559] mx-auto mb-6"></div>
+        <p class="text-xl text-[#0F392B] animate-pulse font-medium">{{ texts()['loadingMsg'] }}</p>
       </div>
     }
 
     <!-- Error State -->
     @if (!isLoading() && error()) {
-      <div class="p-12 text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
-          <i class="fas fa-times text-2xl text-red-600"></i>
+      <div class="p-16 text-center animate-[fadeIn_0.5s_ease-out]">
+        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-50 border-4 border-red-100 mb-6 shadow-sm">
+          <i class="fas fa-times text-4xl text-red-500"></i>
         </div>
-        <h2 class="text-2xl font-bold text-red-600 mb-2">تعذر التحقق</h2>
-        <p class="text-[#6B7280] text-lg">{{ error() }}</p>
+        <h2 class="text-3xl font-bold text-red-600 mb-4">{{ texts()['errorFailed'] }}</h2>
+        <p class="text-[#6B7280] text-lg max-w-md mx-auto">{{ error() }}</p>
       </div>
     }
 
     <!-- Success State -->
     @if (!isLoading() && courseData()) {
-      <div class="p-8 sm:p-10">
+      <div class="p-8 sm:p-12 animate-[fadeIn_0.6s_ease-out]">
         
-        <div class="text-center mb-10">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-            <i class="fas fa-check text-2xl text-green-600"></i>
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-green-100 to-green-50 mb-6 shadow-sm border-4 border-white">
+            <i class="fas fa-check text-4xl text-green-500 animate-checkmark"></i>
           </div>
-          <h2 class="text-2xl font-bold text-[#1F2933] mb-4">شهادة معتمدة وموثقة</h2>
-          <p class="text-lg text-[#1F2933] leading-relaxed max-w-2xl mx-auto">
-            تشهد أكاديمية كنوز أن هذا الكورس قد تم إنجازه بنجاح وفقاً للمعايير الأكاديمية المعتمدة لدينا.
+          <h2 class="text-3xl font-bold text-[#0F392B] mb-4 drop-shadow-sm">{{ texts()['verifiedSuccess'] }}</h2>
+          <p class="text-lg text-[#4B5563] leading-relaxed max-w-2xl mx-auto font-light">
+            {{ texts()['verifiedDesc'] }}
           </p>
         </div>
 
-        <div class="bg-gray-50 rounded-xl p-6 border border-gray-100">
-          <h3 class="text-xl font-bold text-[#0F392B] mb-6 border-b border-gray-200 pb-3">تفاصيل الكورس</h3>
+        <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-8 border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden group hover:bg-white/80 transition-all duration-500">
+          <div class="absolute top-0 right-0 w-2 h-full bg-[#C8A559] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Data item -->
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">اسم الباقة</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().planName }}</p>
+          <div class="flex items-center gap-3 mb-8 border-b border-gray-200/60 pb-4">
+            <div class="w-10 h-10 rounded-full bg-[#0F392B]/5 flex items-center justify-center text-[#C8A559]">
+              <i class="fas fa-graduation-cap text-xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-[#0F392B]">{{ texts()['courseDetails'] }}</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+            <!-- Data items with hover effects -->
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-bookmark text-[#C8A559]/70 text-xs"></i> {{ texts()['planName'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">{{ courseData().planName }}</p>
             </div>
             
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">المادة</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().subjectName }}</p>
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-book-open text-[#C8A559]/70 text-xs"></i> {{ texts()['subject'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">{{ courseData().subjectName }}</p>
             </div>
 
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">المعلم/ة</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().teacherName }}</p>
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-chalkboard-teacher text-[#C8A559]/70 text-xs"></i> {{ texts()['teacherLbl'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">{{ courseData().teacherName }}</p>
             </div>
 
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">المشرف/ة</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().monitorName }}</p>
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-user-shield text-[#C8A559]/70 text-xs"></i> {{ texts()['monitorLbl'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">{{ courseData().monitorName }}</p>
             </div>
 
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">عدد الحصص</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().sessionsCount }} حصة</p>
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-layer-group text-[#C8A559]/70 text-xs"></i> {{ texts()['sessionsCountLbl'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">
+                <span class="text-2xl text-[#C8A559] mr-1">{{ courseData().sessionsCount }}</span> {{ texts()['sessionWord'] }}
+              </p>
             </div>
 
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">مدة الحصة</p>
-              <p class="font-semibold text-lg text-[#1F2933]">{{ courseData().duration }} دقيقة</p>
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-hourglass-half text-[#C8A559]/70 text-xs"></i> {{ texts()['durationLbl'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors">
+                <span class="text-2xl text-[#C8A559] mr-1">{{ courseData().duration }}</span> {{ texts()['minutesWord'] }}
+              </p>
             </div>
 
-            @if (firstSessionDate) {
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">تاريخ أول حصة</p>
-              <p class="font-semibold text-lg text-[#1F2933]" dir="ltr">{{ firstSessionDate | date:'yyyy/MM/dd' }}</p>
+            @if (startDate) {
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-calendar-alt text-[#C8A559]/70 text-xs"></i> {{ texts()['startDate'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors" dir="ltr">{{ startDate | date:'yyyy/MM/dd' }}</p>
             </div>
             }
 
-            @if (lastSessionDate) {
-            <div>
-              <p class="text-sm text-[#6B7280] mb-1">تاريخ آخر حصة</p>
-              <p class="font-semibold text-lg text-[#1F2933]" dir="ltr">{{ lastSessionDate | date:'yyyy/MM/dd' }}</p>
+            @if (endDate) {
+            <div class="group/item">
+              <p class="text-sm text-[#8796A5] mb-2 uppercase tracking-wide font-medium flex items-center gap-2">
+                <i class="fas fa-calendar-check text-[#C8A559]/70 text-xs"></i> {{ texts()['endDate'] }}
+              </p>
+              <p class="font-semibold text-xl text-[#1F2933] group-hover/item:text-[#0F392B] transition-colors" dir="ltr">{{ endDate | date:'yyyy/MM/dd' }}</p>
             </div>
             }
           </div>
 
           @if (courseData().coursePattern && courseData().coursePattern.length > 0) {
-          <div class="mt-8 pt-6 border-t border-gray-200">
-            <h4 class="text-md font-bold text-[#0F392B] mb-4">مواعيد الحصص الأسبوعية</h4>
-            <div class="flex flex-wrap gap-3">
+          <div class="mt-10 pt-8 border-t border-gray-200/60">
+            <h4 class="text-lg font-bold text-[#0F392B] mb-6 flex items-center gap-2">
+              <i class="fas fa-clock text-[#C8A559]"></i> {{ texts()['scheduleTitle'] }}
+            </h4>
+            <div class="flex flex-wrap gap-4">
               @for (pattern of courseData().coursePattern; track pattern) {
-                <div class="bg-white border border-[#DDE3E0] rounded-lg px-4 py-2 text-sm font-medium text-[#1F2933] shadow-sm flex items-center gap-2">
-                  <i class="far fa-clock text-[#C8A559]"></i>
+                <div class="bg-white border border-[#DDE3E0] rounded-xl px-6 py-3 text-sm font-bold text-[#1F2933] shadow-sm flex items-center gap-3 transition-transform hover:-translate-y-1 hover:shadow-md hover:border-[#C8A559]/50">
+                  <div class="w-2 h-2 rounded-full bg-[#C8A559]"></div>
                   <span>{{ getDayName(pattern.dayOfWeek) }}</span>
-                  <span dir="ltr">{{ pattern.time }}</span>
+                  <span class="text-gray-300 mx-1">|</span>
+                  <span dir="ltr" class="text-[#0F392B] font-mono tracking-wide">{{ formatTime(pattern.time) }}</span>
                 </div>
               }
             </div>
@@ -111,8 +157,8 @@
     }
 
     <!-- Footer -->
-    <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 text-center">
-      <p class="text-sm text-[#6B7280]">جميع الحقوق محفوظة &copy; أكاديمية كنوز {{ currentYear() }}</p>
+    <div class="bg-[#0F392B]/5 px-8 py-6 border-t border-[#0F392B]/10 text-center">
+      <p class="text-sm text-[#6B7280] font-medium">{{ texts()['allRightsReserved'] }} &copy; {{ texts()['academyName'] }} {{ currentYear() }}</p>
     </div>
   </div>
 </div>

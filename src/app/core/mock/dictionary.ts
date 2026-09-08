@@ -168,6 +168,29 @@ export const DICTIONARY = {
 
   courseName: 'اسم الدورة',
   quranCourse: 'القرآن الكريم',
+
+  // Verification Page
+  verificationTitle: 'نظام التحقق الإلكتروني من الشهادات',
+  verifiedSuccess: 'شهادة معتمدة وموثقة',
+  verifiedDesc: 'تشهد أكاديمية كنوز أن هذا الكورس قد تم إنجازه بنجاح وفقاً للمعايير الأكاديمية المعتمدة لدينا.',
+  courseDetails: 'تفاصيل الكورس',
+  planName: 'اسم الباقة',
+  subject: 'المادة',
+  teacherLbl: 'المعلم/ة',
+  monitorLbl: 'المشرف/ة',
+  sessionsCountLbl: 'عدد الحصص',
+  sessionWord: 'حصة',
+  durationLbl: 'مدة الحصة',
+  minutesWord: 'دقيقة',
+  startDate: 'تاريخ بداية الكورس',
+  endDate: 'تاريخ نهاية الكورس',
+  scheduleTitle: 'مواعيد الحصص الأسبوعية',
+  loadingMsg: 'جاري التحقق من بيانات الشهادة...',
+  errorFailed: 'تعذر التحقق',
+  errorNotFound: 'لم يتم العثور على بيانات الشهادة.',
+  errorGeneric: 'حدث خطأ أثناء التحقق من الشهادة.',
+  errorNoCourseId: 'رقم الكورس غير متوفر.',
+  allRightsReserved: 'جميع الحقوق محفوظة',
   },
 
   en: {
@@ -343,6 +366,29 @@ export const DICTIONARY = {
 
   courseName: 'Course Name',
   quranCourse: 'Holy Quran',
+
+  // Verification Page
+  verificationTitle: 'Electronic Certificate Verification System',
+  verifiedSuccess: 'Verified & Authenticated Certificate',
+  verifiedDesc: 'Knoz Academy certifies that this course has been successfully completed according to our approved academic standards.',
+  courseDetails: 'Course Details',
+  planName: 'Plan Name',
+  subject: 'Subject',
+  teacherLbl: 'Teacher',
+  monitorLbl: 'Monitor',
+  sessionsCountLbl: 'Sessions Count',
+  sessionWord: 'session(s)',
+  durationLbl: 'Session Duration',
+  minutesWord: 'minutes',
+  startDate: 'Course Start Date',
+  endDate: 'Course End Date',
+  scheduleTitle: 'Weekly Class Schedule',
+  loadingMsg: 'Verifying certificate data...',
+  errorFailed: 'Verification Failed',
+  errorNotFound: 'Certificate data not found.',
+  errorGeneric: 'An error occurred while verifying the certificate.',
+  errorNoCourseId: 'Course ID is not available.',
+  allRightsReserved: 'All rights reserved',
 
   },
 
