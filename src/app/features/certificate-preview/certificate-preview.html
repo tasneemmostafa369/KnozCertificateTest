@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-slate-50" [attr.dir]="pageDirection">
+  <!-- Floating Action Bar / Header -->
+  <header class="no-print sticky top-0 z-10 flex flex-col gap-4 border-b border-gray-200 bg-white/80 px-4 py-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10 shadow-sm">
+    <div class="min-w-0">
+      <h1 class="text-xl font-bold text-gray-800 tracking-tight sm:text-2xl">{{ getPageText('certificatePreview') }}</h1>
+      <p class="mt-1 text-sm text-gray-500">{{ getPageText('reviewCertificate') }}</p>
+    </div>
+    <div class="no-print flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+      <a routerLink="/certificates/create" class="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 hover:text-knoz-green sm:w-auto">
+        <i class="fa-solid" [ngClass]="pageDirection === 'rtl' ? 'fa-arrow-right' : 'fa-arrow-left'"></i>
+        {{ getPageText('back') }}
+      </a>
+      <button type="button" (click)="printCertificate()" class="flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 hover:text-knoz-green sm:w-auto">
+        <i class="fa-solid fa-print"></i>
+        {{ getPageText('printCertificate') }}
+      </button>
+      <button type="button" (click)="downloadCertificate()" class="flex w-full items-center justify-center gap-2 rounded-xl bg-knoz-gold px-5 py-2.5 text-sm font-bold text-knoz-green shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg hover:bg-[#d4b367] sm:w-auto">
+        <i class="fa-solid fa-download"></i>
+        {{ getPageText('downloadCertificate') }}
+      </button>
+    </div>
+  </header>
+
+  <main class="certificate-preview-area flex min-h-[calc(100vh-5rem)] items-start justify-start overflow-x-auto overflow-y-auto p-4 sm:items-center sm:justify-center sm:p-8 lg:p-12">
+    <div class="certificate-wrapper flex min-w-full justify-start sm:justify-center">
+      @if (certificate) {
+        <!-- The actual document container with ring to look like physical paper -->
+        <div class="ring-8 ring-white/50 rounded-sm shadow-2xl transition-all print:ring-0 print:shadow-none">
+          <div id="certificate-download-container" class="certificate-print relative aspect-[297/210] w-[700px] max-w-none shrink-0 overflow-hidden bg-white shadow-inner print:shadow-none sm:w-full sm:max-w-5xl">
+            @if (templateId === 'classic') {
+              @defer (on immediate) {
+                <app-classic-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-classic-certificate>
+              }
+            }
+            @if (templateId === 'elegant') {
+              @defer (on immediate) {
+                <app-elegant-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-elegant-certificate>
+              }
+            }
+            @if (templateId === 'quran') {
+              @defer (on immediate) {
+                <app-quran-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-quran-certificate>
+              }
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="flex flex-col items-center justify-center p-12 text-gray-400">
+          <i class="fa-solid fa-file-circle-xmark text-6xl mb-4 text-gray-300"></i>
+          <p class="text-lg font-medium">No certificate found</p>
+        </div>
+      }
+    </div>
+  </main>
+</div>

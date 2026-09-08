@@ -1,0 +1,162 @@
+<div class="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8" [attr.dir]="direction">
+  <!-- Header Section -->
+  <a routerLink="/dashboard" class="mb-5 inline-flex w-fit items-center gap-2 rounded-lg bg-white px-3 py-1.5 text-sm font-medium text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 hover:text-knoz-green">
+    <i class="fa-solid fa-arrow-left rtl:rotate-180" [ngClass]="direction === 'rtl' ? 'fa-arrow-right' : 'fa-arrow-left'"></i>
+    {{ getText('backToDashboard') }}
+  </a>
+  <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-3xl font-bold text-knoz-green">{{ getText('expiredCoursesTitle') }}</h1>
+      <div class="mt-2 h-1 w-20 bg-knoz-gold"></div>
+      <p class="mt-2 text-sm text-gray-500 font-medium">{{ getText('expiredCoursesDesc') }}</p>
+    </div>
+    
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <!-- Search Input -->
+      <div class="relative w-full sm:w-80">
+        <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center px-4">
+          <i class="fa-solid fa-magnifying-glass text-knoz-gold"></i>
+        </div>
+        <input 
+          type="text" 
+          [ngModel]="searchQuery()" 
+          (ngModelChange)="onSearchChange($event)"
+          [placeholder]="getText('searchStudentName')" 
+          class="block w-full rounded-full border-0 py-3 px-12 text-sm text-knoz-green shadow-sm ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-knoz-gold transition-all"
+        />
+      </div>
+      
+      <!-- Refresh Button -->
+      <button 
+        (click)="refresh()" 
+        [disabled]="isLoading()"
+        class="flex items-center justify-center gap-2 rounded-full bg-knoz-green px-6 py-3 text-sm font-bold text-knoz-gold shadow-md transition-all hover:opacity-90 disabled:opacity-50"
+      >
+        <i class="fa-solid fa-arrows-rotate" [class.animate-spin]="isLoading()"></i>
+        <span class="hidden sm:inline">{{ getText('refresh') }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div class="relative overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-knoz-gold/20">
+    
+    <!-- Loading Overlay -->
+    @if (isLoading()) {
+      <div class="absolute inset-0 z-10 flex items-center justify-center bg-white/60 backdrop-blur-sm">
+        <div class="h-12 w-12 animate-spin rounded-full border-4 border-knoz-gold/30 border-t-knoz-green"></div>
+      </div>
+    }
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200 text-start">
+        <thead class="bg-knoz-green">
+          <tr>
+            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase tracking-wider text-knoz-gold">{{ getText('studentInfo') }}</th>
+            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase tracking-wider text-knoz-gold">{{ getText('subjectPlan') }}</th>
+            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase tracking-wider text-knoz-gold">{{ getText('statusDate') }}</th>
+            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase tracking-wider text-knoz-gold">{{ getText('teacher') }}</th>
+            <th scope="col" class="px-6 py-5 text-start text-xs font-bold uppercase tracking-wider text-knoz-gold">{{ getText('monitor') }}</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 bg-white">
+          @for (course of courses(); track $index) {
+            <tr (click)="navigateToCertificate(course)" class="transition-colors hover:bg-knoz-gold/10 cursor-pointer">
+              <!-- Student Info -->
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex flex-col">
+                  <span class="font-bold text-knoz-green text-base">{{ course.studentName }}</span>
+                  <span class="mt-1 flex items-center gap-1.5 text-xs font-medium text-gray-500">
+                    <i class="fa-solid fa-phone text-knoz-gold"></i> {{ course.studentOrParentPhone }}
+                  </span>
+                </div>
+              </td>
+              
+              <!-- Subject & Plan -->
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex flex-col items-start">
+                  <span class="font-bold text-knoz-green">{{ course.subjectName }}</span>
+                  <span class="mt-1.5 inline-flex items-center rounded-md border border-knoz-gold/30 bg-knoz-gold/10 px-2.5 py-0.5 text-xs font-bold text-knoz-green">
+                    {{ course.planName }}
+                  </span>
+                </div>
+              </td>
+              
+              <!-- End Date & Days -->
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-gray-700">
+                    <i class="fa-regular fa-calendar text-knoz-gold mx-1"></i> {{ course.endDate | date:'dd MMM yyyy' }}
+                  </span>
+                  <span class="mt-1.5 inline-flex w-fit items-center gap-1 rounded bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600 border border-red-100">
+                    <i class="fa-solid fa-circle-exclamation"></i> {{ course.daysSinceExpiration }} {{ getText('daysOverdue') }}
+                  </span>
+                </div>
+              </td>
+              
+              <!-- Teacher Info -->
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-knoz-green">
+                    <i class="fa-solid fa-chalkboard-user text-knoz-gold mx-1"></i> {{ course.primaryTeacherName }}
+                  </span>
+                  <span class="mt-1 text-xs text-gray-500 px-5">{{ course.primaryTeacherPhone }}</span>
+                </div>
+              </td>
+              
+              <!-- Monitor Info -->
+              <td class="whitespace-nowrap px-6 py-4">
+                <div class="flex flex-col">
+                  <span class="text-sm font-bold text-knoz-green">
+                    <i class="fa-solid fa-user-shield text-knoz-gold mx-1"></i> {{ course.monitorName }}
+                  </span>
+                  <span class="mt-1 text-xs text-gray-500 px-5">{{ course.monitorPhone }}</span>
+                </div>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="px-6 py-20 text-center">
+                <div class="flex flex-col items-center justify-center">
+                  <div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-knoz-green/5">
+                    <i class="fa-regular fa-folder-open text-3xl text-knoz-gold"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-knoz-green">{{ getText('noExpiredCourses') }}</h3>
+                  <p class="mt-2 text-sm text-gray-500">{{ getText('noRecordsMatching') }}</p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Footer -->
+    <div class="flex flex-col items-center justify-between gap-4 border-t border-knoz-gold/20 bg-gray-50 px-6 py-4 sm:flex-row">
+      <p class="text-sm font-medium text-gray-600">
+        {{ getText('showingPage') }} <span class="font-bold text-knoz-green">{{ currentPage() }}</span> {{ getText('of') }} 
+        <span class="font-bold text-knoz-green">{{ totalPages() }}</span> 
+        <span class="hidden text-gray-500 sm:inline"> ({{ getText('totalRecords') }} {{ totalCount() }})</span>
+      </p>
+      
+      <div class="flex gap-2">
+        <button 
+          (click)="prevPage()" 
+          [disabled]="currentPage() === 1 || isLoading()"
+          class="flex items-center gap-2 rounded-lg border border-knoz-gold/50 bg-white px-4 py-2.5 text-sm font-bold text-knoz-green shadow-sm transition-all hover:bg-knoz-gold/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white"
+        >
+          <i class="fa-solid fa-chevron-left text-xs" [ngClass]="direction === 'rtl' ? 'fa-chevron-right' : 'fa-chevron-left'"></i>
+          {{ getText('prev') }}
+        </button>
+        <button 
+          (click)="nextPage()" 
+          [disabled]="currentPage() === totalPages() || isLoading()"
+          class="flex items-center gap-2 rounded-lg border border-knoz-gold/50 bg-white px-4 py-2.5 text-sm font-bold text-knoz-green shadow-sm transition-all hover:bg-knoz-gold/10 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white"
+        >
+          {{ getText('next') }}
+          <i class="fa-solid fa-chevron-right text-xs" [ngClass]="direction === 'rtl' ? 'fa-chevron-left' : 'fa-chevron-right'"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

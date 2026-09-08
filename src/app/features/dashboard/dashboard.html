@@ -1,0 +1,353 @@
+<div class="min-h-screen bg-gray-50" [attr.dir]="currentLanguage === 'ar' ? 'rtl' : 'ltr'">
+
+  <!-- Desktop Sidebar -->
+  <aside class="fixed inset-y-0 start-0 hidden w-64 bg-knoz-green lg:block">
+    <div class="flex h-full flex-col">
+      <!-- Logo -->
+      <div class="border-b border-white/10 p-6">
+        <h1 class="text-xl font-bold tracking-wide text-white">
+           {{ getText('academyName') }}
+        </h1>
+        <p class="mt-1 text-xs text-white/60">
+           {{ getText('certificateManagement') }}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 space-y-2 p-4">
+        <a routerLink="/dashboard" routerLinkActive="bg-white/10 text-white" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+           <i class="fa-solid fa-chart-line w-5 text-center"></i>
+           {{ getText('dashboard') }}
+        </a>
+        <a routerLink="/certificates/create" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+           <i class="fa-solid fa-certificate w-5 text-center"></i>
+           {{ getText('certificates') }}
+        </a>
+        <a routerLink="/expired-courses" routerLinkActive="bg-white/10 text-white" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+           <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i>
+           <span>{{ getText('expiredCourses') }}</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="border-t border-white/10 p-4">
+        <button class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-white/70 transition hover:bg-white/10 hover:text-white">
+           <i class="fa-solid fa-gear w-5 text-center"></i>
+           {{ getText('settings') }}
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Sidebar -->
+  @if (isMobileSidebarOpen) {
+  <!-- Overlay -->
+  <div (click)="closeMobileSidebar()" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden transition-opacity">
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="fixed inset-y-0 start-0 z-50 flex w-64 flex-col bg-knoz-green shadow-2xl lg:hidden">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-white/10 p-6">
+      <div>
+        <h1 class="text-xl font-bold tracking-wide text-white">
+           {{ getText('academyName') }}
+        </h1>
+        <p class="mt-1 text-xs text-white/60">
+           {{ getText('certificateManagement') }}
+        </p>
+      </div>
+      <!-- Close Button -->
+      <button type="button" (click)="closeMobileSidebar()" class="rounded-lg p-2 text-xl text-white/70 transition hover:bg-white/10 hover:text-white">
+        ✕
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 space-y-2 p-4">
+      <a routerLink="/dashboard" routerLinkActive="bg-white/10 text-white" (click)="closeMobileSidebar()" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+         <i class="fa-solid fa-chart-line w-5 text-center"></i>
+         {{ getText('dashboard') }}
+      </a>
+      <a routerLink="/certificates/create" (click)="closeMobileSidebar()" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+         <i class="fa-solid fa-certificate w-5 text-center"></i>
+         {{ getText('certificates') }}
+      </a>
+      <a routerLink="/expired-courses" (click)="closeMobileSidebar()" routerLinkActive="bg-white/10 text-white" class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+         <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i>
+         <span>{{ getText('expiredCourses') }}</span>
+      </a>
+    </nav>
+
+    <!-- Footer -->
+    <div class="border-t border-white/10 p-4">
+      <button class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-white/70 transition hover:bg-white/10 hover:text-white">
+         <i class="fa-solid fa-gear w-5 text-center"></i>
+         {{ getText('settings') }}
+      </button>
+    </div>
+  </aside>
+  }
+
+  <!-- Main -->
+  <main class="lg:ms-64 transition-all duration-300 ease-in-out">
+
+    <!-- Mobile header -->
+    <div class="flex items-center justify-between bg-knoz-green px-5 py-4 shadow-md lg:hidden">
+      <h1 class="font-bold text-white tracking-wide">
+         {{ getText('academyName') }}
+      </h1>
+      <button type="button" (click)="openMobileSidebar()" class="rounded-lg bg-white/10 px-3 py-2 text-white transition hover:bg-white/20">
+        ☰
+      </button>
+    </div>
+
+    <!-- header -->
+    <header class="flex h-20 items-center justify-between border-b border-gray-200 bg-white px-6 shadow-sm lg:px-10">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800 tracking-tight">
+           {{ getText('dashboard') }}
+        </h2>
+      </div>
+
+      <div class="flex items-center gap-2 rounded-lg bg-gray-100 p-1 shadow-inner">
+        <button
+          type="button"
+          (click)="setLanguage('en')"
+          [class.bg-white]="currentLanguage === 'en'"
+          [class.shadow]="currentLanguage === 'en'"
+          [class.text-knoz-green]="currentLanguage === 'en'"
+          [class.text-gray-500]="currentLanguage !== 'en'"
+          class="rounded-md px-4 py-1.5 text-sm font-bold transition-all duration-200 hover:text-knoz-green">
+          EN
+        </button>
+        <button
+          type="button"
+          (click)="setLanguage('ar')"
+          [class.bg-white]="currentLanguage === 'ar'"
+          [class.shadow]="currentLanguage === 'ar'"
+          [class.text-knoz-green]="currentLanguage === 'ar'"
+          [class.text-gray-500]="currentLanguage !== 'ar'"
+          class="rounded-md px-4 py-1.5 text-sm font-bold transition-all duration-200 hover:text-knoz-green">
+          العربية
+        </button>
+      </div>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="px-6 py-8 lg:px-10">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between rounded-2xl bg-gradient-to-r from-knoz-green to-emerald-900 p-8 shadow-lg text-white">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-wider text-knoz-gold">
+             {{ getText('academyName') }}
+          </p>
+          <h1 class="mt-2 text-3xl font-extrabold tracking-tight lg:text-4xl drop-shadow-sm">
+             {{ getText('welcomeToKnoz') }}
+          </h1>
+          <p class="mt-3 max-w-xl text-white/80 text-lg">
+            {{ getText('welcomeDescription') }}
+          </p>
+        </div>
+
+        <a routerLink="/expired-courses" class="inline-flex items-center justify-center gap-2 rounded-xl bg-knoz-gold px-7 py-3.5 font-bold text-knoz-green shadow-md transition-all hover:-translate-y-1 hover:shadow-xl hover:bg-[#d4b367]">
+          <i class="fa-solid fa-plus"></i>
+          {{ getText('createCertificate') }}
+        </a>
+      </div>
+    </section>
+
+    <!-- Statistics Cards -->
+    <section class="px-6 pb-8 lg:px-10">
+      <div class="grid gap-6 md:grid-cols-3">
+        <!-- Certificates -->
+        <div class="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-knoz-gold/30">
+          <div>
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+               {{ getText('certificates') }}
+            </p>
+            <p class="mt-2 text-4xl font-extrabold text-knoz-green group-hover:text-knoz-gold transition-colors">
+              {{certificates.length}}
+            </p>
+            <p class="mt-2 text-sm text-gray-400">
+               {{ getText('totalCertificates') }}
+            </p>
+          </div>
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 transition-colors group-hover:bg-knoz-gold/10 group-hover:text-knoz-gold">
+            <i class="fa-solid fa-award text-2xl"></i>
+          </div>
+        </div>
+
+        <!-- Courses -->
+        <div class="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-knoz-gold/30">
+          <div>
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+              {{ getText('courses') }}
+            </p>
+            <p class="mt-2 text-4xl font-extrabold text-knoz-green group-hover:text-knoz-gold transition-colors">
+              12
+            </p>
+            <p class="mt-2 text-sm text-gray-400">
+               {{ getText('availableCourses') }}
+            </p>
+          </div>
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors group-hover:bg-knoz-gold/10 group-hover:text-knoz-gold">
+            <i class="fa-solid fa-book-open text-2xl"></i>
+          </div>
+        </div>
+
+        <!-- Students -->
+        <div class="group flex items-center justify-between rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-knoz-gold/30">
+          <div>
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">
+               {{ getText('students') }}
+            </p>
+            <p class="mt-2 text-4xl font-extrabold text-knoz-green group-hover:text-knoz-gold transition-colors">
+              95
+            </p>
+            <p class="mt-2 text-sm text-gray-400">
+               {{ getText('studentsCertified') }}
+            </p>
+          </div>
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-purple-50 text-purple-600 transition-colors group-hover:bg-knoz-gold/10 group-hover:text-knoz-gold">
+            <i class="fa-solid fa-user-graduate text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Certificates -->
+    <section class="px-6 pb-12 lg:px-10">
+      <div class="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md">
+        <!-- Section Header -->
+        <div class="flex flex-col gap-2 border-b border-gray-100 bg-gray-50/50 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-gray-800 tracking-tight">
+               {{ getText('recentCertificates') }}
+            </h2>
+            <p class="mt-1 text-sm text-gray-500">
+               {{ getText('recentlyGenerated') }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[700px] text-start">
+            <thead class="bg-gray-50/50">
+              <tr class="border-b border-gray-200 text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                <th class="px-6 py-4 text-start">
+                   {{ getText('student') }}
+                </th>
+                <th class="px-6 py-4 text-start">
+                   {{ getText('courseSubject') }}
+                </th>
+                <th class="px-6 py-4 text-start">
+                   {{ getText('date') }}
+                </th>
+                <th class="px-6 py-4 text-start">
+                   {{ getText('status') }}
+                </th>
+                <th class="px-6 py-4 text-center">
+                   {{ getText('actions') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              @for (certificate of certificates; track certificate.id) {
+              <tr class="group transition-colors hover:bg-gray-50/80">
+                <!-- Student -->
+                <td class="px-6 py-5">
+                  <div class="flex items-center gap-3">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-knoz-green/10 text-knoz-green font-bold shadow-sm">
+                      {{ certificate.studentName.charAt(0) }}
+                    </div>
+                    <span class="text-sm font-bold text-gray-800">{{ certificate.studentName }}</span>
+                  </div>
+                </td>
+                <!-- Course -->
+                <td class="px-6 py-5 text-sm font-medium text-gray-600">
+                  {{ certificate.courseName }}
+                </td>
+                <!-- Date -->
+                <td class="px-6 py-5 text-sm text-gray-500">
+                  <span class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-gray-400"></i>
+                    {{ certificate.issueDate | date:'dd/MM/yyyy' }}
+                  </span>
+                </td>
+                <!-- Status -->
+                <td class="px-6 py-5">
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700 ring-1 ring-inset ring-emerald-600/20 shadow-sm">
+                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span>
+                     {{ getText('generated') }}
+                  </span>
+                </td>
+                <!-- Actions -->
+                <td class="px-6 py-5">
+                  <div class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100 sm:opacity-100">
+                    <!-- View -->
+                    <button type="button" (click)="viewCertificate(certificate)" class="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-50 text-gray-600 transition-all hover:bg-knoz-green hover:text-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-knoz-green focus:ring-offset-2" title="{{ getText('viewCertificate') }}">
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                    <!-- Delete -->
+                    <button type="button" (click)="openDeleteModal(certificate)" class="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-50 text-red-500 transition-all hover:bg-red-600 hover:text-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2" title="{{ getText('deleteCertificate') }}">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              }
+              @empty {
+              <tr>
+                <td colspan="5" class="px-6 py-16 text-center">
+                  <div class="flex flex-col items-center justify-center text-gray-400">
+                    <i class="fa-solid fa-folder-open text-5xl mb-4 text-gray-300"></i>
+                    <p class="text-base font-medium">{{ getText('noCertificates') }}</p>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- delete modal -->
+    @if (isDeleteModalOpen) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 p-4 backdrop-blur-sm transition-all">
+      <div class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-2xl transition-all">
+        <!-- Icon -->
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
+          <i class="fa-solid fa-triangle-exclamation text-2xl text-red-600"></i>
+        </div>
+        <!-- Title -->
+        <h3 class="mt-5 text-center text-xl font-bold text-gray-900">
+          {{ getText('deleteCertificate') }}?
+        </h3>
+        <!-- Message -->
+        <div class="mt-3">
+          <p class="text-center text-sm text-gray-500">
+             {{ getText('confirmDelete') }}
+            <span class="font-bold text-gray-800">
+              {{ certificateToDelete?.studentName }}
+            </span>?
+          </p>
+          <p class="mt-2 text-center text-sm font-medium text-red-500 bg-red-50 py-2 rounded-lg">
+             {{ getText('ConfirmDeletion2') }}
+          </p>
+        </div>
+        <!-- Buttons -->
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <button type="button" (click)="closeDeleteModal()" class="w-full rounded-xl bg-white px-5 py-3 text-sm font-bold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 sm:w-auto">
+             {{ getText('cancel') }}
+          </button>
+          <button type="button" (click)="confirmDelete()" class="w-full rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-red-700 hover:shadow-md sm:w-auto">
+             {{ getText('deleteCertificate') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+  </main>
+</div>

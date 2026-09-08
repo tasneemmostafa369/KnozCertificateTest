@@ -1,0 +1,233 @@
+/* =========================================
+   NORMAL SCREEN
+   ========================================= */
+
+.certificate-preview-area {
+  scrollbar-width: thin;
+}
+
+.certificate-wrapper {
+  min-width: max-content;
+}
+
+
+/* QR Code */
+
+.certificate-qr {
+  flex-shrink: 0;
+}
+
+.certificate-qr img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  max-width: none;
+  object-fit: contain;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 639px) {
+
+  /*
+    الشهادة Landscape لذلك نحافظ على
+    حجم مناسب ولا نسمح للعناصر بالانهيار.
+  */
+
+  .certificate-print {
+    width: 700px;
+  }
+
+
+  /*
+    في حالة الشاشة الصغيرة جدًا
+    يكون هناك Scroll أفقي للمعاينة
+  */
+
+  .certificate-preview-area {
+    justify-content: flex-start;
+  }
+
+
+  .certificate-wrapper {
+    justify-content: flex-start;
+  }
+
+
+  /*
+    QR
+  */
+
+  .certificate-qr img {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  /*
+    منع التاريخ من الخروج أو النزول
+  */
+
+  .certificate-footer {
+    min-width: 100%;
+  }
+
+}
+
+
+/* =========================================
+   PRINT
+   ========================================= */
+
+@media print {
+
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+
+  html,
+  body {
+    width: 297mm !important;
+    height: 210mm !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+  }
+
+
+  .no-print {
+    display: none !important;
+  }
+
+
+  main {
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+  }
+
+
+  .certificate-preview-area {
+    display: block !important;
+  }
+
+
+  .certificate-wrapper {
+    display: block !important;
+    min-width: 0 !important;
+  }
+
+
+  /* =========================================
+     Certificate
+     ========================================= */
+
+  .certificate-print {
+    width: 297mm !important;
+    height: 210mm !important;
+
+    aspect-ratio: auto !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    box-shadow: none !important;
+
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+
+  /* =========================================
+     Content Scaling
+     ========================================= */
+
+  ::ng-deep .certificate-print {
+    font-size: 1.25rem;
+  }
+
+  /* Logo */
+  ::ng-deep .certificate-brand img {
+    height: 30mm !important;
+  }
+
+  /* Academy Name */
+  ::ng-deep .certificate-brand p {
+    font-size: 12pt !important;
+  }
+
+  /* Certificate Title */
+  ::ng-deep .certificate-title h2 {
+    font-size: 28pt !important;
+  }
+
+  /* Presented Text */
+  ::ng-deep .certificate-student p {
+    font-size: 13pt !important;
+  }
+
+  /* Student Name */
+  ::ng-deep .certificate-student h3 {
+    font-size: 32pt !important;
+  }
+
+  /* Course Description */
+  ::ng-deep .certificate-course > p:first-child {
+    font-size: 13pt !important;
+  }
+
+  /* Course Name */
+  ::ng-deep .certificate-course > p:last-child {
+    font-size: 20pt !important;
+  }
+
+  /* =========================================
+     QR Code
+     ========================================= */
+
+  ::ng-deep .certificate-qr img {
+    display: block !important;
+
+    width: 22mm !important;
+    height: 22mm !important;
+
+    min-width: 22mm !important;
+    min-height: 22mm !important;
+
+    max-width: 22mm !important;
+    max-height: 22mm !important;
+
+    object-fit: contain !important;
+  }
+
+  /* =========================================
+     Signature
+     ========================================= */
+
+  ::ng-deep .certificate-signature {
+    max-height: 18mm !important;
+    width: auto !important;
+  }
+
+}

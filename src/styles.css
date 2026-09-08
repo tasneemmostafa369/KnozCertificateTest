@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'tailwindcss';
+
+@theme {
+    --color-knoz-green: #0F392B;
+    --color-knoz-gold: #C8A559;
+    --color-knoz-cream: #F7F3E8;
+
+    --color-knoz-text: #1F2933;
+    --color-knoz-muted: #6B7280;
+    --color-knoz-border: #DDE3E0;
+}
+
+@media print {
+  /* Hide everything in the body by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the certificate container and its children */
+  #certificate-download-container,
+  #certificate-download-container * {
+    visibility: visible;
+  }
+
+  /* Force the container to the absolute top-left of the page */
+  #certificate-download-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 297mm !important;
+    height: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    background-color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Set page layout to A4 Landscape */
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+}
