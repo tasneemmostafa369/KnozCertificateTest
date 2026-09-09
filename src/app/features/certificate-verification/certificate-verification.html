@@ -1,19 +1,19 @@
-<div class="min-h-screen bg-[#E8F0EA] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+<div class="min-h-screen bg-[#F3F4F6] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
   
   <!-- Language Toggle -->
   <div class="absolute top-4 right-4 sm:top-8 sm:right-8 z-50">
-    <button (click)="toggleLang()" class="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-[#0F392B]/20 text-[#0F392B] px-5 py-2.5 rounded-full shadow-sm hover:bg-white transition-all font-semibold hover:shadow-md">
+    <button (click)="toggleLang()" class="flex items-center gap-2 bg-white backdrop-blur-md border border-gray-200 text-gray-800 px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all font-semibold hover:scale-105">
       <i class="fas fa-globe text-[#C8A559]"></i>
       <span>{{ lang() === 'ar' ? 'English' : 'عربي' }}</span>
     </button>
   </div>
 
   <!-- Main Container -->
-  <div class="w-full max-w-6xl mx-auto bg-white rounded-3xl shadow-[0_20px_60px_rgba(15,57,43,0.1)] overflow-hidden relative z-10 flex flex-col min-h-[600px]">
+  <div class="w-full max-w-6xl mx-auto bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] overflow-hidden relative z-10 flex flex-col min-h-[600px]">
     
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="p-32 flex flex-col items-center justify-center flex-1 bg-[#F7F3E8]">
+      <div class="p-32 flex flex-col items-center justify-center flex-1 bg-white">
         <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#0F392B] mb-6"></div>
         <p class="text-xl text-[#0F392B] animate-pulse font-bold">{{ texts()['loadingMsg'] }}</p>
       </div>
@@ -21,7 +21,7 @@
 
     <!-- Error State -->
     @if (!isLoading() && error()) {
-      <div class="p-24 flex flex-col items-center justify-center flex-1 bg-[#F7F3E8] animate-[fadeIn_0.5s_ease-out]">
+      <div class="p-24 flex flex-col items-center justify-center flex-1 bg-white animate-[fadeIn_0.5s_ease-out]">
         <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-50 border-4 border-red-100 mb-6 shadow-sm">
           <i class="fas fa-times text-5xl text-red-500"></i>
         </div>
@@ -53,94 +53,116 @@
           <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 font-['Amiri'] tracking-wide relative z-10 drop-shadow-md">
             {{ texts()['verifiedSuccess'] }}
           </h2>
-          <p class="text-[#F7F3E8]/80 text-lg leading-relaxed max-w-sm relative z-10 font-medium">
+          <p class="text-white/80 text-lg leading-relaxed max-w-sm relative z-10 font-medium">
             {{ texts()['verifiedDesc'] }}
           </p>
         </div>
 
-        <!-- SIDE 2: Official Details (Off-White) -->
-        <div class="lg:w-7/12 bg-[#F7F3E8] p-8 sm:p-14 relative flex flex-col justify-center">
+        <!-- SIDE 2: Official Details (Pure White) -->
+        <div class="lg:w-7/12 bg-white p-8 sm:p-12 relative flex flex-col justify-center">
           
-          <div class="mb-10 border-b border-[#0F392B]/15 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <h3 class="text-sm font-bold text-[#C8A559] uppercase tracking-widest mb-2 flex items-center gap-2">
-                <i class="fas fa-file-signature"></i> {{ texts()['courseDetails'] }}
-              </h3>
-              <h1 class="text-3xl sm:text-4xl font-bold text-[#0F392B] leading-tight">{{ courseData().subjectName }}</h1>
+          <!-- Header Section -->
+          <div class="mb-10 border-b border-gray-100 pb-8">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+              <span class="bg-[#0F392B]/5 text-[#0F392B] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest border border-[#0F392B]/10 flex items-center gap-2">
+                <i class="fas fa-file-signature text-[#C8A559]"></i> {{ texts()['courseDetails'] }}
+              </span>
+              <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-md text-xs font-bold border border-amber-200">
+                {{ courseData().planName }}
+              </span>
             </div>
-            <div class="bg-white border border-[#C8A559]/30 text-[#C8A559] px-5 py-2 rounded-lg font-bold text-sm shadow-sm flex items-center gap-2 whitespace-nowrap shrink-0">
-              <i class="fas fa-star text-xs"></i>
-              {{ courseData().planName }}
-            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug">{{ courseData().subjectName }}</h1>
           </div>
 
-          <!-- Structured Data Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mb-10">
+          <!-- Structured Data Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
             <!-- Teacher -->
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="fas fa-chalkboard-teacher text-[#C8A559] w-4 text-center"></i> {{ texts()['teacherLbl'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().teacherName }}</span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fas fa-chalkboard-teacher text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['teacherLbl'] }}</p>
+                <p class="text-lg font-bold text-gray-900">{{ courseData().teacherName }}</p>
+              </div>
             </div>
 
             <!-- Monitor -->
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="fas fa-user-shield text-[#C8A559] w-4 text-center"></i> {{ texts()['monitorLbl'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().monitorName }}</span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fas fa-user-shield text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['monitorLbl'] }}</p>
+                <p class="text-lg font-bold text-gray-900">{{ courseData().monitorName }}</p>
+              </div>
             </div>
 
             <!-- Sessions Count -->
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="fas fa-layer-group text-[#C8A559] w-4 text-center"></i> {{ texts()['sessionsCountLbl'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().sessionsCount }} <span class="text-sm font-medium text-[#0F392B]/60">{{ texts()['sessionWord'] }}</span></span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fas fa-layer-group text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['sessionsCountLbl'] }}</p>
+                <p class="text-lg font-bold text-gray-900">{{ courseData().sessionsCount }} <span class="text-sm font-medium text-gray-500">{{ texts()['sessionWord'] }}</span></p>
+              </div>
             </div>
 
             <!-- Duration -->
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="fas fa-stopwatch text-[#C8A559] w-4 text-center"></i> {{ texts()['durationLbl'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().duration }} <span class="text-sm font-medium text-[#0F392B]/60">{{ texts()['minutesWord'] }}</span></span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="fas fa-stopwatch text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['durationLbl'] }}</p>
+                <p class="text-lg font-bold text-gray-900">{{ courseData().duration }} <span class="text-sm font-medium text-gray-500">{{ texts()['minutesWord'] }}</span></p>
+              </div>
             </div>
             
             <!-- Start Date -->
             @if (startDate) {
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="far fa-calendar-alt text-[#C8A559] w-4 text-center"></i> {{ texts()['startDate'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] font-mono px-6" dir="ltr">{{ startDate | date:'yyyy/MM/dd' }}</span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="far fa-calendar-alt text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['startDate'] }}</p>
+                <div class="flex items-center">
+                  <span class="text-lg font-bold text-gray-900 font-mono" dir="ltr">{{ startDate | date:'yyyy/MM/dd' }}</span>
+                </div>
+              </div>
             </div>
             }
 
             <!-- End Date -->
             @if (endDate) {
-            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
-              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
-                <i class="far fa-calendar-check text-[#C8A559] w-4 text-center"></i> {{ texts()['endDate'] }}
-              </span>
-              <span class="text-xl font-bold text-[#0F392B] font-mono px-6" dir="ltr">{{ endDate | date:'yyyy/MM/dd' }}</span>
+            <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
+              <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
+                <i class="far fa-calendar-check text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-[11px] text-gray-500 font-bold uppercase mb-1 tracking-wider">{{ texts()['endDate'] }}</p>
+                <div class="flex items-center">
+                  <span class="text-lg font-bold text-gray-900 font-mono" dir="ltr">{{ endDate | date:'yyyy/MM/dd' }}</span>
+                </div>
+              </div>
             </div>
             }
           </div>
 
           <!-- Schedule -->
           @if (courseData().coursePattern && courseData().coursePattern.length > 0) {
-          <div class="bg-white rounded-xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#0F392B]/5">
-            <h4 class="text-xs font-bold text-[#0F392B]/50 mb-4 flex items-center gap-2 uppercase tracking-widest">
+          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+            <h4 class="text-xs font-bold text-gray-500 mb-4 flex items-center gap-2 uppercase tracking-widest">
               <i class="far fa-clock text-[#C8A559]"></i> {{ texts()['scheduleTitle'] }}
             </h4>
             <div class="flex flex-wrap gap-3">
               @for (pattern of courseData().coursePattern; track pattern) {
-                <div class="bg-[#F7F3E8] border border-[#C8A559]/30 rounded-md px-4 py-2 flex items-center gap-3">
-                  <span class="font-bold text-[#0F392B]">{{ getDayName(pattern.dayOfWeek) }}</span>
+                <div class="bg-white border border-gray-200 rounded-lg px-4 py-2 flex items-center gap-3 shadow-sm hover:border-[#C8A559]/30 transition-colors">
+                  <span class="font-bold text-gray-900">{{ getDayName(pattern.dayOfWeek) }}</span>
                   <div class="w-1.5 h-1.5 rounded-full bg-[#C8A559]"></div>
-                  <span class="text-[#0F392B] font-mono font-semibold" dir="ltr">{{ formatTime(pattern.time) }}</span>
+                  <span class="text-gray-900 font-mono font-semibold" dir="ltr">{{ formatTime(pattern.time) }}</span>
                 </div>
               }
             </div>
@@ -152,8 +174,8 @@
     }
 
     <!-- Footer -->
-    <div class="bg-white px-8 py-4 text-center border-t border-[#0F392B]/10 relative z-10 shrink-0">
-      <p class="text-sm text-[#0F392B]/60 font-bold">{{ texts()['allRightsReserved'] }} &copy; {{ texts()['academyName'] }} {{ currentYear() }}</p>
+    <div class="bg-gray-50 px-8 py-4 text-center border-t border-gray-200 relative z-10 w-full shrink-0">
+      <p class="text-sm text-gray-500 font-medium">{{ texts()['allRightsReserved'] }} &copy; {{ texts()['academyName'] }} {{ currentYear() }}</p>
     </div>
   </div>
 </div>
