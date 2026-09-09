@@ -1,184 +1,158 @@
-<div class="min-h-screen bg-[#0F392B] py-20 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative overflow-hidden" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+<div class="min-h-screen bg-[#E8F0EA] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
   
-  <!-- Ambient Background Effects -->
-  <div class="absolute inset-0 z-0 pointer-events-none">
-    <div class="absolute top-0 left-0 w-full h-full opacity-5 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')]"></div>
-    <div class="absolute top-1/4 -left-1/4 w-[30rem] h-[30rem] bg-[#C8A559] rounded-full blur-[120px] opacity-20 animate-pulse"></div>
-    <div class="absolute bottom-1/4 -right-1/4 w-[30rem] h-[30rem] bg-[#C8A559] rounded-full blur-[120px] opacity-20 animate-[pulse_4s_infinite]"></div>
-  </div>
-
   <!-- Language Toggle -->
   <div class="absolute top-4 right-4 sm:top-8 sm:right-8 z-50">
-    <button (click)="toggleLang()" class="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-[#C8A559]/40 text-[#F7F3E8] px-5 py-2.5 rounded-full shadow-lg hover:bg-white/20 transition-all font-semibold hover:scale-105">
+    <button (click)="toggleLang()" class="flex items-center gap-2 bg-white/50 backdrop-blur-md border border-[#0F392B]/20 text-[#0F392B] px-5 py-2.5 rounded-full shadow-sm hover:bg-white transition-all font-semibold hover:shadow-md">
       <i class="fas fa-globe text-[#C8A559]"></i>
       <span>{{ lang() === 'ar' ? 'English' : 'عربي' }}</span>
     </button>
   </div>
 
-  <!-- Main Container (Removed overflow-hidden to allow seal to show completely) -->
-  <div class="w-full max-w-5xl mx-auto bg-[#F7F3E8] rounded-[2.5rem] shadow-2xl relative z-10 border-4 border-[#C8A559]/30 mt-8">
+  <!-- Main Container -->
+  <div class="w-full max-w-6xl mx-auto bg-white rounded-3xl shadow-[0_20px_60px_rgba(15,57,43,0.1)] overflow-hidden relative z-10 flex flex-col min-h-[600px]">
     
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="p-32 text-center bg-[#F7F3E8] rounded-[2.5rem]">
-        <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-[#0F392B] mx-auto mb-6"></div>
+      <div class="p-32 flex flex-col items-center justify-center flex-1 bg-[#F7F3E8]">
+        <div class="animate-spin rounded-full h-16 w-16 border-b-4 border-[#0F392B] mb-6"></div>
         <p class="text-xl text-[#0F392B] animate-pulse font-bold">{{ texts()['loadingMsg'] }}</p>
       </div>
     }
 
     <!-- Error State -->
     @if (!isLoading() && error()) {
-      <div class="p-24 text-center animate-[fadeIn_0.5s_ease-out] bg-[#F7F3E8] rounded-[2.5rem]">
-        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 border-4 border-red-200 mb-6 shadow-md">
-          <i class="fas fa-times text-5xl text-red-600"></i>
+      <div class="p-24 flex flex-col items-center justify-center flex-1 bg-[#F7F3E8] animate-[fadeIn_0.5s_ease-out]">
+        <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-50 border-4 border-red-100 mb-6 shadow-sm">
+          <i class="fas fa-times text-5xl text-red-500"></i>
         </div>
         <h2 class="text-3xl font-bold text-red-700 mb-4">{{ texts()['errorFailed'] }}</h2>
-        <p class="text-[#6B7280] text-lg max-w-md mx-auto">{{ error() }}</p>
+        <p class="text-[#6B7280] text-lg max-w-md mx-auto text-center">{{ error() }}</p>
       </div>
     }
 
     <!-- Success State -->
     @if (!isLoading() && courseData()) {
-      <div class="animate-[fadeIn_0.8s_ease-out] relative rounded-[2.5rem]">
+      <div class="flex flex-col lg:flex-row flex-1 animate-[fadeIn_0.8s_ease-out]">
         
-        <!-- Luxury Header Area -->
-        <div class="relative pt-20 pb-12 px-8 text-center border-b border-[#C8A559]/20 bg-white/50 rounded-t-[2.5rem]">
-          <!-- The Golden Seal (Moved up and fixed overflow issue) -->
-          <div class="absolute -top-16 left-1/2 -translate-x-1/2 z-30">
-            <div class="flex items-center justify-center w-32 h-32 rounded-full bg-[#0F392B] border-4 border-[#C8A559] animate-[stamp_0.8s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards,glow_3s_infinite_0.8s] shadow-[0_0_40px_rgba(200,165,89,0.4)] relative">
-              <div class="absolute inset-1.5 border-2 border-dashed border-[#C8A559]/50 rounded-full"></div>
-              <i class="fas fa-check-double text-5xl text-[#C8A559]"></i>
+        <!-- SIDE 1: Status & Seal (Dark Green) -->
+        <div class="lg:w-5/12 bg-[#0F392B] relative p-12 flex flex-col items-center justify-center text-center overflow-hidden shrink-0 border-b-4 lg:border-b-0 lg:border-l-4 border-[#C8A559] min-h-[400px]">
+          <!-- Background Pattern -->
+          <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] pointer-events-none"></div>
+          <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-[#C8A559] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+          
+          <img src="assets/logo.jpeg" alt="Logo" class="h-20 w-20 object-cover mx-auto mb-10 rounded-full border-2 border-[#C8A559] relative z-10 shadow-lg">
+          
+          <!-- The Golden Seal -->
+          <div class="relative z-10 mb-10">
+            <div class="flex items-center justify-center w-40 h-40 rounded-full bg-[#0F392B] border-4 border-[#C8A559] animate-[stamp_0.8s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards,glow_3s_infinite_0.8s] shadow-[0_0_40px_rgba(200,165,89,0.4)] relative mx-auto">
+              <div class="absolute inset-2 border-2 border-dashed border-[#C8A559]/60 rounded-full"></div>
+              <i class="fas fa-check-double text-6xl text-[#C8A559]"></i>
             </div>
           </div>
           
-          <img src="assets/logo.jpeg" alt="Logo" class="h-16 w-16 object-cover mx-auto mb-4 rounded-full border border-[#C8A559] opacity-80">
-          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F392B] mb-4 font-['Amiri'] tracking-wide">{{ texts()['verifiedSuccess'] }}</h2>
-          <p class="text-lg text-[#0F392B]/70 leading-relaxed max-w-2xl mx-auto font-medium">
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 font-['Amiri'] tracking-wide relative z-10 drop-shadow-md">
+            {{ texts()['verifiedSuccess'] }}
+          </h2>
+          <p class="text-[#F7F3E8]/80 text-lg leading-relaxed max-w-sm relative z-10 font-medium">
             {{ texts()['verifiedDesc'] }}
           </p>
         </div>
 
-        <!-- Royal Content Area -->
-        <div class="bg-[#F7F3E8] p-8 sm:p-12 relative overflow-hidden">
-          <!-- Decorative Corners -->
-          <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#C8A559]/40 opacity-70"></div>
-          <div class="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-[#C8A559]/40 opacity-70"></div>
-          <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-[#C8A559]/40 opacity-70"></div>
-          <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-[#C8A559]/40 opacity-70"></div>
-
-          <!-- Main Subject & Plan -->
-          <div class="text-center mb-12">
-            <h3 class="text-3xl sm:text-4xl font-bold text-[#0F392B] mb-4 drop-shadow-sm">{{ courseData().subjectName }}</h3>
-            <div class="inline-block px-8 py-2.5 rounded-full bg-white text-[#C8A559] font-bold text-lg border border-[#C8A559]/30 shadow-sm">
-              <i class="fas fa-star mr-2 ml-2 text-xs opacity-80"></i>
+        <!-- SIDE 2: Official Details (Off-White) -->
+        <div class="lg:w-7/12 bg-[#F7F3E8] p-8 sm:p-14 relative flex flex-col justify-center">
+          
+          <div class="mb-10 border-b border-[#0F392B]/15 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h3 class="text-sm font-bold text-[#C8A559] uppercase tracking-widest mb-2 flex items-center gap-2">
+                <i class="fas fa-file-signature"></i> {{ texts()['courseDetails'] }}
+              </h3>
+              <h1 class="text-3xl sm:text-4xl font-bold text-[#0F392B] leading-tight">{{ courseData().subjectName }}</h1>
+            </div>
+            <div class="bg-white border border-[#C8A559]/30 text-[#C8A559] px-5 py-2 rounded-lg font-bold text-sm shadow-sm flex items-center gap-2 whitespace-nowrap shrink-0">
+              <i class="fas fa-star text-xs"></i>
               {{ courseData().planName }}
-              <i class="fas fa-star mr-2 ml-2 text-xs opacity-80"></i>
             </div>
           </div>
-          
-          <!-- Persons: Teacher & Monitor -->
-          <div class="flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-16 mb-16">
+
+          <!-- Structured Data Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6 mb-10">
             <!-- Teacher -->
-            <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-2xl w-full sm:w-auto shadow-[0_4px_20px_rgba(15,57,43,0.05)] hover:shadow-lg transition-all hover:-translate-y-1 border border-gray-100 min-w-[250px]">
-              <div class="w-14 h-14 rounded-full bg-[#0F392B] flex items-center justify-center text-[#C8A559] shadow-inner">
-                <i class="fas fa-chalkboard-teacher text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-sm text-[#0F392B]/50 mb-1 uppercase tracking-wider font-bold">{{ texts()['teacherLbl'] }}</p>
-                <p class="font-bold text-xl text-[#0F392B]">{{ courseData().teacherName }}</p>
-              </div>
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="fas fa-chalkboard-teacher text-[#C8A559] w-4 text-center"></i> {{ texts()['teacherLbl'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().teacherName }}</span>
             </div>
 
             <!-- Monitor -->
-            <div class="flex items-center gap-4 bg-white px-6 py-4 rounded-2xl w-full sm:w-auto shadow-[0_4px_20px_rgba(15,57,43,0.05)] hover:shadow-lg transition-all hover:-translate-y-1 border border-gray-100 min-w-[250px]">
-              <div class="w-14 h-14 rounded-full bg-[#C8A559] flex items-center justify-center text-[#0F392B] shadow-inner">
-                <i class="fas fa-user-shield text-2xl"></i>
-              </div>
-              <div>
-                <p class="text-sm text-[#0F392B]/50 mb-1 uppercase tracking-wider font-bold">{{ texts()['monitorLbl'] }}</p>
-                <p class="font-bold text-xl text-[#0F392B]">{{ courseData().monitorName }}</p>
-              </div>
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="fas fa-user-shield text-[#C8A559] w-4 text-center"></i> {{ texts()['monitorLbl'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().monitorName }}</span>
             </div>
-          </div>
 
-          <!-- The Timeline (Dates) -->
-          @if (startDate || endDate) {
-          <div class="relative max-w-3xl mx-auto mb-16">
-            <!-- Connecting Line -->
-            <div class="absolute top-1/2 left-[10%] right-[10%] h-1 bg-gradient-to-r from-transparent via-[#C8A559]/40 to-transparent -translate-y-1/2 hidden sm:block"></div>
-            
-            <div class="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-8 relative z-10">
-              <!-- Start Date -->
-              @if (startDate) {
-              <div class="bg-white border-2 border-[#C8A559] rounded-2xl p-6 text-center shadow-lg w-full sm:w-64 transform transition-all hover:scale-105 z-10">
-                <div class="w-12 h-12 rounded-full bg-[#C8A559]/20 flex items-center justify-center mx-auto mb-3 text-[#C8A559]">
-                  <i class="fas fa-flag-checkered text-xl"></i>
-                </div>
-                <p class="text-sm text-[#0F392B]/60 uppercase tracking-widest font-bold mb-2">{{ texts()['startDate'] }}</p>
-                <p class="text-2xl font-mono font-bold text-[#0F392B]" dir="ltr">
-                  {{ startDate | date:'yyyy/MM/dd' }}
-                </p>
-              </div>
-              }
-
-              <!-- End Date -->
-              @if (endDate) {
-              <div class="bg-white border-2 border-[#0F392B] rounded-2xl p-6 text-center shadow-lg w-full sm:w-64 transform transition-all hover:scale-105 z-10">
-                <div class="w-12 h-12 rounded-full bg-[#0F392B]/10 flex items-center justify-center mx-auto mb-3 text-[#0F392B]">
-                  <i class="fas fa-trophy text-xl"></i>
-                </div>
-                <p class="text-sm text-[#0F392B]/60 uppercase tracking-widest font-bold mb-2">{{ texts()['endDate'] }}</p>
-                <p class="text-2xl font-mono font-bold text-[#0F392B]" dir="ltr">
-                  {{ endDate | date:'yyyy/MM/dd' }}
-                </p>
-              </div>
-              }
+            <!-- Sessions Count -->
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="fas fa-layer-group text-[#C8A559] w-4 text-center"></i> {{ texts()['sessionsCountLbl'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().sessionsCount }} <span class="text-sm font-medium text-[#0F392B]/60">{{ texts()['sessionWord'] }}</span></span>
             </div>
-          </div>
-          }
 
-          <!-- Stats (Sessions & Duration) Widgets -->
-          <div class="flex flex-wrap justify-center gap-8 mb-12">
-            <div class="flex flex-col items-center justify-center bg-gradient-to-br from-[#0F392B] to-[#164b39] w-40 h-40 rounded-full text-white shadow-[0_10px_30px_rgba(15,57,43,0.3)] transform transition-all hover:scale-110 hover:-rotate-3 cursor-default border-4 border-white">
-              <i class="fas fa-layer-group text-3xl text-[#C8A559] mb-2"></i>
-              <p class="text-4xl font-bold mb-1">{{ courseData().sessionsCount }}</p>
-              <p class="text-xs uppercase tracking-wider text-[#C8A559] font-bold">{{ texts()['sessionWord'] }}</p>
+            <!-- Duration -->
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="fas fa-stopwatch text-[#C8A559] w-4 text-center"></i> {{ texts()['durationLbl'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] px-6">{{ courseData().duration }} <span class="text-sm font-medium text-[#0F392B]/60">{{ texts()['minutesWord'] }}</span></span>
             </div>
             
-            <div class="flex flex-col items-center justify-center bg-gradient-to-bl from-[#C8A559] to-[#dcb974] w-40 h-40 rounded-full text-[#0F392B] shadow-[0_10px_30px_rgba(200,165,89,0.3)] transform transition-all hover:scale-110 hover:rotate-3 cursor-default border-4 border-white">
-              <i class="fas fa-stopwatch text-3xl text-white mb-2"></i>
-              <p class="text-4xl font-bold mb-1">{{ courseData().duration }}</p>
-              <p class="text-xs uppercase tracking-wider text-white font-bold">{{ texts()['minutesWord'] }}</p>
+            <!-- Start Date -->
+            @if (startDate) {
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="far fa-calendar-alt text-[#C8A559] w-4 text-center"></i> {{ texts()['startDate'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] font-mono px-6" dir="ltr">{{ startDate | date:'yyyy/MM/dd' }}</span>
             </div>
+            }
+
+            <!-- End Date -->
+            @if (endDate) {
+            <div class="flex flex-col border-b border-[#0F392B]/10 pb-3">
+              <span class="text-xs text-[#0F392B]/50 font-bold uppercase tracking-wider flex items-center gap-2 mb-1">
+                <i class="far fa-calendar-check text-[#C8A559] w-4 text-center"></i> {{ texts()['endDate'] }}
+              </span>
+              <span class="text-xl font-bold text-[#0F392B] font-mono px-6" dir="ltr">{{ endDate | date:'yyyy/MM/dd' }}</span>
+            </div>
+            }
           </div>
 
-          <!-- Schedule/Course Pattern (Glassmorphism) -->
+          <!-- Schedule -->
           @if (courseData().coursePattern && courseData().coursePattern.length > 0) {
-          <div class="mt-8 relative z-10">
-            <h4 class="text-center text-xl font-bold text-[#0F392B] mb-8 relative inline-block left-1/2 -translate-x-1/2">
-              {{ texts()['scheduleTitle'] }}
-              <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#C8A559] rounded-full"></div>
+          <div class="bg-white rounded-xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#0F392B]/5">
+            <h4 class="text-xs font-bold text-[#0F392B]/50 mb-4 flex items-center gap-2 uppercase tracking-widest">
+              <i class="far fa-clock text-[#C8A559]"></i> {{ texts()['scheduleTitle'] }}
             </h4>
-            
-            <div class="flex flex-wrap justify-center gap-4">
+            <div class="flex flex-wrap gap-3">
               @for (pattern of courseData().coursePattern; track pattern) {
-                <div class="glass-panel rounded-2xl px-6 py-4 flex flex-col items-center gap-2 hover:-translate-y-2 transition-transform shadow-md border-t-4 border-t-[#C8A559] min-w-[140px]">
-                  <span class="text-[#0F392B] font-bold text-lg">{{ getDayName(pattern.dayOfWeek) }}</span>
-                  <div class="flex items-center justify-center gap-2 w-full text-white bg-[#0F392B] px-3 py-1.5 rounded-full text-sm font-mono shadow-inner" [ngClass]="{'flex-row-reverse': lang() === 'ar'}">
-                    <i class="far fa-clock text-[#C8A559]"></i>
-                    <span dir="ltr">{{ formatTime(pattern.time) }}</span>
-                  </div>
+                <div class="bg-[#F7F3E8] border border-[#C8A559]/30 rounded-md px-4 py-2 flex items-center gap-3">
+                  <span class="font-bold text-[#0F392B]">{{ getDayName(pattern.dayOfWeek) }}</span>
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#C8A559]"></div>
+                  <span class="text-[#0F392B] font-mono font-semibold" dir="ltr">{{ formatTime(pattern.time) }}</span>
                 </div>
               }
             </div>
           </div>
           }
+
         </div>
       </div>
     }
 
     <!-- Footer -->
-    <div class="bg-white/80 px-8 py-6 text-center border-t border-[#C8A559]/20 relative z-10">
+    <div class="bg-white px-8 py-4 text-center border-t border-[#0F392B]/10 relative z-10 shrink-0">
       <p class="text-sm text-[#0F392B]/60 font-bold">{{ texts()['allRightsReserved'] }} &copy; {{ texts()['academyName'] }} {{ currentYear() }}</p>
     </div>
   </div>
