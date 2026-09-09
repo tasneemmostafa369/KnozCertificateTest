@@ -19,12 +19,6 @@ import { DICTIONARY, Language } from '../../core/mock/dictionary';
       50% { box-shadow: 0 0 40px rgba(200, 165, 89, 0.6); }
       100% { box-shadow: 0 0 10px rgba(200, 165, 89, 0.2); }
     }
-    .animate-stamp {
-      animation: stamp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    .animate-glow {
-      animation: glow 3s infinite;
-    }
     .glass-panel {
       background: rgba(247, 243, 232, 0.6);
       backdrop-filter: blur(16px);

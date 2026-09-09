@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#0F392B] py-12 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative overflow-hidden" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
+<div class="min-h-screen bg-[#0F392B] py-20 px-4 sm:px-6 lg:px-8 font-['Tajawal'] flex items-center justify-center transition-all duration-700 relative overflow-hidden" [dir]="lang() === 'ar' ? 'rtl' : 'ltr'">
   
   <!-- Ambient Background Effects -->
   <div class="absolute inset-0 z-0 pointer-events-none">
@@ -15,12 +15,12 @@
     </button>
   </div>
 
-  <!-- Main Container -->
-  <div class="w-full max-w-5xl mx-auto bg-[#F7F3E8] rounded-[2.5rem] shadow-2xl overflow-hidden relative z-10 border-4 border-[#C8A559]/30">
+  <!-- Main Container (Removed overflow-hidden to allow seal to show completely) -->
+  <div class="w-full max-w-5xl mx-auto bg-[#F7F3E8] rounded-[2.5rem] shadow-2xl relative z-10 border-4 border-[#C8A559]/30 mt-8">
     
     <!-- Loading State -->
     @if (isLoading()) {
-      <div class="p-32 text-center bg-[#F7F3E8]">
+      <div class="p-32 text-center bg-[#F7F3E8] rounded-[2.5rem]">
         <div class="animate-spin rounded-full h-20 w-20 border-b-4 border-[#0F392B] mx-auto mb-6"></div>
         <p class="text-xl text-[#0F392B] animate-pulse font-bold">{{ texts()['loadingMsg'] }}</p>
       </div>
@@ -28,7 +28,7 @@
 
     <!-- Error State -->
     @if (!isLoading() && error()) {
-      <div class="p-24 text-center animate-[fadeIn_0.5s_ease-out] bg-[#F7F3E8]">
+      <div class="p-24 text-center animate-[fadeIn_0.5s_ease-out] bg-[#F7F3E8] rounded-[2.5rem]">
         <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-100 border-4 border-red-200 mb-6 shadow-md">
           <i class="fas fa-times text-5xl text-red-600"></i>
         </div>
@@ -39,19 +39,19 @@
 
     <!-- Success State -->
     @if (!isLoading() && courseData()) {
-      <div class="animate-[fadeIn_0.8s_ease-out] relative">
+      <div class="animate-[fadeIn_0.8s_ease-out] relative rounded-[2.5rem]">
         
         <!-- Luxury Header Area -->
-        <div class="relative pt-16 pb-12 px-8 text-center border-b border-[#C8A559]/20 bg-white/50">
-          <!-- The Golden Seal -->
-          <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-20">
-            <div class="inline-flex items-center justify-center w-28 h-28 rounded-full bg-[#0F392B] border-4 border-[#C8A559] animate-stamp animate-glow shadow-[0_0_40px_rgba(200,165,89,0.4)] relative">
+        <div class="relative pt-20 pb-12 px-8 text-center border-b border-[#C8A559]/20 bg-white/50 rounded-t-[2.5rem]">
+          <!-- The Golden Seal (Moved up and fixed overflow issue) -->
+          <div class="absolute -top-16 left-1/2 -translate-x-1/2 z-30">
+            <div class="flex items-center justify-center w-32 h-32 rounded-full bg-[#0F392B] border-4 border-[#C8A559] animate-[stamp_0.8s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards,glow_3s_infinite_0.8s] shadow-[0_0_40px_rgba(200,165,89,0.4)] relative">
               <div class="absolute inset-1.5 border-2 border-dashed border-[#C8A559]/50 rounded-full"></div>
-              <i class="fas fa-check-double text-4xl text-[#C8A559]"></i>
+              <i class="fas fa-check-double text-5xl text-[#C8A559]"></i>
             </div>
           </div>
           
-          <img src="assets/logo.jpeg" alt="Logo" class="h-16 w-16 object-cover mx-auto mb-4 mt-8 rounded-full border border-[#C8A559] opacity-80">
+          <img src="assets/logo.jpeg" alt="Logo" class="h-16 w-16 object-cover mx-auto mb-4 rounded-full border border-[#C8A559] opacity-80">
           <h2 class="text-3xl sm:text-4xl font-bold text-[#0F392B] mb-4 font-['Amiri'] tracking-wide">{{ texts()['verifiedSuccess'] }}</h2>
           <p class="text-lg text-[#0F392B]/70 leading-relaxed max-w-2xl mx-auto font-medium">
             {{ texts()['verifiedDesc'] }}
