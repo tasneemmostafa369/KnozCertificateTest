@@ -9,22 +9,27 @@ import { DICTIONARY, Language } from '../../core/mock/dictionary';
   imports: [CommonModule],
   templateUrl: './certificate-verification.html',
   styles: [`
-    @keyframes checkmark {
-      0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 1; }
+    @keyframes stamp {
+      0% { transform: scale(3) rotate(-20deg); opacity: 0; }
+      50% { transform: scale(0.9) rotate(5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
     }
-    .animate-checkmark {
-      animation: checkmark 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px rgba(200, 165, 89, 0.2); }
+      50% { box-shadow: 0 0 40px rgba(200, 165, 89, 0.6); }
+      100% { box-shadow: 0 0 10px rgba(200, 165, 89, 0.2); }
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    .animate-stamp {
+      animation: stamp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
-    .gradient-bg {
-      background: linear-gradient(135deg, #F7F3E8 0%, #E8F0EA 100%);
+    .animate-glow {
+      animation: glow 3s infinite;
+    }
+    .glass-panel {
+      background: rgba(247, 243, 232, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(200, 165, 89, 0.3);
     }
   `]
 })
