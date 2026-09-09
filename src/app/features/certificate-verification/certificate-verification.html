@@ -67,11 +67,19 @@
               <span class="bg-[#0F392B]/5 text-[#0F392B] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest border border-[#0F392B]/10 flex items-center gap-2">
                 <i class="fas fa-file-signature text-[#C8A559]"></i> {{ texts()['courseDetails'] }}
               </span>
-              <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-md text-xs font-bold border border-amber-200">
-                {{ courseData().planName }}
-              </span>
             </div>
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug">{{ courseData().subjectName }}</h1>
+            
+            <!-- Main Course Name (Plan Name) -->
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug mb-5">{{ courseData().planName }}</h1>
+            
+            <!-- Subject Name with Label -->
+            <div class="inline-flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl px-5 py-2.5 shadow-sm">
+              <div class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559]">
+                <i class="fas fa-book-open text-sm"></i>
+              </div>
+              <span class="text-gray-500 text-sm font-bold uppercase tracking-wider">{{ texts()['subject'] }}:</span>
+              <span class="text-[#0F392B] text-lg font-extrabold">{{ courseData().subjectName }}</span>
+            </div>
           </div>
 
           <!-- Structured Data Cards -->
