@@ -3,6 +3,7 @@ import { Dashboard } from './features/dashboard/dashboard';
 import { CreateCertificate } from './features/create-certificate/create-certificate';
 import { CertificatePreview } from './features/certificate-preview/certificate-preview';
 import { authGuard } from './core/guards/auth.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
     {
@@ -12,7 +13,8 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        loadComponent: () => import('./features/login/login').then(c => c.LoginComponent)
+        loadComponent: () => import('./features/login/login').then(c => c.LoginComponent),
+        canActivate: [guestGuard]
     },
     {
         path: 'expired-courses',
@@ -32,6 +34,7 @@ export const routes: Routes = [
     {
         path: 'certificates/preview',
         component: CertificatePreview,
+        canActivate: [authGuard]
     },
     {
         path: 'certificates/Verification/:sspId',
