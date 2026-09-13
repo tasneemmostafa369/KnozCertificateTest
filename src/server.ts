@@ -15,6 +15,7 @@ dotenv.config();
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
+app.set('trust proxy', true); // Trust the proxy to handle x-forwarded-host correctly
 app.use(express.json()); // Add JSON body parser for API
 app.use(cookieParser()); // Parse cookies
 const angularApp = new AngularNodeAppEngine();

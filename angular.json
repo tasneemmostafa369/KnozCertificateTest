@@ -32,7 +32,7 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": ["localhost:3000", ".europe-west2.run.app"]
+              "allowedHosts": ["localhost:3000", "localhost", ".europe-west2.run.app", ".ai.studio", "knozcertificatetest.ai.studio", ".vercel.app"]
             },
             "ssr": {
               "entry": "src/server.ts"
@@ -65,7 +65,7 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "allowedHosts": [".run.app", "localhost", "127.0.0.1"]
+            "allowedHosts": [".run.app", "localhost", "127.0.0.1", "localhost:3000", ".ai.studio", "knozcertificatetest.ai.studio", ".vercel.app"]
           },
           "configurations": {
             "production": {
