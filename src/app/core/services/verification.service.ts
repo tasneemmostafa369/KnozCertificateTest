@@ -7,36 +7,24 @@ export class VerificationService {
 
   async verifyCertificate(sspId: string): Promise<any> {
     try {
-      // 1. Login to get token
-      const loginRes = await fetch('https://knoz-api.knoz.online/api/Auth/login', {
+      // 1. Call our secure Backend Proxy to login (no credentials passed from frontend)
+      const loginRes = await fetch('/api/verification-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          usernameOrEmail: "Yahya511",
-          password: "Yahya@2026",
-          appType: 0
-        })
+        // We do NOT send the hardcoded username/password here.
+        // We tell the browser to include/receive credentials (cookies).
       });
 
       if (!loginRes.ok) {
         throw new Error('Failed to authenticate for verification');
       }
 
-      const loginData = await loginRes.json();
-      const token = loginData?.record?.token;
-
-      if (!token) {
-        throw new Error('No token received');
-      }
-
-      // 2. Fetch course details
-      const detailsRes = await fetch(`https://knoz-api.knoz.online/api/Monitor/Assigned-Student-Course-Details?SSPId=${sspId}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      // 2. Fetch course details using our secure Backend Proxy
+      // The browser will automatically attach the HttpOnly cookie received from step 1
+      const detailsRes = await fetch(`/api/verification-details?sspId=${sspId}`, {
+        method: 'GET'
       });
 
       if (!detailsRes.ok) {

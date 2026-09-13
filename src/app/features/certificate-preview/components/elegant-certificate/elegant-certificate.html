@@ -33,7 +33,8 @@
         <p class="text-[8px] italic text-knoz-gold/80 sm:text-[10px] lg:text-sm">
           {{ texts()['presentedTo'] }}
         </p>
-        <h3 class="mt-1 max-w-[600px] truncate font-serif text-base font-bold text-white sm:mt-2 sm:text-2xl lg:mt-3 lg:text-5xl">
+        <h3 class="mt-1 w-full max-w-[90%] mx-auto whitespace-nowrap text-center font-serif text-base font-bold text-white sm:mt-2 lg:mt-3"
+            [class]="(certificate().studentName?.length || 0) > 40 ? 'sm:text-lg lg:text-3xl' : ((certificate().studentName?.length || 0) > 25 ? 'sm:text-xl lg:text-4xl' : 'sm:text-2xl lg:text-5xl')">
           {{ certificate().studentName }}
         </h3>
       </div>
@@ -43,7 +44,8 @@
         <p class="text-[8px] text-knoz-gold/80 sm:text-[10px] lg:text-sm">
           {{ texts()['successfullyCompleted'] }}
         </p>
-        <p class="mt-1 max-w-[600px] truncate text-xs font-semibold text-knoz-gold sm:text-base lg:mt-2 lg:text-2xl">
+        <p class="mt-1 w-full max-w-[90%] mx-auto whitespace-nowrap text-center text-xs font-semibold text-knoz-gold lg:mt-2"
+           [class]="(certificate().courseName?.length || 0) > 50 ? 'sm:text-xs lg:text-lg' : ((certificate().courseName?.length || 0) > 35 ? 'sm:text-sm lg:text-xl' : 'sm:text-base lg:text-2xl')">
           {{ certificate().courseName }}
         </p>
       </div>

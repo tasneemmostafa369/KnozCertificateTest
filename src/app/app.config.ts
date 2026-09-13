@@ -1,18 +1,24 @@
-import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
 import { headerInterceptor } from './core/interceptors/header.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     importProvidersFrom(NgxSpinnerModule),
-    provideHttpClient(withInterceptors([loadingInterceptor, headerInterceptor, errorInterceptor]))
-  ]
+    provideHttpClient(withInterceptors([loadingInterceptor, headerInterceptor, errorInterceptor])),
+    provideClientHydration(withEventReplay()),
+  ],
 };

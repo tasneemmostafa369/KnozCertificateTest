@@ -28,7 +28,15 @@
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.css"
-            ]
+            ],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": ["localhost:3000", ".europe-west2.run.app"]
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -56,6 +64,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [".run.app", "localhost", "127.0.0.1"]
+          },
           "configurations": {
             "production": {
               "buildTarget": "knoz-academy:build:production"
