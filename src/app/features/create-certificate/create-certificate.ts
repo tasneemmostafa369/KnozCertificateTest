@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CertificateService } from '../../core/services/certificate-service';
 import { LanguageService } from '../../core/services/language-service';
+import { SettingsService, TemplateId } from '../../core/services/settings.service';
 import { DICTIONARY } from '../../core/mock/dictionary';
 import { Certificate } from '../../core/models/certificate';
 import {  NgClass } from '@angular/common';
@@ -19,7 +20,8 @@ export class CreateCertificate {
   private readonly router = inject(Router);
   private readonly certificateService = inject(CertificateService);
   private readonly languageService = inject(LanguageService);
-  selectedTemplate: 'classic' | 'elegant' | 'quran' = 'classic';
+  private readonly settingsService = inject(SettingsService);
+  selectedTemplate: TemplateId = this.settingsService.defaultTemplate();
   sspId?: number;
 
   certificateForm = this.fb.nonNullable.group({

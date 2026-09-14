@@ -191,6 +191,17 @@ export const DICTIONARY = {
   errorGeneric: 'حدث خطأ أثناء التحقق من الشهادة.',
   errorNoCourseId: 'رقم الكورس غير متوفر.',
   allRightsReserved: 'جميع الحقوق محفوظة',
+
+  // Settings
+  settingsTitle: 'الإعدادات',
+  settingsDesc: 'تخصيص إعدادات التطبيق الافتراضية',
+  appLanguage: 'لغة التطبيق',
+  appLanguageDesc: 'اختر لغة واجهة المستخدم',
+  arabic: 'العربية',
+  english: 'English',
+  defaultTemplateTitle: 'القالب الافتراضي',
+  defaultTemplateDesc: 'اختر القالب الافتراضي لإنشاء الشهادات',
+  settingsSaved: 'تم حفظ الإعدادات بنجاح',
   },
 
   en: {
@@ -390,6 +401,16 @@ export const DICTIONARY = {
   errorNoCourseId: 'Course ID is not available.',
   allRightsReserved: 'All rights reserved',
 
+  // Settings
+  settingsTitle: 'Settings',
+  settingsDesc: 'Customize your default application settings',
+  appLanguage: 'App Language',
+  appLanguageDesc: 'Choose the user interface language',
+  arabic: 'العربية',
+  english: 'English',
+  defaultTemplateTitle: 'Default Template',
+  defaultTemplateDesc: 'Choose the default template for generating certificates',
+  settingsSaved: 'Settings saved successfully',
   },
 
 } as const;

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Dashboard } from './features/dashboard/dashboard';
 import { CreateCertificate } from './features/create-certificate/create-certificate';
 import { CertificatePreview } from './features/certificate-preview/certificate-preview';
+import { SettingsComponent } from './features/settings/settings';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
 
@@ -24,6 +25,11 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: Dashboard,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'settings',
+        component: SettingsComponent,
         canActivate: [authGuard]
     },
     {
