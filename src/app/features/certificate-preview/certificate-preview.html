@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-slate-50" [attr.dir]="pageDirection">
   <!-- Floating Action Bar / Header -->
-  <header class="no-print sticky top-0 z-10 flex flex-col gap-4 border-b border-gray-200 bg-white/80 px-4 py-4 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10 shadow-sm">
+  <header class="no-print sticky top-0 z-50 flex flex-col gap-4 border-b border-gray-200 bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-10 shadow-sm relative">
     <div class="min-w-0">
       <h1 class="text-xl font-bold text-gray-800 tracking-tight sm:text-2xl">{{ getPageText('certificatePreview') }}</h1>
       <p class="mt-1 text-sm text-gray-500">{{ getPageText('reviewCertificate') }}</p>
@@ -20,7 +20,6 @@
       </button>
     </div>
   </header>
-//--
   <main class="certificate-preview-area flex min-h-[calc(100vh-5rem)] items-start justify-start overflow-x-auto overflow-y-auto p-4 sm:items-center sm:justify-center sm:p-8 lg:p-12">
     <div class="certificate-wrapper flex min-w-full justify-start sm:justify-center">
       @if (certificate) {
