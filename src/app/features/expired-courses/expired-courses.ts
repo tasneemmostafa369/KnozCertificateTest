@@ -32,6 +32,20 @@ export class ExpiredCoursesComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<string>();
   private subscription = new Subscription();
 
+  isMobileSidebarOpen = signal(false);
+
+  openMobileSidebar() {
+    this.isMobileSidebarOpen.set(true);
+  }
+
+  closeMobileSidebar() {
+    this.isMobileSidebarOpen.set(false);
+  }
+
+  setLanguage(lang: 'en' | 'ar') {
+    this.languageService.setLanguage(lang);
+  }
+
   get currentLanguage(): 'en' | 'ar' {
     return this.languageService.currentLanguage();
   }
