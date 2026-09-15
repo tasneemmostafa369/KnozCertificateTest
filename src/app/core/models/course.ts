@@ -4,12 +4,14 @@ export interface ExpiredCourse {
   studentOrParentPhone: string;
   subjectName: string;
   planName: string;
+  planId?: number;
   primaryTeacherName: string;
   primaryTeacherPhone: string;
   monitorName: string;
   monitorPhone: string;
   daysSinceExpiration?: number;
   sspId?: number;
+  studentId?: number;
 }
 
 export interface ExpiredCoursesResponse {

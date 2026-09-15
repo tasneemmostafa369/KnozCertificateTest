@@ -38,6 +38,7 @@ export const DICTIONARY = {
 
     academicDirector: 'المدير الأكاديمي',
 
+    issuedCertificates: 'الشهادات الصادرة',
     dashboard: 'لوحة التحكم',
 
     certificateManagement:
@@ -244,6 +245,7 @@ export const DICTIONARY = {
     academicDirector: 'Academic Director',
 
 
+    issuedCertificates: 'Issued Certificates',
     dashboard: 'Dashboard',
 
     certificateManagement:

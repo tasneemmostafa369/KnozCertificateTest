@@ -1,106 +1,65 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Certificate } from '../../core/models/certificate';
 import { CertificateService } from '../../core/services/certificate-service';
-import { DatePipe } from '@angular/common';
 import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
   private readonly certificateService = inject(CertificateService);
-  private readonly loadingService =inject(LoadingService);
+  private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);
-  certificateToDelete: Certificate | null = null;
-  isDeleteModalOpen = false;
+  private readonly languageService = inject(LanguageService);
+  
   isMobileSidebarOpen = false;
+  readonly dictionary = DICTIONARY;
 
-  private readonly languageService =
-  inject(LanguageService);
-
-readonly dictionary = DICTIONARY;
-
-  certificates: Certificate[] = [];
+  totalCertificates = signal(0);
+  uniqueCourses = signal(0);
+  uniqueStudents = signal(0);
 
   ngOnInit(): void {
-    this.loadingService.show()
-    this.certificates =
-      [...this.certificateService.getCertificates()].reverse();
-    this.loadingService.hide()
-  }
+    setTimeout(() => this.loadingService.show(), 0);
+    
+    const certs = this.certificateService.getCertificates();
+    this.totalCertificates.set(certs.length);
+    
+    // Calculate unique courses based on generated certificates
+    const uniqueCourseNames = new Set(certs.map(c => c.courseName.trim().toLowerCase()));
+    this.uniqueCourses.set(uniqueCourseNames.size);
 
-  // view certificate
-  viewCertificate(certificate: Certificate): void {
-    this.loadingService.show();
-    this.certificateService.setCertificate(certificate);
-
-    this.router.navigate(['/certificates/preview']).finally(() => {
-      this.loadingService.hide();
-    });
-  }
-
-  // delete cetificate
-
-  openDeleteModal(certificate: Certificate): void {
-    this.certificateToDelete = certificate;
-    this.isDeleteModalOpen = true;
-  }
-  closeDeleteModal(): void {
-    this.isDeleteModalOpen = false;
-    this.certificateToDelete = null;
-  }
-  confirmDelete(): void {
-
-    if (!this.certificateToDelete) {
-      return;
-    }
-
-    this.certificateService.deleteCertificate(
-      this.certificateToDelete.id
-    );
-
-    this.certificates =
-      [...this.certificateService.getCertificates()].reverse();
-
-    this.closeDeleteModal();
+    // Calculate unique students based on generated certificates
+    const uniqueStudentNames = new Set(certs.map(c => c.studentName.trim().toLowerCase()));
+    this.uniqueStudents.set(uniqueStudentNames.size);
+    
+    setTimeout(() => this.loadingService.hide(), 0);
   }
 
   // sidebar
   openMobileSidebar(): void {
-  this.isMobileSidebarOpen = true;
-}
+    this.isMobileSidebarOpen = true;
+  }
 
-closeMobileSidebar(): void {
-  this.isMobileSidebarOpen = false;
-}
+  closeMobileSidebar(): void {
+    this.isMobileSidebarOpen = false;
+  }
 
-// language
-get currentLanguage(): Language {
-  return this.languageService.currentLanguage();
-}
+  // language
+  get currentLanguage(): Language {
+    return this.languageService.currentLanguage();
+  }
 
+  setLanguage(language: Language): void {
+    this.languageService.setLanguage(language);
+  }
 
-setLanguage(language: Language): void {
-
-  this.languageService.setLanguage(language);
-
-}
-
-
-getText(
-  key: keyof typeof DICTIONARY.en
-): string {
-
-  return this.dictionary[
-    this.currentLanguage
-  ][key];
-
-}
-
+  getText(key: keyof typeof DICTIONARY.en): string {
+    return this.dictionary[this.currentLanguage][key];
+  }
 }
