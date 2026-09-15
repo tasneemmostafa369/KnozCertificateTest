@@ -1,8 +1,14 @@
-export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+app.use(express.json());
+
+app.get('/api/verify', async (req, res) => {
   const sspId = req.query.sspId;
 
   if (!sspId) {
@@ -60,4 +66,14 @@ export default async function handler(req, res) {
     console.error('API Error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
-}
+});
+
+app.use(express.static(path.join(__dirname, 'dist/knoz-academy/browser')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/knoz-academy/browser/index.html'));
+});
+
+app.listen(3000, '0.0.0.0', () => {
+  console.log('Server is running on http://0.0.0.0:3000');
+});
