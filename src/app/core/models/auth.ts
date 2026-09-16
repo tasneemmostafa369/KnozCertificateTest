@@ -9,5 +9,6 @@ export interface AuthResponse {
   message: string;
   record: {
     token: string;
+    fullName?: string;
   };
 }

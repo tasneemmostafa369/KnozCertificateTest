@@ -12,6 +12,7 @@ export class AuthService {
   private router = inject(Router);
 
   public isAuthenticated = signal<boolean>(!!localStorage.getItem('token'));
+  public currentUserFullName = signal<string | null>(localStorage.getItem('fullName'));
 
   login(credentials: Partial<LoginRequest>): Observable<AuthResponse> {
     const payload: LoginRequest = {
@@ -24,6 +25,10 @@ export class AuthService {
       tap(response => {
         if (response.status && response.record?.token) {
           localStorage.setItem('token', response.record.token);
+          if (response.record.fullName) {
+            localStorage.setItem('fullName', response.record.fullName);
+            this.currentUserFullName.set(response.record.fullName);
+          }
           this.isAuthenticated.set(true);
         }
       })
@@ -32,6 +37,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('fullName');
+    this.currentUserFullName.set(null);
     this.isAuthenticated.set(false);
     this.router.navigate(['/login']);
   }

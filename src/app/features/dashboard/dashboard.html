@@ -134,6 +134,23 @@
       </header>
     </div>
 
+    <!-- User Greeting Card -->
+    <section class="px-4 pt-6 lg:px-8">
+      <div class="flex items-center gap-4 rounded-2xl bg-white border border-knoz-gold/30 p-5 shadow-sm">
+        <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-knoz-green text-knoz-gold shadow-md">
+          <i class="fa-solid fa-user text-2xl"></i>
+        </div>
+        <div>
+          <p class="text-sm font-medium text-gray-500">
+            {{ currentLanguage === 'ar' ? 'مرحباً بك،' : 'Welcome back,' }}
+          </p>
+          <h3 class="text-xl font-bold text-gray-900 tracking-tight">
+            {{ currentUserFullName || (currentLanguage === 'ar' ? 'مستخدم' : 'User') }}
+          </h3>
+        </div>
+      </div>
+    </section>
+
     <!-- Welcome Section -->
     <section class="px-4 pt-4 pb-4 lg:px-8">
       <div class="relative overflow-hidden rounded-3xl bg-knoz-green p-5 sm:p-8 shadow-2xl">

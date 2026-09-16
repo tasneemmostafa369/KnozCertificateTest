@@ -4,6 +4,7 @@ import { CertificateService } from '../../core/services/certificate-service';
 import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class Dashboard implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);
   private readonly languageService = inject(LanguageService);
+  private readonly authService = inject(AuthService);
   
   isMobileSidebarOpen = false;
   readonly dictionary = DICTIONARY;
@@ -23,6 +25,10 @@ export class Dashboard implements OnInit {
   totalCertificates = signal(0);
   uniqueCourses = signal(0);
   uniqueStudents = signal(0);
+  
+  get currentUserFullName(): string {
+    return this.authService.currentUserFullName() || '';
+  }
 
   ngOnInit(): void {
     setTimeout(() => this.loadingService.show(), 0);
