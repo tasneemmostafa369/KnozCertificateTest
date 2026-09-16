@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ReportService } from '../../core/services/report.service';
 import { ExpiredCourse } from '../../core/models/course';
 import { LanguageService } from '../../core/services/language-service';
+import { AuthService } from '../../core/services/auth.service';
 import { DICTIONARY } from '../../core/mock/dictionary';
 
 @Component({
@@ -19,6 +20,7 @@ export class ExpiredCoursesComponent implements OnInit, OnDestroy {
   private reportService = inject(ReportService);
   private router = inject(Router);
   private languageService = inject(LanguageService);
+  private authService = inject(AuthService);
 
   courses = signal<ExpiredCourse[]>([]);
   totalCount = signal(0);
@@ -33,6 +35,7 @@ export class ExpiredCoursesComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   isMobileSidebarOpen = signal(false);
+  isLogoutModalOpen = signal(false);
 
   openMobileSidebar() {
     this.isMobileSidebarOpen.set(true);
@@ -124,5 +127,18 @@ export class ExpiredCoursesComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  openLogoutModal() {
+    this.isLogoutModalOpen.set(true);
+  }
+
+  closeLogoutModal() {
+    this.isLogoutModalOpen.set(false);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.closeLogoutModal();
   }
 }

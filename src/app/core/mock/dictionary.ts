@@ -45,6 +45,7 @@ export const DICTIONARY = {
       'إدارة الشهادات',
 
     settings: 'الإعدادات',
+    logout: 'تسجيل الخروج',
 
     certificates: 'الشهادات',
 
@@ -203,6 +204,9 @@ export const DICTIONARY = {
   defaultTemplateTitle: 'القالب الافتراضي',
   defaultTemplateDesc: 'اختر القالب الافتراضي لإنشاء الشهادات',
   settingsSaved: 'تم حفظ الإعدادات بنجاح',
+  logoutConfirmTitle: 'تأكيد تسجيل الخروج',
+  logoutConfirmMessage: 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
+  confirm: 'تأكيد',
   },
 
   en: {
@@ -252,6 +256,7 @@ export const DICTIONARY = {
       'Certificate Management',
 
     settings: 'Settings',
+    logout: 'Logout',
 
     certificates: 'Certificates',
 
@@ -413,6 +418,9 @@ export const DICTIONARY = {
   defaultTemplateTitle: 'Default Template',
   defaultTemplateDesc: 'Choose the default template for generating certificates',
   settingsSaved: 'Settings saved successfully',
+  logoutConfirmTitle: 'Confirm Logout',
+  logoutConfirmMessage: 'Are you sure you want to log out?',
+  confirm: 'Confirm',
   },
 
 } as const;

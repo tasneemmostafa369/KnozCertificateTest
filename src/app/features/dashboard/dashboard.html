@@ -29,11 +29,15 @@
       </nav>
 
       <!-- Footer -->
-      <div class="border-t border-white/10 p-4">
+      <div class="border-t border-white/10 p-4 space-y-2">
         <a routerLink="/settings" class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-white/70 transition hover:bg-white/10 hover:text-white">
            <i class="fa-solid fa-gear w-5 text-center"></i>
            {{ getText('settings') }}
         </a>
+        <button (click)="openLogoutModal()" class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-red-400 transition hover:bg-red-500/10 hover:text-red-300">
+           <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
+           {{ getText('logout') }}
+        </button>
       </div>
     </div>
   </aside>
@@ -79,11 +83,15 @@
     </nav>
 
     <!-- Footer -->
-    <div class="border-t border-white/10 p-4">
+    <div class="border-t border-white/10 p-4 space-y-2">
       <a routerLink="/settings" (click)="closeMobileSidebar()" class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-white/70 transition hover:bg-white/10 hover:text-white">
          <i class="fa-solid fa-gear w-5 text-center"></i>
          {{ getText('settings') }}
       </a>
+      <button (click)="openLogoutModal(); closeMobileSidebar()" class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-start text-sm text-red-400 transition hover:bg-red-500/10 hover:text-red-300">
+         <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i>
+         {{ getText('logout') }}
+      </button>
     </div>
   </aside>
   }
@@ -274,4 +282,33 @@
       </div>
     </section>
   </main>
+
+  <!-- Logout Confirmation Modal -->
+  @if (isLogoutModalOpen) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-0">
+      <!-- Backdrop -->
+      <div class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity" (click)="closeLogoutModal()"></div>
+      
+      <!-- Modal Panel -->
+      <div class="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-start align-middle shadow-xl transition-all border border-gray-100">
+        <div class="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-start sm:text-start">
+          <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:h-10 sm:w-10">
+            <i class="fa-solid fa-arrow-right-from-bracket text-red-600"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-gray-900 font-['Tajawal']">{{ getText('logoutConfirmTitle') }}</h3>
+            <p class="mt-2 text-sm text-gray-500 font-['Tajawal'] leading-relaxed">{{ getText('logoutConfirmMessage') }}</p>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+          <button type="button" (click)="closeLogoutModal()" class="inline-flex w-full justify-center rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-bold text-gray-700 shadow-sm hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-knoz-green focus:ring-offset-2 transition-all duration-200 sm:w-auto font-['Tajawal']">
+            {{ getText('cancel') }}
+          </button>
+          <button type="button" (click)="logout()" class="inline-flex w-full justify-center rounded-xl bg-red-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200 sm:w-auto font-['Tajawal']">
+            {{ getText('confirm') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </div>

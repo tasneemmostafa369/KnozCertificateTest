@@ -25,9 +25,10 @@ export class AuthService {
       tap(response => {
         if (response.status && response.record?.token) {
           localStorage.setItem('token', response.record.token);
-          if (response.record.fullName) {
-            localStorage.setItem('fullName', response.record.fullName);
-            this.currentUserFullName.set(response.record.fullName);
+          const fullName = response.record.userInfo?.fullName;
+          if (fullName) {
+            localStorage.setItem('fullName', fullName);
+            this.currentUserFullName.set(fullName);
           }
           this.isAuthenticated.set(true);
         }

@@ -20,6 +20,7 @@ export class Dashboard implements OnInit {
   private readonly authService = inject(AuthService);
   
   isMobileSidebarOpen = false;
+  isLogoutModalOpen = false;
   readonly dictionary = DICTIONARY;
 
   totalCertificates = signal(0);
@@ -67,5 +68,18 @@ export class Dashboard implements OnInit {
 
   getText(key: keyof typeof DICTIONARY.en): string {
     return this.dictionary[this.currentLanguage][key];
+  }
+
+  openLogoutModal(): void {
+    this.isLogoutModalOpen = true;
+  }
+
+  closeLogoutModal(): void {
+    this.isLogoutModalOpen = false;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.closeLogoutModal();
   }
 }

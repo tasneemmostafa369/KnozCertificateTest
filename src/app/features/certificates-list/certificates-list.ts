@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-certificates-list',
@@ -17,9 +18,11 @@ export class CertificatesListComponent implements OnInit {
   private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);
   private readonly languageService = inject(LanguageService);
+  private readonly authService = inject(AuthService);
   
   certificateToDelete: Certificate | null = null;
   isDeleteModalOpen = false;
+  isLogoutModalOpen = false;
   isMobileSidebarOpen = false;
   readonly dictionary = DICTIONARY;
   certificates: Certificate[] = [];
@@ -75,5 +78,18 @@ export class CertificatesListComponent implements OnInit {
 
   getText(key: keyof typeof DICTIONARY.en): string {
     return this.dictionary[this.currentLanguage][key];
+  }
+
+  openLogoutModal(): void {
+    this.isLogoutModalOpen = true;
+  }
+
+  closeLogoutModal(): void {
+    this.isLogoutModalOpen = false;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.closeLogoutModal();
   }
 }
