@@ -174,7 +174,7 @@ export const DICTIONARY = {
   // Verification Page
   verificationTitle: 'نظام التحقق الإلكتروني من الشهادات',
   verifiedSuccess: 'شهادة معتمدة وموثقة',
-  verifiedDesc: 'تشهد أكاديمية كنوز أن هذا الكورس قد تم إنجازه بنجاح وفقاً للمعايير الأكاديمية المعتمدة لدينا.',
+  verifiedDesc: 'قد أتم إنجاز هذا الكورس بنجاح وفقاً للمعايير الأكاديمية المعتمدة لدينا.',
   courseDetails: 'تفاصيل الكورس',
   planName: 'اسم الباقة',
   subject: 'المادة',
@@ -388,7 +388,7 @@ export const DICTIONARY = {
   // Verification Page
   verificationTitle: 'Electronic Certificate Verification System',
   verifiedSuccess: 'Verified & Authenticated Certificate',
-  verifiedDesc: 'Knoz Academy certifies that this course has been successfully completed according to our approved academic standards.',
+  verifiedDesc: 'has successfully completed this course according to our approved academic standards.',
   courseDetails: 'Course Details',
   planName: 'Plan Name',
   subject: 'Subject',
