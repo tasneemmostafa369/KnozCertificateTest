@@ -32,75 +32,75 @@
 
     <!-- Success State -->
     @if (!isLoading() && courseData()) {
-      <div class="flex flex-col lg:flex-row flex-1 animate-[fadeIn_0.8s_ease-out]">
+      <div class="flex flex-col flex-1 animate-[fadeIn_0.8s_ease-out]">
         
         <!-- SIDE 1: Status & Seal (Dark Green) -->
-        <div class="w-full lg:w-4/12 xl:w-3/12 bg-[#0F392B] relative p-8 lg:p-10 flex flex-col items-center justify-center text-center overflow-hidden shrink-0 border-b-4 lg:border-b-0 lg:border-l-4 border-[#C8A559] min-h-[400px]">
+        <div class="w-full bg-[#0F392B] relative py-6 px-4 sm:px-8 flex flex-col items-center justify-center text-center overflow-hidden shrink-0 border-b-4 border-[#C8A559]">
           <!-- Background Pattern -->
           <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] pointer-events-none"></div>
           <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-[#C8A559] rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
           
-          <img src="assets/logo.jpeg" alt="Logo" class="h-20 w-20 object-cover mx-auto mb-10 rounded-full border-2 border-[#C8A559] relative z-10 shadow-lg">
+          <img src="assets/logo.jpeg" alt="Logo" class="h-14 w-14 object-cover mx-auto mb-4 rounded-full border-2 border-[#C8A559] relative z-10 shadow-lg">
           
           <!-- The Golden Seal -->
-          <div class="relative z-10 mb-10">
-            <div class="flex items-center justify-center w-40 h-40 rounded-full bg-[#0F392B] border-4 border-[#C8A559] animate-[stamp_0.8s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards,glow_3s_infinite_0.8s] shadow-[0_0_40px_rgba(200,165,89,0.4)] relative mx-auto">
-              <div class="absolute inset-2 border-2 border-dashed border-[#C8A559]/60 rounded-full"></div>
-              <i class="fas fa-check-double text-6xl text-[#C8A559]"></i>
+          <div class="relative z-10 mb-4">
+            <div class="flex items-center justify-center w-24 h-24 rounded-full bg-[#0F392B] border-[3px] border-[#C8A559] animate-[stamp_0.8s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards,glow_3s_infinite_0.8s] shadow-[0_0_30px_rgba(200,165,89,0.4)] relative mx-auto">
+              <div class="absolute inset-1.5 border border-dashed border-[#C8A559]/60 rounded-full"></div>
+              <i class="fas fa-check-double text-3xl text-[#C8A559]"></i>
             </div>
           </div>
           
-          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-2 font-['Amiri'] tracking-wide relative z-10 drop-shadow-md">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2 font-['Amiri'] tracking-wide relative z-10 drop-shadow-md">
             {{ texts()['verifiedSuccess'] }}
           </h2>
           
           <!-- Student Name Card -->
-          <div class="w-full max-w-sm rounded-3xl p-6 sm:p-8 my-6 relative z-10 flex flex-col items-center justify-center bg-gradient-to-b from-white/10 to-transparent backdrop-blur-xl border border-[#C8A559]/60 shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_50px_rgba(200,165,89,0.15)] transition-all duration-500 group overflow-hidden">
-            <p class="text-white/80 text-sm sm:text-base font-bold tracking-widest mb-6 text-center shrink-0">
+          <div class="w-full max-w-4xl rounded-2xl p-4 sm:p-6 my-2 relative z-10 flex flex-col items-center justify-center bg-gradient-to-b from-white/10 to-transparent backdrop-blur-xl border border-[#C8A559]/60 shadow-[0_15px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_50px_rgba(200,165,89,0.15)] transition-all duration-500 group overflow-hidden">
+            <p class="text-white/80 text-xs sm:text-sm font-bold tracking-widest mb-3 text-center shrink-0">
               {{ texts()['presentedTo'] }}
             </p>
-            <div class="w-full overflow-x-auto flex justify-center pb-2 mb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#C8A559] font-['Amiri'] leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] text-center whitespace-nowrap px-2 group-hover:scale-105 transition-transform duration-500">
+            <div class="w-full overflow-x-auto flex justify-center pb-1 mb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#C8A559] font-['Amiri'] leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] text-center whitespace-nowrap px-2 group-hover:scale-102 transition-transform duration-500">
                 {{ courseData().studentName }}
               </h3>
             </div>
             
-            <div class="w-24 h-[2px] bg-gradient-to-r from-transparent via-[#C8A559] to-transparent mb-6 opacity-60 shrink-0"></div>
+            <div class="w-16 h-[2px] bg-gradient-to-r from-transparent via-[#C8A559] to-transparent mb-3 opacity-60 shrink-0"></div>
             
-            <p class="text-white/90 text-sm sm:text-base leading-relaxed font-medium text-center max-w-2xl shrink-0">
+            <p class="text-white/90 text-xs sm:text-sm leading-relaxed font-medium text-center max-w-2xl shrink-0">
               {{ texts()['verifiedDesc'] }}
             </p>
           </div>
         </div>
 
         <!-- SIDE 2: Official Details (Pure White) -->
-        <div class="w-full lg:w-8/12 xl:w-9/12 bg-white p-6 sm:p-10 relative flex flex-col items-center justify-center">
-          <div class="w-full max-w-4xl">
+        <div class="w-full bg-white p-6 sm:p-8 relative flex flex-col items-center justify-center">
+          <div class="w-full max-w-5xl">
             <!-- Header Section -->
-            <div class="mb-10 border-b border-gray-100 pb-8 flex flex-col">
-              <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="bg-[#0F392B]/5 text-[#0F392B] px-3 py-1 rounded-md text-xs font-bold uppercase tracking-widest border border-[#0F392B]/10 flex items-center gap-2">
+            <div class="mb-6 border-b border-gray-100 pb-5 flex flex-col">
+              <div class="flex flex-wrap items-center gap-3 mb-2">
+                <span class="bg-[#0F392B]/5 text-[#0F392B] px-3 py-1 rounded-md text-[10px] sm:text-xs font-bold uppercase tracking-widest border border-[#0F392B]/10 flex items-center gap-2">
                   <i class="fas fa-file-signature text-[#C8A559]"></i> {{ texts()['courseDetails'] }}
                 </span>
               </div>
               
               <!-- Main Course Name (Plan Name) -->
-              <div class="w-full overflow-x-auto pb-2 mb-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-snug whitespace-nowrap">{{ courseData().planName }}</h1>
+              <div class="w-full overflow-x-auto pb-1 mb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 leading-snug whitespace-nowrap">{{ courseData().planName }}</h1>
               </div>
             
             <!-- Subject Name with Label -->
-            <div class="inline-flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-xl px-5 py-2.5 shadow-sm">
-              <div class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559]">
-                <i class="fas fa-book-open text-sm"></i>
+            <div class="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 shadow-sm self-start">
+              <div class="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559]">
+                <i class="fas fa-book-open text-xs"></i>
               </div>
-              <span class="text-gray-500 text-sm font-bold uppercase tracking-wider">{{ texts()['subject'] }}:</span>
-              <span class="text-[#0F392B] text-lg font-extrabold">{{ courseData().subjectName }}</span>
+              <span class="text-gray-500 text-xs font-bold uppercase tracking-wider">{{ texts()['subject'] }}:</span>
+              <span class="text-[#0F392B] text-base font-extrabold">{{ courseData().subjectName }}</span>
             </div>
           </div>
 
           <!-- Structured Data Cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
             <!-- Teacher -->
             <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 flex items-center gap-4 transition-all hover:shadow-md hover:border-[#C8A559]/30 hover:bg-white group">
               <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#C8A559] shrink-0 group-hover:scale-110 transition-transform">
@@ -178,29 +178,28 @@
 
           <!-- Schedule -->
           @if (courseData().coursePattern && courseData().coursePattern.length > 0) {
-          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <h4 class="text-xs font-bold text-gray-500 mb-4 flex items-center gap-2 uppercase tracking-widest">
+          <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 mb-2">
+            <h4 class="text-[11px] font-bold text-gray-500 mb-3 flex items-center gap-2 uppercase tracking-widest">
               <i class="far fa-clock text-[#C8A559]"></i> {{ texts()['scheduleTitle'] }}
             </h4>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2">
               @for (pattern of courseData().coursePattern; track pattern) {
-                <div class="bg-white border border-gray-200 rounded-lg px-4 py-2 flex items-center gap-3 shadow-sm hover:border-[#C8A559]/30 transition-colors">
-                  <span class="font-bold text-gray-900">{{ getDayName(pattern.dayOfWeek) }}</span>
-                  <div class="w-1.5 h-1.5 rounded-full bg-[#C8A559]"></div>
-                  <span class="text-gray-900 font-mono font-semibold" dir="ltr">{{ formatTime(pattern.time) }}</span>
+                <div class="bg-white border border-gray-200 rounded-lg px-3 py-1.5 flex items-center gap-2 shadow-sm hover:border-[#C8A559]/30 transition-colors">
+                  <span class="font-bold text-xs text-gray-900">{{ getDayName(pattern.dayOfWeek) }}</span>
+                  <div class="w-1 h-1 rounded-full bg-[#C8A559]"></div>
+                  <span class="text-gray-900 font-mono font-semibold text-xs" dir="ltr">{{ formatTime(pattern.time) }}</span>
                 </div>
               }
             </div>
           </div>
           }
-
         </div>
         </div>
       </div>
     }
 
     <!-- Footer -->
-    <div class="bg-gray-50 px-8 py-4 text-center border-t border-gray-200 relative z-10 w-full shrink-0">
+    <div class="bg-gray-50 px-6 py-3 text-center border-t border-gray-200 relative z-10 w-full shrink-0">
       <p class="text-sm text-gray-500 font-medium">{{ texts()['allRightsReserved'] }} &copy; {{ texts()['academyName'] }} {{ currentYear() }}</p>
     </div>
   </div>
