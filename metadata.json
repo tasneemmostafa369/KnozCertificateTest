@@ -1,0 +1,6 @@
+{
+  "name": "Knoz Academy",
+  "description": "Certificate generation and verification platform for Knoz Academy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,15 +1,4 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const app = express();
-app.use(express.json());
-app.use((req, res, next) => { console.log(req.method, req.url); next(); });
-
-app.get('/api/verify', async (req, res) => {
+export default async function handler(req, res) {
   const sspId = req.query.sspId;
 
   if (!sspId) {
@@ -20,7 +9,7 @@ app.get('/api/verify', async (req, res) => {
   const password = process.env.KNOZ_API_PASSWORD;
 
   if (!username || !password) {
-    console.error('Server configuration error: Missing credentials in .env');
+    console.error('Server configuration error: Missing credentials in Environment Variables');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
@@ -67,14 +56,4 @@ app.get('/api/verify', async (req, res) => {
     console.error('API Error:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
-});
-
-app.use(express.static(path.join(__dirname, 'dist/knoz-academy/browser')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/knoz-academy/browser/index.html'));
-});
-
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Server is running on http://0.0.0.0:3000');
-});
+}

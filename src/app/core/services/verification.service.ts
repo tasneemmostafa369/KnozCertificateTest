@@ -7,7 +7,7 @@ export class VerificationService {
 
   async verifyCertificate(sspId: string): Promise<any> {
     try {
-      const response = await fetch(`/api/verify?sspId=${sspId}`, {
+      const response = await fetch(`${window.location.origin}/api/verify?sspId=${sspId}`, {
         method: 'GET'
       });
 
