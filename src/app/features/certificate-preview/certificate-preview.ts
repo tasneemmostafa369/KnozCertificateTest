@@ -44,7 +44,7 @@ export class CertificatePreview implements OnInit {
   }
 
   get verificationUrl(): string {
-    return `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.encodedSspId}`;
+    return `https://knoz-verification.vercel.app/${this.encodedSspId}`;
   }
 
   ngOnInit(): void {

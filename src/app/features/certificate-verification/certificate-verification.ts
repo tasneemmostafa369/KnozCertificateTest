@@ -43,6 +43,11 @@ export class CertificateVerificationComponent implements OnInit {
 
   ngOnInit() {
     const rawSspId = this.route.snapshot.paramMap.get('sspId');
+    if (typeof window !== 'undefined' && rawSspId) {
+      window.location.replace(`https://knoz-verification.vercel.app/${rawSspId}`);
+      return;
+    }
+
     if (!rawSspId) {
       this.error.set(this.texts()['errorNoCourseId']);
       this.isLoading.set(false);

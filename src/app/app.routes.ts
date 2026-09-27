@@ -1,10 +1,18 @@
-import { Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 import { Dashboard } from './features/dashboard/dashboard';
 import { CreateCertificate } from './features/create-certificate/create-certificate';
 import { CertificatePreview } from './features/certificate-preview/certificate-preview';
 import { SettingsComponent } from './features/settings/settings';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
+
+const redirectToNewVerification = (route: ActivatedRouteSnapshot) => {
+    const sspId = route.paramMap.get('sspId') || '';
+    if (typeof window !== 'undefined') {
+        window.location.replace(`https://knoz-verification.vercel.app/${sspId}`);
+    }
+    return false;
+};
 
 export const routes: Routes = [
     {
@@ -54,10 +62,12 @@ export const routes: Routes = [
     },
     {
         path: 'certificates/Verification/:sspId',
+        canActivate: [redirectToNewVerification],
         loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
     },
     {
         path: 'certificates/verification/:sspId',
+        canActivate: [redirectToNewVerification],
         loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
     },
     {

@@ -110,6 +110,10 @@ app.get('/api/verify', async (req, res) => {
   }
 });
 
+app.get(['/certificates/Verification/:sspId', '/certificates/verification/:sspId'], (req, res) => {
+  res.redirect(302, `https://knoz-verification.vercel.app/${req.params.sspId}`);
+});
+
 app.use(express.static(path.join(__dirname, 'dist/knoz-academy/browser')));
 
 app.get('*', (req, res) => {

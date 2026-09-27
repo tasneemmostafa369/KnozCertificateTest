@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/certificates/Verification/:sspId",
+      "destination": "https://knoz-verification.vercel.app/:sspId",
+      "permanent": false
+    },
+    {
+      "source": "/certificates/verification/:sspId",
+      "destination": "https://knoz-verification.vercel.app/:sspId",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
