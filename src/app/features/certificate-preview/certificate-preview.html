@@ -28,17 +28,17 @@
           <div id="certificate-download-container" class="certificate-print relative aspect-[297/210] w-[700px] max-w-none shrink-0 overflow-hidden bg-white shadow-inner print:shadow-none sm:w-full sm:max-w-5xl">
             @if (templateId === 'classic') {
               @defer (on immediate) {
-                <app-classic-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-classic-certificate>
+                <app-classic-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [verificationUrl]="verificationUrl" [texts]="texts" [direction]="direction"></app-classic-certificate>
               }
             }
             @if (templateId === 'elegant') {
               @defer (on immediate) {
-                <app-elegant-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-elegant-certificate>
+                <app-elegant-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [verificationUrl]="verificationUrl" [texts]="texts" [direction]="direction"></app-elegant-certificate>
               }
             }
             @if (templateId === 'quran') {
               @defer (on immediate) {
-                <app-quran-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [texts]="texts" [direction]="direction"></app-quran-certificate>
+                <app-quran-certificate [certificate]="certificate" [qrCodeUrl]="qrCodeUrl()" [verificationUrl]="verificationUrl" [texts]="texts" [direction]="direction"></app-quran-certificate>
               }
             }
           </div>

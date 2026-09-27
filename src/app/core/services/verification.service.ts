@@ -12,7 +12,11 @@ export class VerificationService {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch certificate details');
+        const errData = await response.json().catch(() => null);
+        const error = new Error(errData?.error || 'Failed to fetch certificate details') as any;
+        error.status = response.status;
+        error.isInvalid = errData?.invalid || false;
+        throw error;
       }
 
       const detailsData = await response.json();

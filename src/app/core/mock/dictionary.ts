@@ -192,6 +192,9 @@ export const DICTIONARY = {
   errorNotFound: 'لم يتم العثور على بيانات الشهادة.',
   errorGeneric: 'حدث خطأ أثناء التحقق من الشهادة.',
   errorNoCourseId: 'رقم الكورس غير متوفر.',
+  invalidLinkTitle: 'رابط غير صالح',
+  invalidLinkDesc: 'عفواً، رابط التحقق من الشهادة غير صالح أو تم التلاعب به.',
+  invalidFormatNotice: 'يرجى التأكد من استخدام الرابط الأصلي أو مسح رمز الاستجابة السريعة (QR Code) الموجود على الشهادة مباشرة.',
   allRightsReserved: 'جميع الحقوق محفوظة',
 
   // Settings
@@ -439,6 +442,9 @@ export const DICTIONARY = {
   errorNotFound: 'Certificate data not found.',
   errorGeneric: 'An error occurred while verifying the certificate.',
   errorNoCourseId: 'Course ID is not available.',
+  invalidLinkTitle: 'Invalid Verification Link',
+  invalidLinkDesc: 'Sorry, the certificate verification link is invalid or has been modified.',
+  invalidFormatNotice: 'Please ensure you use the original link or scan the QR Code on the official certificate.',
   allRightsReserved: 'All rights reserved',
 
   // Settings

@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { VerificationService } from '../../core/services/verification.service';
 import { DICTIONARY, Language } from '../../core/mock/dictionary';
+import { validateAndDecodeSspId } from '../../core/utils/ssp-cipher';
 
 @Component({
   selector: 'app-certificate-verification',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './certificate-verification.html',
   styles: [`
     @keyframes stamp {
@@ -32,6 +33,7 @@ export class CertificateVerificationComponent implements OnInit {
   private verificationService = inject(VerificationService);
 
   isLoading = signal<boolean>(true);
+  isInvalid = signal<boolean>(false);
   error = signal<string | null>(null);
   courseData = signal<any>(null);
   sessions = signal<any[]>([]);
@@ -40,13 +42,25 @@ export class CertificateVerificationComponent implements OnInit {
   texts = computed(() => DICTIONARY[this.lang()]);
 
   ngOnInit() {
-    const sspId = this.route.snapshot.paramMap.get('sspId');
-    if (sspId) {
-      this.verify(sspId);
-    } else {
+    const rawSspId = this.route.snapshot.paramMap.get('sspId');
+    if (!rawSspId) {
       this.error.set(this.texts()['errorNoCourseId']);
       this.isLoading.set(false);
+      return;
     }
+
+    // Step 1 & 2: Validate cipher format, pairs, dictionary mapping, start/end conditions
+    const decodeResult = validateAndDecodeSspId(rawSspId);
+
+    if (!decodeResult.isValid || !decodeResult.numericId) {
+      // Show the dedicated "Not Valid" page
+      this.isInvalid.set(true);
+      this.isLoading.set(false);
+      return;
+    }
+
+    // Step 3: Use the separated original numeric ID to fetch verification data
+    this.verify(decodeResult.numericId);
   }
 
   toggleLang() {
@@ -73,8 +87,12 @@ export class CertificateVerificationComponent implements OnInit {
       } else {
         this.error.set(this.texts()['errorNotFound']);
       }
-    } catch (err) {
-      this.error.set(this.texts()['errorGeneric']);
+    } catch (err: any) {
+      if (err?.isInvalid) {
+        this.isInvalid.set(true);
+      } else {
+        this.error.set(this.texts()['errorGeneric']);
+      }
     } finally {
       this.isLoading.set(false);
     }

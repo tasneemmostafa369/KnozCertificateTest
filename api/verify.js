@@ -1,8 +1,49 @@
-export default async function handler(req, res) {
-  const sspId = req.query.sspId;
+const SSP_ALPHA_TO_DIGIT = {
+  'A': '0', 'B': '1', 'C': '2', 'D': '3', 'E': '4',
+  'F': '5', 'G': '6', 'H': '7', 'I': '8', 'J': '9'
+};
 
-  if (!sspId) {
+function decodeSspId(input) {
+  if (!input || typeof input !== 'string') return null;
+  const trimmed = input.trim();
+
+  // If already purely digits (e.g. numeric ID)
+  if (/^\d+$/.test(trimmed)) {
+    return trimmed;
+  }
+
+  // Validate cipher format rules
+  if (/^\d/.test(trimmed)) return null; // Starts with num
+  if (/[a-zA-Z]$/.test(trimmed)) return null; // Ends with alpha
+  if (/[a-zA-Z]{2,}/.test(trimmed)) return null; // Alpha + Alpha
+  if (/\d{2,}/.test(trimmed)) return null; // Num + Num
+  if (trimmed.length % 2 !== 0) return null; // Must be even pairs
+
+  let extracted = '';
+  for (let i = 0; i < trimmed.length; i += 2) {
+    const alpha = trimmed[i].toUpperCase();
+    const digit = trimmed[i + 1];
+
+    if (!(alpha in SSP_ALPHA_TO_DIGIT)) return null;
+    if (!/^\d$/.test(digit)) return null;
+    if (SSP_ALPHA_TO_DIGIT[alpha] !== digit) return null;
+
+    extracted += digit;
+  }
+
+  return extracted;
+}
+
+export default async function handler(req, res) {
+  const rawSspId = req.query.sspId;
+
+  if (!rawSspId) {
     return res.status(400).json({ error: 'Bad Request: Missing sspId' });
+  }
+
+  const sspId = decodeSspId(rawSspId);
+  if (!sspId) {
+    return res.status(400).json({ error: 'Bad Request: Invalid or corrupted sspId format', invalid: true });
   }
 
   const username = process.env.KNOZ_API_USERNAME;

@@ -6,6 +6,7 @@ import { DICTIONARY } from '../../core/mock/dictionary';
 import QRCode from 'qrcode';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
+import { encodeSspId } from '../../core/utils/ssp-cipher';
 import { jsPDF } from 'jspdf';
 import { toJpeg } from 'html-to-image';
 
@@ -37,10 +38,18 @@ export class CertificatePreview implements OnInit {
     return this.certificate?.templateId ?? 'classic';
   }
 
+  get encodedSspId(): string {
+    const rawId = this.certificate?.sspId ?? this.certificate?.id;
+    return encodeSspId(rawId);
+  }
+
+  get verificationUrl(): string {
+    return `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.encodedSspId}`;
+  }
+
   ngOnInit(): void {
     if (this.certificate) {
-      const qrData = this.certificate.sspId ? `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.id}`;
-      this.generateQrCode(qrData);
+      this.generateQrCode(this.verificationUrl);
     }
   }
 
@@ -116,7 +125,7 @@ export class CertificatePreview implements OnInit {
         const pdfW = (btnRect.width / elementWidth) * pdfWidth;
         const pdfH = (btnRect.height / elementHeight) * pdfHeight;
 
-        const qrDataUrl = this.certificate?.sspId ? `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate.sspId}` : `https://knoz-certificate-test.vercel.app/certificates/Verification/${this.certificate?.id}`;
+        const qrDataUrl = this.verificationUrl;
         
         pdf.link(pdfX, pdfY, pdfW, pdfH, { url: qrDataUrl });
       }

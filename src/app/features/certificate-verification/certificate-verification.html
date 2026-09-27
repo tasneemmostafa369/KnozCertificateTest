@@ -19,8 +19,41 @@
       </div>
     }
 
+    <!-- Not Valid Link State (Custom Cipher Protection) -->
+    @if (!isLoading() && isInvalid()) {
+      <div class="p-12 sm:p-20 flex flex-col items-center justify-center flex-1 bg-white text-center animate-[fadeIn_0.5s_ease-out]">
+        <div class="relative mb-6">
+          <div class="w-24 h-24 rounded-full bg-amber-50 border-4 border-amber-200 flex items-center justify-center shadow-inner">
+            <i class="fas fa-shield-halved text-5xl text-amber-500"></i>
+          </div>
+          <span class="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white shadow-md">
+            <i class="fas fa-times text-sm"></i>
+          </span>
+        </div>
+
+        <span class="inline-block px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 rounded-full mb-3">
+          Not Valid Link
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-3 font-['Amiri']">
+          {{ texts()['invalidLinkTitle'] }}
+        </h2>
+        <p class="text-gray-600 text-base sm:text-lg max-w-lg mx-auto mb-4 leading-relaxed">
+          {{ texts()['invalidLinkDesc'] }}
+        </p>
+        <div class="max-w-md mx-auto bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-8 text-sm text-gray-500 flex items-start gap-3 text-start">
+          <i class="fas fa-circle-info text-amber-600 text-lg mt-0.5 shrink-0"></i>
+          <span>{{ texts()['invalidFormatNotice'] }}</span>
+        </div>
+
+        <a routerLink="/" class="inline-flex items-center gap-2 rounded-xl bg-[#0F392B] px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-[#154d3a] hover:scale-105">
+          <i class="fas fa-home text-[#C8A559]"></i>
+          <span>{{ lang() === 'ar' ? 'العودة للرئيسية' : 'Return to Home' }}</span>
+        </a>
+      </div>
+    }
+
     <!-- Error State -->
-    @if (!isLoading() && error()) {
+    @if (!isLoading() && !isInvalid() && error()) {
       <div class="p-24 flex flex-col items-center justify-center flex-1 bg-white animate-[fadeIn_0.5s_ease-out]">
         <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-red-50 border-4 border-red-100 mb-6 shadow-sm">
           <i class="fas fa-times text-5xl text-red-500"></i>
@@ -31,7 +64,7 @@
     }
 
     <!-- Success State -->
-    @if (!isLoading() && courseData()) {
+    @if (!isLoading() && !isInvalid() && courseData()) {
       <div class="flex flex-col flex-1 animate-[fadeIn_0.8s_ease-out]">
         
         <!-- SIDE 1: Status & Seal (Dark Green) -->

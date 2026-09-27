@@ -10,6 +10,7 @@ import { Certificate } from '../../../../core/models/certificate';
 export class ElegantCertificate {
   certificate = input.required<Certificate>();
   qrCodeUrl = input.required<string>();
+  verificationUrl = input<string>('');
   texts = input.required<{ [key: string]: string }>();
   direction = input.required<'ltr' | 'rtl'>();
 }
