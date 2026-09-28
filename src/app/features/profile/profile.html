@@ -197,7 +197,7 @@
             </h1>
 
             <p class="text-white/70 text-sm flex items-center justify-center md:justify-start gap-2 flex-wrap">
-              <span class="font-mono text-knoz-gold font-bold">@{{ userProfile()?.userName || 'student' }}</span>
+              <span class="font-mono text-knoz-gold font-bold">@{{ userProfile()?.userName || 'admin' }}</span>
             </p>
           </div>
 
@@ -355,7 +355,7 @@
         <!-- Column 3: Sidebar Summary Card -->
         <div class="space-y-6">
           
-          <!-- Student ID Card Visual -->
+          <!-- Admin ID Card Visual -->
           <div class="bg-gradient-to-b from-knoz-green to-[#144b39] rounded-3xl p-6 text-white shadow-lg border border-knoz-gold/30 relative overflow-hidden">
             <!-- Background Watermark -->
             <div class="absolute -right-8 -bottom-8 opacity-10 text-9xl text-knoz-gold pointer-events-none">
@@ -363,19 +363,19 @@
             </div>
 
             <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold tracking-widest text-knoz-gold uppercase">{{ getText('studentIdCard') }}</span>
+              <span class="text-xs font-bold tracking-widest text-knoz-gold uppercase">{{ getText('adminIdCard') }}</span>
               <img src="assets/logo.jpeg" alt="Logo" class="w-9 h-9 rounded-full border border-knoz-gold/40 object-cover shadow-sm">
             </div>
 
             <div class="space-y-4 mb-6">
               <div>
-                <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold">{{ getText('studentName') }}</p>
+                <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold">{{ getText('fullName') }}</p>
                 <p class="text-lg font-bold text-white tracking-wide font-['Tajawal']">{{ userProfile()?.fullName || getText('notSpecified') }}</p>
               </div>
               <div class="grid grid-cols-2 gap-2">
                 <div>
-                  <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold">{{ getText('accountId') }}</p>
-                  <p class="text-sm font-mono text-knoz-gold font-bold">@{{ userProfile()?.userName || 'knoz_user' }}</p>
+                  <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold">{{ getText('userName') }}</p>
+                  <p class="text-sm font-mono text-knoz-gold font-bold">@{{ userProfile()?.userName || 'admin' }}</p>
                 </div>
                 @if (userProfile()?.country) {
                   <div>
@@ -399,7 +399,7 @@
                   <p class="text-[10px] text-white/50 uppercase tracking-widest font-bold">{{ getText('academyStatus') }}</p>
                   <p class="text-xs font-semibold text-emerald-300 flex items-center gap-1.5 mt-0.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    {{ getText('activeKnozStudent') }}
+                    {{ getText('activeKnozAdmin') }}
                   </p>
                 </div>
               </div>

@@ -28,9 +28,9 @@ export class ProfileComponent implements OnInit {
     } else {
       // Fallback
       this.userProfile.set({
-        fullName: this.authService.currentUserFullName() || 'الطالب',
-        userName: 'student',
-        email: 'student@knoz.online'
+        fullName: this.authService.currentUserFullName() || 'المشرف',
+        userName: 'admin',
+        email: 'admin@knoz.online'
       });
     }
   }
@@ -49,39 +49,31 @@ export class ProfileComponent implements OnInit {
 
   getGenderLabel(): string {
     const g = this.userProfile()?.gender;
-    if (g === 1 || g === '1' as any) {
+    if (g === 1) {
       return this.getText('female');
     }
-    if (g === 0 || g === '0' as any) {
+    if (g === 0) {
       return this.getText('male');
     }
     return this.getText('notSpecified');
   }
 
   isFemale(): boolean {
-    const g = this.userProfile()?.gender;
-    return g === 1 || g === '1' as any;
+    return this.userProfile()?.gender === 1;
   }
 
   isMale(): boolean {
-    const g = this.userProfile()?.gender;
-    return g === 0 || g === '0' as any;
+    return this.userProfile()?.gender === 0;
   }
 
   getCountryDisplay(): string {
     const country = this.userProfile()?.country;
     if (!country) return this.getText('notSpecified');
-    let name = country.name || country.englishName || '';
+
     if (this.currentLanguage === 'ar') {
-      if (name.toLowerCase() === 'egypt' || !name) {
-        name = 'مصر';
-      }
-    } else {
-      if (name === 'مصر' || !name) {
-        name = 'Egypt';
-      }
+      return (country.name || country.englishName || this.getText('notSpecified')).trim();
     }
-    return name.trim();
+    return (country.englishName || country.name || this.getText('notSpecified')).trim();
   }
 
   getFormattedPhoneNumber(): string {
