@@ -146,7 +146,7 @@ export class AuthService {
       appType: 0
     };
 
-    return this.http.post<AuthResponse>('https://knoz-api.knoz.online/api/Auth/login', payload).pipe(
+    return this.http.post<AuthResponse>('/api/proxy/Auth/login', payload).pipe(
       tap(response => {
         if (response.status && response.record?.token) {
           localStorage.setItem('token', response.record.token);

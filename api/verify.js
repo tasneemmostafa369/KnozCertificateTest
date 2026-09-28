@@ -48,15 +48,16 @@ export default async function handler(req, res) {
 
   const username = process.env.KNOZ_API_USERNAME;
   const password = process.env.KNOZ_API_PASSWORD;
+  const baseUrl = (process.env.KNOZ_API_BASE_URL || '').replace(/\/+$/, '');
 
-  if (!username || !password) {
-    console.error('Server configuration error: Missing credentials in Environment Variables');
+  if (!username || !password || !baseUrl) {
+    console.error('Server configuration error: Missing credentials or KNOZ_API_BASE_URL in Environment Variables');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
   try {
     // 1. Login to get the token
-    const loginRes = await fetch('https://knoz-api.knoz.online/api/Auth/login', {
+    const loginRes = await fetch(`${baseUrl}/api/Auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -80,7 +81,7 @@ export default async function handler(req, res) {
     }
 
     // 2. Fetch the certificate details
-    const detailsRes = await fetch(`https://knoz-api.knoz.online/api/Monitor/Assigned-Student-Course-Details?SSPId=${sspId}`, {
+    const detailsRes = await fetch(`${baseUrl}/api/Monitor/Assigned-Student-Course-Details?SSPId=${sspId}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`

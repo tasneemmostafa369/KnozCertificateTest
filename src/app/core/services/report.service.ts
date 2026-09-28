@@ -19,6 +19,6 @@ export class ReportService {
       params = params.set('StudentSearch', studentSearch);
     }
 
-    return this.http.get<ExpiredCoursesResponse>('https://knoz-api.knoz.online/api/Report/Expired-Courses', { params });
+    return this.http.get<ExpiredCoursesResponse>('/api/proxy/Report/Expired-Courses', { params });
   }
 }
