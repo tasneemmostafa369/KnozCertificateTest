@@ -63,12 +63,12 @@ export const routes: Routes = [
     {
         path: 'certificates/Verification/:sspId',
         canActivate: [redirectToNewVerification],
-        loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
+        children: []
     },
     {
         path: 'certificates/verification/:sspId',
         canActivate: [redirectToNewVerification],
-        loadComponent: () => import('./features/certificate-verification/certificate-verification').then(c => c.CertificateVerificationComponent)
+        children: []
     },
     {
         path: '**',
