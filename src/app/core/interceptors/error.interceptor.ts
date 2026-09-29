@@ -13,10 +13,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 401) {
         authService.logout();
         router.navigate(['/login']);
-      } else if (error.status === 403) {
-        console.error('Access Denied (403)');
-      } else if (error.status === 500) {
-        console.error('Server Error (500)', error.message);
       }
 
       return throwError(() => error);
