@@ -19,7 +19,7 @@
 
 ---
 
-## 🇬🇧 Part 1 — English Documentation
+## Part 1 — English Documentation
 
 ### Table of Contents
 - [1. Executive Summary & Vision](#1-executive-summary--vision)
@@ -230,7 +230,7 @@ Contributions are restricted to authorized academy contributors.
 
 <br/>
 
-## 🇸🇦 Part 2 — الوثائق باللغة العربية
+## Part 2 — الوثائق باللغة العربية
 
 ### فهرس المحتويات
 - [1. الملخص التنفيذي والرؤية](#1-الملخص-التنفيذي-والرؤية)
