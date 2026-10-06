@@ -20,13 +20,13 @@ export interface AcademyConfig {
  */
 export const ACADEMY_CONFIG: AcademyConfig = {
   // اسم الأكاديمية
-  nameAr: 'أكاديمية النيل',
-  nameEn: 'Nile Academy',
+  nameAr: 'أكاديمية كنوز',
+  nameEn: 'Knoz Academy',
 
   // الهوية البصرية (اللوجو والألوان)
-  logoUrl: '/assets/nile academy.jpg',
-  primaryColor: '#1E3A8A',    // اللون الأساسي (الأزرار، القوائم، الشهادات)
-  secondaryColor: '#FBBF24',  // اللون الثانوي (الذهبي للإطارات واللمسات الجمالية)
+  logoUrl: '/assets/logo.jpeg',
+  primaryColor: '#0F392B',    // اللون الأساسي (الأزرار، القوائم، الشهادات)
+  secondaryColor: '#C8A559',  // اللون الثانوي (الذهبي للإطارات واللمسات الجمالية)
 
   // بيانات التوقيع في الشهادة
   signatureUrl: '/assets/Signature.png',
