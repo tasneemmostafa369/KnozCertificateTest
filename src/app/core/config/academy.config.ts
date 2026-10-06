@@ -24,7 +24,7 @@ export const ACADEMY_CONFIG: AcademyConfig = {
   nameEn: 'Nile Academy',
 
   // الهوية البصرية (اللوجو والألوان)
-  logoUrl: '/assets/logo.jpeg',
+  logoUrl: '/assets/nile academy.jpg',
   primaryColor: '#1E3A8A',    // اللون الأساسي (الأزرار، القوائم، الشهادات)
   secondaryColor: '#FBBF24',  // اللون الثانوي (الذهبي للإطارات واللمسات الجمالية)
 
