@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { LoginRequest } from '../../core/models/auth';
 import { LanguageService } from '../../core/services/language-service';
+import { BrandingService } from '../../core/services/branding.service';
 import { DICTIONARY } from '../../core/mock/dictionary';
 
 @Component({
@@ -13,10 +14,13 @@ import { DICTIONARY } from '../../core/mock/dictionary';
   template: `
     <div class="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8" [attr.dir]="direction">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="flex justify-center">
-          <img class="h-20 w-auto rounded-full shadow-sm" src="/assets/logo.jpeg" alt="Knoz Academy">
+        <div class="flex flex-col items-center justify-center">
+          <img class="h-20 w-20 rounded-full shadow-sm object-cover border-2 border-knoz-gold/30" [src]="branding.logoUrl()" [alt]="branding.academyName()">
+          <h1 class="mt-3 text-lg font-bold text-knoz-green font-['Tajawal'] tracking-wide">
+            {{ branding.academyName() }}
+          </h1>
         </div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 font-['Tajawal']">
+        <h2 class="mt-4 text-center text-3xl font-extrabold text-gray-900 font-['Tajawal']">
           {{ getText('loginTitle') }}
         </h2>
       </div>
@@ -73,6 +77,7 @@ import { DICTIONARY } from '../../core/mock/dictionary';
   `
 })
 export class LoginComponent {
+  readonly branding = inject(BrandingService);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);

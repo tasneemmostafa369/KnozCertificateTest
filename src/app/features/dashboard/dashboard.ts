@@ -5,6 +5,7 @@ import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
 import { AuthService } from '../../core/services/auth.service';
+import { BrandingService } from '../../core/services/branding.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
+  readonly branding = inject(BrandingService);
   private readonly certificateService = inject(CertificateService);
   private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);

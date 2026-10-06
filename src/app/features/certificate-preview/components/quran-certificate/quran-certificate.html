@@ -29,10 +29,10 @@
       <!-- LOGO with glow/backdrop -->
       <div class="certificate-brand flex flex-col items-center">
         <div class="relative flex items-center justify-center p-2 before:absolute before:inset-0 before:rounded-full before:bg-white/20 before:backdrop-blur-md before:shadow-[0_0_15px_rgba(255,255,255,0.4)]">
-          <img src="/assets/logo.jpeg" alt="Knoz Academy" class="relative z-10 h-8 w-8 rounded-full object-contain sm:h-11 sm:w-11 lg:h-16 lg:w-16" />
+          <img [src]="branding.logoUrl()" [alt]="branding.academyName()" class="relative z-10 h-8 w-8 rounded-full object-contain sm:h-11 sm:w-11 lg:h-16 lg:w-16" />
         </div>
         <p class="mt-2 text-[7px] font-semibold tracking-[0.25em] text-knoz-gold sm:mt-3 sm:text-[9px] lg:text-sm lg:tracking-[0.35em] font-['Amiri']">
-          {{ texts()['academyName'] }}
+          {{ branding.academyName() }}
         </p>
       </div>
       
@@ -107,12 +107,17 @@
       <!-- SIGNATURE -->
       <div class="flex flex-col items-center justify-start">
         <div class="flex h-7 items-end justify-center sm:h-10 lg:h-14">
-          <img src="/assets/Signature.png" alt="Academic Director Signature" class="certificate-signature max-h-7 w-auto object-contain sm:max-h-10 lg:max-h-14 brightness-0 invert sepia saturate-[5] hue-rotate-[10deg] opacity-90" />
+          <img [src]="branding.signatureUrl()" [alt]="branding.signatoryTitle()" class="certificate-signature max-h-7 w-auto object-contain sm:max-h-10 lg:max-h-14 brightness-0 invert sepia saturate-[5] hue-rotate-[10deg] opacity-90" />
         </div>
         <div class="mt-1 h-px w-20 bg-knoz-gold/50 sm:w-28 lg:mt-2 lg:w-36"></div>
         <p class="mt-1 whitespace-nowrap text-[7px] font-medium text-knoz-gold/80 sm:text-[9px] lg:text-xs font-['Amiri']">
-          {{ texts()['academicDirector'] }}
+          {{ branding.signatoryTitle() }}
         </p>
+        @if (branding.signatoryName()) {
+          <p class="text-[6px] font-bold text-knoz-gold sm:text-[8px] lg:text-[10px] mt-0.5 font-['Amiri']">
+            {{ branding.signatoryName() }}
+          </p>
+        }
       </div>
       
     </div>

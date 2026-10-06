@@ -3,13 +3,16 @@
   <aside class="fixed inset-y-0 start-0 hidden w-64 bg-knoz-green lg:block z-30">
     <div class="flex h-full flex-col">
       <!-- Logo -->
-      <div class="border-b border-white/10 p-6">
-        <h1 class="text-xl font-bold tracking-wide text-white">
-           {{ getText('academyName') }}
-        </h1>
-        <p class="mt-1 text-xs text-white/60">
-           {{ getText('certificateManagement') }}
-        </p>
+      <div class="border-b border-white/10 p-6 flex items-center gap-3">
+        <img [src]="branding.logoUrl()" [alt]="branding.academyName()" class="w-10 h-10 rounded-full border border-white/20 object-cover shadow-sm">
+        <div>
+          <h1 class="text-xl font-bold tracking-wide text-white">
+             {{ branding.academyName() }}
+          </h1>
+          <p class="mt-1 text-xs text-white/60">
+             {{ getText('certificateManagement') }}
+          </p>
+        </div>
       </div>
 
       <!-- Navigation -->
@@ -56,13 +59,16 @@
     <aside class="fixed inset-y-0 start-0 z-50 flex w-64 flex-col bg-knoz-green shadow-2xl lg:hidden">
       <!-- Header -->
       <div class="flex items-center justify-between border-b border-white/10 p-6">
-        <div>
-          <h1 class="text-xl font-bold tracking-wide text-white">
-             {{ getText('academyName') }}
-          </h1>
-          <p class="mt-1 text-xs text-white/60">
-             {{ getText('certificateManagement') }}
-          </p>
+        <div class="flex items-center gap-3">
+          <img [src]="branding.logoUrl()" [alt]="branding.academyName()" class="w-10 h-10 rounded-full border border-white/20 object-cover shadow-sm">
+          <div>
+            <h1 class="text-xl font-bold tracking-wide text-white">
+               {{ branding.academyName() }}
+            </h1>
+            <p class="mt-1 text-xs text-white/60">
+               {{ getText('certificateManagement') }}
+            </p>
+          </div>
         </div>
         <!-- Close Button -->
         <button type="button" (click)="closeMobileSidebar()" class="rounded-lg p-2 text-xl text-white/70 transition hover:bg-white/10 hover:text-white">
@@ -364,7 +370,7 @@
 
             <div class="flex items-center justify-between mb-6">
               <span class="text-xs font-bold tracking-widest text-knoz-gold uppercase">{{ getText('adminIdCard') }}</span>
-              <img src="assets/logo.jpeg" alt="Logo" class="w-9 h-9 rounded-full border border-knoz-gold/40 object-cover shadow-sm">
+              <img [src]="branding.logoUrl()" [alt]="branding.academyName()" class="w-9 h-9 rounded-full border border-knoz-gold/40 object-cover shadow-sm">
             </div>
 
             <div class="space-y-4 mb-6">

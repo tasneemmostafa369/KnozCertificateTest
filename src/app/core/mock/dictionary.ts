@@ -26,11 +26,11 @@ export const DICTIONARY = {
     prev: 'السابق',
     next: 'التالي',
     expiredCourses: 'الدورات المنتهية',
-    academyName: 'أكاديمية كنوز',
+    academyName: 'الأكاديمية',
 
     certificateTitle: 'شهادة إتمام',
 
-    presentedTo: 'تشهد أكاديمية كنوز بأن',
+    presentedTo: 'تشهد إدارة الأكاديمية بأن',
 
     successfullyCompleted: 'قد أتم بنجاح دورة',
 
@@ -50,7 +50,7 @@ export const DICTIONARY = {
     certificates: 'الشهادات',
 
     welcomeToKnoz:
-      'مرحبًا بك في أكاديمية كنوز',
+      'مرحبًا بك في الأكاديمية',
 
     welcomeDescription:
       'أنشئ وأدر شهادات الطلاب الاحترافية بسهولة.',
@@ -227,13 +227,13 @@ export const DICTIONARY = {
   female: 'أنثى',
   country: 'الدولة',
   role: 'نوع الحساب / الدور',
-  studentRole: 'طالب بأكاديمية كنوز',
+  studentRole: 'طالب بالأكاديمية',
   notSpecified: 'غير محدد',
   profileUpdatedSuccess: 'تم تحديث البيانات بنجاح',
   saveChanges: 'حفظ التعديلات',
   editProfile: 'تعديل الملف الشخصي',
   verifiedAccount: 'حساب موثق ومفعل',
-  joinedAcademy: 'عضو في أكاديمية كنوز القرآنية',
+  joinedAcademy: 'عضو في الأكاديمية',
   emailConfirmed: 'البريد الإلكتروني مؤكد',
   emailNotConfirmed: 'البريد غير مؤكد',
   idNumber: 'رقم المعرف الأكاديمي',
@@ -241,9 +241,9 @@ export const DICTIONARY = {
   adminIdCard: 'بطاقة تعريف المشرف',
   accountId: 'اسم المستخدم',
   academyStatus: 'حالة الحساب',
-  activeKnozStudent: 'مشرف نشط - أكاديمية كنوز',
-  activeKnozAdmin: 'مشرف نشط - أكاديمية كنوز',
-  knozQuranicAcademy: 'أكاديمية كنوز القرآنية',
+  activeKnozStudent: 'مشرف نشط بالأكاديمية',
+  activeKnozAdmin: 'مشرف نشط بالأكاديمية',
+  knozQuranicAcademy: 'الأكاديمية التعليمية',
   quickLinks: 'روابط سريعة',
   },
 
@@ -274,7 +274,7 @@ export const DICTIONARY = {
     prev: 'Prev',
     next: 'Next',
     expiredCourses: 'Expired Courses',
-    academyName: 'KNOZ ACADEMY',
+    academyName: 'ACADEMY',
 
     certificateTitle: 'Certificate of Achievement',
 
@@ -299,7 +299,7 @@ export const DICTIONARY = {
     certificates: 'Certificates',
 
     welcomeToKnoz:
-      'Welcome to Knoz Academy',
+      'Welcome to the Academy',
 
     welcomeDescription:
       'Create and manage professional student certificates with ease.',
@@ -479,13 +479,13 @@ export const DICTIONARY = {
   female: 'Female',
   country: 'Country',
   role: 'Account Role',
-  studentRole: 'Knoz Academy Student',
+  studentRole: 'Academy Student',
   notSpecified: 'Not specified',
   profileUpdatedSuccess: 'Profile updated successfully',
   saveChanges: 'Save Changes',
   editProfile: 'Edit Profile',
   verifiedAccount: 'Verified & Active Account',
-  joinedAcademy: 'Member of Knoz Quranic Academy',
+  joinedAcademy: 'Member of Academy',
   emailConfirmed: 'Email Confirmed',
   emailNotConfirmed: 'Email Not Confirmed',
   idNumber: 'Admin ID',
@@ -493,9 +493,9 @@ export const DICTIONARY = {
   adminIdCard: 'Admin ID Card',
   accountId: 'Username',
   academyStatus: 'Academy Status',
-  activeKnozStudent: 'Active Knoz Admin',
-  activeKnozAdmin: 'Active Knoz Admin',
-  knozQuranicAcademy: 'Knoz Quranic Academy',
+  activeKnozStudent: 'Active Academy Admin',
+  activeKnozAdmin: 'Active Academy Admin',
+  knozQuranicAcademy: 'Educational Academy',
   quickLinks: 'Quick Links',
   },
 

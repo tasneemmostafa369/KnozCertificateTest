@@ -2,14 +2,23 @@
 
 @import 'tailwindcss';
 
-@theme {
-    --color-knoz-green: #0F392B;
-    --color-knoz-gold: #C8A559;
-    --color-knoz-cream: #F7F3E8;
+:root {
+    --brand-primary: #0F392B;
+    --brand-secondary: #C8A559;
+    --brand-cream: #F7F3E8;
+    --brand-text: #1F2933;
+    --brand-muted: #6B7280;
+    --brand-border: #DDE3E0;
+}
 
-    --color-knoz-text: #1F2933;
-    --color-knoz-muted: #6B7280;
-    --color-knoz-border: #DDE3E0;
+@theme {
+    --color-knoz-green: var(--brand-primary);
+    --color-knoz-gold: var(--brand-secondary);
+    --color-knoz-cream: var(--brand-cream);
+
+    --color-knoz-text: var(--brand-text);
+    --color-knoz-muted: var(--brand-muted);
+    --color-knoz-border: var(--brand-border);
 }
 
 @media print {

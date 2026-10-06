@@ -8,6 +8,7 @@ import { ReportService } from '../../core/services/report.service';
 import { ExpiredCourse } from '../../core/models/course';
 import { LanguageService } from '../../core/services/language-service';
 import { AuthService } from '../../core/services/auth.service';
+import { BrandingService } from '../../core/services/branding.service';
 import { DICTIONARY } from '../../core/mock/dictionary';
 
 @Component({
@@ -17,6 +18,7 @@ import { DICTIONARY } from '../../core/mock/dictionary';
   templateUrl: './expired-courses.html'
 })
 export class ExpiredCoursesComponent implements OnInit, OnDestroy {
+  readonly branding = inject(BrandingService);
   private reportService = inject(ReportService);
   private router = inject(Router);
   private languageService = inject(LanguageService);

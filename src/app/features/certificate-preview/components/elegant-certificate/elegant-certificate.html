@@ -13,10 +13,10 @@
       <div class="certificate-brand flex flex-col items-center">
         <!-- Thin, elegant Gold border around the logo -->
         <div class="rounded-full border border-knoz-gold bg-white p-1 shadow-sm">
-          <img src="/assets/logo.jpeg" alt="Knoz Academy" class="h-8 w-8 rounded-full object-contain sm:h-11 sm:w-11 lg:h-16 lg:w-16" />
+          <img [src]="branding.logoUrl()" [alt]="branding.academyName()" class="h-8 w-8 rounded-full object-contain sm:h-11 sm:w-11 lg:h-16 lg:w-16" />
         </div>
         <p class="mt-1 text-[7px] font-semibold tracking-[0.25em] text-knoz-gold sm:mt-2 sm:text-[9px] lg:text-sm lg:tracking-[0.35em]">
-          {{ texts()['academyName'] }}
+          {{ branding.academyName() }}
         </p>
       </div>
       
@@ -91,12 +91,17 @@
       <!-- SIGNATURE -->
       <div class="flex flex-col items-center justify-start">
         <div class="flex h-7 items-end justify-center sm:h-10 lg:h-14">
-          <img src="/assets/Signature.png" alt="Academic Director Signature" class="certificate-signature max-h-7 w-auto object-contain sm:max-h-10 lg:max-h-14 brightness-0 invert sepia saturate-[5] hue-rotate-[10deg] opacity-90" />
+          <img [src]="branding.signatureUrl()" [alt]="branding.signatoryTitle()" class="certificate-signature max-h-7 w-auto object-contain sm:max-h-10 lg:max-h-14 brightness-0 invert sepia saturate-[5] hue-rotate-[10deg] opacity-90" />
         </div>
         <div class="mt-1 h-px w-20 bg-knoz-gold/50 sm:w-28 lg:mt-2 lg:w-36"></div>
         <p class="mt-1 whitespace-nowrap text-[7px] font-medium text-knoz-gold/80 sm:text-[9px] lg:text-xs">
-          {{ texts()['academicDirector'] }}
+          {{ branding.signatoryTitle() }}
         </p>
+        @if (branding.signatoryName()) {
+          <p class="text-[6px] font-bold text-knoz-gold sm:text-[8px] lg:text-[10px] mt-0.5">
+            {{ branding.signatoryName() }}
+          </p>
+        }
       </div>
       
     </div>

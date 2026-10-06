@@ -19,6 +19,21 @@ const app = express();
 app.use(express.json());
 app.use((req, res, next) => { console.log(req.method, req.url); next(); });
 
+app.get('/api/branding', (req, res) => {
+  res.json({
+    academyNameAr: process.env.ACADEMY_NAME_AR || 'أكاديمية كنوز',
+    academyNameEn: process.env.ACADEMY_NAME_EN || 'Knoz Academy',
+    logoUrl: process.env.ACADEMY_LOGO_URL || '/assets/logo.jpeg',
+    signatureUrl: process.env.ACADEMY_SIGNATURE_URL || '/assets/Signature.png',
+    signatoryNameAr: process.env.ACADEMY_SIGNATORY_NAME_AR || '',
+    signatoryNameEn: process.env.ACADEMY_SIGNATORY_NAME_EN || '',
+    signatoryTitleAr: process.env.ACADEMY_SIGNATORY_TITLE_AR || 'المدير الأكاديمي',
+    signatoryTitleEn: process.env.ACADEMY_SIGNATORY_TITLE_EN || 'Academic Director',
+    primaryColor: process.env.ACADEMY_PRIMARY_COLOR || '#0F392B',
+    secondaryColor: process.env.ACADEMY_SECONDARY_COLOR || '#C8A559'
+  });
+});
+
 app.all('/api/proxy/*', async (req, res) => {
   const baseUrl = (process.env.KNOZ_API_BASE_URL || '').replace(/\/+$/, '');
 

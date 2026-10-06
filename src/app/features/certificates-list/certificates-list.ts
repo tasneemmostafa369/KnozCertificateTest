@@ -7,6 +7,7 @@ import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { LanguageService } from '../../core/services/language-service';
 import { LoadingService } from '../../core/services/loading-service';
 import { AuthService } from '../../core/services/auth.service';
+import { BrandingService } from '../../core/services/branding.service';
 
 @Component({
   selector: 'app-certificates-list',
@@ -14,6 +15,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './certificates-list.html',
 })
 export class CertificatesListComponent implements OnInit {
+  readonly branding = inject(BrandingService);
   private readonly certificateService = inject(CertificateService);
   private readonly loadingService = inject(LoadingService);
   private readonly router = inject(Router);

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { LanguageService } from '../../core/services/language-service';
+import { BrandingService } from '../../core/services/branding.service';
 import { DICTIONARY } from '../../core/mock/dictionary';
 import { UserProfile } from '../../core/models/auth';
 
@@ -12,6 +13,7 @@ import { UserProfile } from '../../core/models/auth';
   templateUrl: './profile.html'
 })
 export class ProfileComponent implements OnInit {
+  readonly branding = inject(BrandingService);
   private readonly authService = inject(AuthService);
   private readonly languageService = inject(LanguageService);
 

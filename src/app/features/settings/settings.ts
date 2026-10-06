@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LanguageService } from '../../core/services/language-service';
 import { SettingsService, TemplateId } from '../../core/services/settings.service';
+import { BrandingService } from '../../core/services/branding.service';
 import { DICTIONARY, Language } from '../../core/mock/dictionary';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './settings.html'
 })
 export class SettingsComponent {
+  readonly branding = inject(BrandingService);
   private readonly languageService = inject(LanguageService);
   private readonly settingsService = inject(SettingsService);
 
