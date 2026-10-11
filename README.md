@@ -1,447 +1,546 @@
-# 🎓 Knoz Academy — Enterprise Certificate & Academic Management Platform
+# Academic Certificate Issuance & Management Platform
 
 <div align="center">
 
-![Angular](https://img.shields.io/badge/Angular-21.2.0-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1.12-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Express](https://img.shields.io/badge/Express-4.18.2-000000?style=for-the-badge&logo=express&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-4.0.8-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)
-![License](https://img.shields.io/badge/License-Proprietary-blue?style=for-the-badge)
+  <h1>🎓 Academic Certificate Issuance & Management Platform<br/><span>منظومة إدارة وإصدار الشهادات الأكاديمية</span></h1>
 
-<p align="center">
-  <strong>An enterprise-grade, high-performance academic management and certificate issuance platform engineered with Angular 21, reactive signals, secure Reverse Proxy architecture, and dynamic verification workflows.</strong>
-</p>
+  <p><strong>Enterprise-Grade, White-Label, Real-Time Credential Issuance, Course Auditing & Academic Management Engine for Educational Institutions</strong></p>
 
-[English Documentation](#-part-1--english-documentation) • [الوثائق باللغة العربية](#-part-2--الوثائق-باللغة-العربية)
+  <p>
+    <a href="#-part-1-english-documentation">English Documentation</a> &nbsp;•&nbsp;
+    <a href="#-الجزء-الثاني-دليل-التوثيق-باللغة-العربية">الوثائق باللغة العربية</a>
+  </p>
+
+  <p>
+    <img src="https://img.shields.io/badge/Angular-21.2-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular 21" />
+    <img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/White--Label-Ready-1E3A8A?style=for-the-badge" alt="White-Label Ready" />
+    <img src="https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+    <img src="https://img.shields.io/badge/Vercel-Serverless-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+    <img src="https://img.shields.io/badge/Architecture-Zoneless_Signals-0F392B?style=for-the-badge" alt="Zoneless Signals" />
+    <img src="https://img.shields.io/badge/License-MIT-C8A559?style=for-the-badge" alt="License MIT" />
+  </p>
 
 </div>
 
 ---
 
-## Part 1 — English Documentation
+## 📑 Table of Global Contents
 
-### Table of Contents
-- [1. Executive Summary & Vision](#1-executive-summary--vision)
-- [2. Key Features & Business Highlights](#2-key-features--business-highlights)
-- [3. Architecture & Tech Stack](#3-architecture--tech-stack)
-- [4. Security & Reverse Proxy Architecture](#4-security--reverse-proxy-architecture)
-- [5. Directory & File Structure](#5-directory--file-structure)
-- [6. Getting Started & Installation](#6-getting-started--installation)
-- [7. Engineering Best Practices & Quality](#7-engineering-best-practices--quality)
-- [8. Roadmap & Future Enhancements](#8-roadmap--future-enhancements)
-- [9. Contributing & License](#9-contributing--license)
-
----
-
-### 1. Executive Summary & Vision
-
-**Knoz Academy** is a modern, enterprise-ready web application built to streamline educational operations, report tracking, and certificate generation/verification. Designed with the latest **Angular 21** standalone paradigm and powered by **Angular Signals**, the platform offers:
-
-- **Zero-Trust Security**: Complete masking of upstream APIs using a **Backend-For-Frontend (BFF) / Reverse Proxy** pattern.
-- **Bilingual Accessibility**: Instant, reactive RTL/LTR switching between Arabic and English.
-- **High-Fidelity Document Generation**: Client-side rendering of cryptographic-grade QR codes, high-resolution certificate previews, and vector PDF exports.
-- **Auditable Academic Reports**: Real-time monitoring and reporting of expired courses and learner credentials.
+- [Part 1: English Documentation](#part-1-english-documentation)
+  - [1. Executive Overview](#1-executive-overview)
+  - [2. White-Label Branding System](#2-white-label-branding-system)
+  - [3. Key Features & Academic Highlights](#3-key-features--academic-highlights)
+  - [4. Architecture & Technical Stack](#4-architecture--technical-stack)
+  - [5. Reverse Proxy & Security Architecture](#5-reverse-proxy--security-architecture)
+  - [6. Project Directory & File Structure](#6-project-directory--file-structure)
+  - [7. Getting Started & Installation](#7-getting-started--installation)
+  - [8. Production Deployment (Vercel & Self-Hosted)](#8-production-deployment-vercel--self-hosted)
+  - [9. Engineering Best Practices & Standards](#9-engineering-best-practices--standards)
+  - [10. Product Roadmap](#10-product-roadmap)
+  - [11. Contributing & License](#11-contributing--license)
 
 ---
 
-### 2. Key Features & Business Highlights
+# Part 1: English Documentation
 
-| Feature Module | Business Impact & Technical Implementation |
-| :--- | :--- |
-| 🔐 **Authentication & Session Lifecycle** | Guard-protected routes (`authGuard`, `guestGuard`) with centralized token revocation via functional HTTP interceptors (`errorInterceptor`). |
-| 📜 **Certificate Builder & Live Preview** | Real-time design canvas utilizing reactive forms, instant visual preview (`CertificatePreview`), and dynamic styling. |
-| 🖨️ **High-Res PDF & Image Export** | Vector-accurate client exports via `jspdf`, `html2canvas`, and `html-to-image` without taxing server resources. |
-| 🔍 **QR Code Verification Routing** | Dynamic generation of verification QR codes linking directly to a decentralized verification portal (`https://knoz-verification.vercel.app/:sspId`). |
-| 📊 **Expired Courses Reporting** | Granular data tables with multi-parameter filtering, pagination, and status tracking for academy administrative audits. |
-| 🌐 **Bi-directional Internationalization (i18n)** | Seamless Arabic (RTL) and English (LTR) localization powered by a reactive `LanguageService` and dictionary mapping. |
-| ⏳ **Non-Blocking UI Feedback** | Integrated loading telemetry via `ngx-spinner` and contextual status alerts. |
+## 1. Executive Overview
+
+The **Academic Certificate Issuance & Management Platform** is a high-speed, secure, production-grade management application engineered for **academies, universities, and training institutes**. Its primary mission is to streamline academic administrative workflows: issuing accredited certificates, previewing multi-template graduation designs, monitoring expired course compliances, and generating dynamic, tamper-proof QR verification tokens linking directly to independent verification portals.
+
+Built on **Angular 21** with a **Zoneless Signal-based architecture**, styled with **Tailwind CSS v4**, and backed by an isolated **Serverless / Reverse-Proxy Gateway**, the platform guarantees:
+- **Instant White-Label Adaptation:** Complete institution customization (name, logo, brand colors, and academic signature) managed via a single configuration file.
+- **Zero API Credential Exposure:** End users and client browsers never see internal authentication tokens, remote server addresses, or database identifiers.
+- **Client-Side High-Fidelity Rendering:** Instant vector-accurate PDF generation and high-resolution print exports without overloading upstream servers.
+- **Bilingual Fluidity:** Seamless, instantaneous switching between Arabic (RTL) and English (LTR) without page reloads.
+- **Multi-Template Prestige Presentation:** Support for Classic, Elegant Gold, and Traditional Quranic certificate templates with adaptive typography.
 
 ---
 
-### 3. Architecture & Tech Stack
+## 2. White-Label Branding System
+
+The platform is designed from the ground up as a turnkey **White-Label Solution**. You can rebrand the entire application for any educational institution in seconds without modifying core components or environment variables.
+
+### Central Configuration File: `src/app/core/config/academy.config.ts`
+
+```typescript
+export interface AcademyConfig {
+  nameAr: string;
+  nameEn: string;
+  logoUrl: string;
+  primaryColor: string;
+  secondaryColor: string;
+  signatureUrl: string;
+  signatoryTitleAr: string;
+  signatoryTitleEn: string;
+  signatoryNameAr?: string;
+  signatoryNameEn?: string;
+}
+
+export const ACADEMY_CONFIG: AcademyConfig = {
+  nameAr: 'اسم الأكاديمية بالعربية',
+  nameEn: 'Academy Name in English',
+  logoUrl: '/assets/logo.jpeg',
+  primaryColor: '#1E3A8A',    // Main Brand Color (Buttons, headers, certificates)
+  secondaryColor: '#FBBF24',  // Accent Color (Gold trim, highlights, borders)
+  signatureUrl: '/assets/Signature.png',
+  signatoryTitleAr: 'المدير الأكاديمي',
+  signatoryTitleEn: 'Academic Director',
+  signatoryNameAr: '',
+  signatoryNameEn: '',
+};
+```
+
+### How It Works:
+- **`BrandingService`**: Injects CSS variables (`--brand-primary`, `--brand-secondary`) dynamically into `:root`.
+- **Dynamic Assets**: Automatically updates the browser favicon, document title, dashboard navigation headers, and certificate stamps according to the active configuration.
+- **Tailwind Integration**: Colors cascade directly through Tailwind CSS v4 `@theme` tokens without rebuilding stylesheets.
+
+---
+
+## 3. Key Features & Academic Highlights
+
+### 📜 1. Multi-Template Certificate Designer & Live Preview
+- **Classic Academic Template:** Timeless formal design tailored for general graduation diplomas.
+- **Elegant Dark/Gold Template:** Modern luxury layout with high-contrast golden trims for specialized programs.
+- **Quranic & Traditional Template:** Intricate Islamic geometric borders designed for Quranic memorization and tajweed accreditations.
+
+### 🖨️ 2. Vector-Accurate Client-Side PDF & Print Engine
+- High-fidelity PDF rendering via `jspdf`, `html2canvas`, and `html-to-image`.
+- Client-side document assembly eliminates server memory bloat and enables offline printing capabilities.
+- Standardized A4 Landscape print stylesheets for zero-margin physical printing.
+
+### 🔍 3. Dynamic QR Code Routing & Tamper Protection
+- Every issued certificate includes an automated QR code containing a secure verification token.
+- Seamless redirection linking students and employers directly to the dedicated **Verification Portal**.
+
+### 📊 4. Expired Courses Compliance Auditing
+- Granular administrative dashboard tracking student enrollments that have exceeded their timeframe.
+- Real-time search, multi-column sorting, pagination, and course supervisor status telemetry.
+
+### 🌐 5. Real-Time Localization (RTL / LTR)
+- Centralized dictionary covering all UI elements in **Arabic** and **English**.
+- Instant document direction switching (`dir="rtl"` / `dir="ltr"`).
+
+---
+
+## 4. Architecture & Technical Stack
 
 ```
-┌────────────────────────────────────────────────────────┐
-│                   Client Browser                       │
-│  (Angular 21 Standalone + Signals + Tailwind CSS v4)   │
-└───────────────────────────┬────────────────────────────┘
-                            │ /api/proxy/* (Protected Route)
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│            BFF Layer (Reverse Proxy)                   │
-│   • Local Dev: Express Server (server.mjs)             │
-│   • Production: Vercel Serverless (api/proxy.js)       │
-│   • Secret Injection: process.env.KNOZ_API_BASE_URL    │
-└───────────────────────────┬────────────────────────────┘
-                            │ https://api.upstream-domain.com
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│               Upstream Knoz API Backend                │
-│             (Microservices / REST API)                 │
-└────────────────────────────────────────────────────────┘
++-----------------------------------------------------------------------------------------+
+|                                    CLIENT BROWSER                                       |
+|                                                                                         |
+|   +-----------------------+     +------------------------+     +--------------------+   |
+|   | Angular 21 Standalone | --> |   BrandingService      | --> | CertificateService |   |
+|   | Components & Signals  |     |  (CSS Var Injection)   |     |  (PDF & QR Engine) |   |
+|   +-----------------------+     +------------------------+     +--------------------+   |
++---------------------------------------------------------------------------|-------------+
+                                                                            |
+                                               Internal Secure Route (/api) |
+                                                                            v
++-----------------------------------------------------------------------------------------+
+|                           SERVER RUNTIME (Vercel / Node.js)                             |
+|                                                                                         |
+|       +-------------------------------------------------------------------------+       |
+|       | api/proxy.js (Vercel Function)  OR  server.mjs (Express Proxy)          |       |
+|       |                                                                         |       |
+|       | 1. Read environment variables (Base URL & service credentials)          |       |
+|       | 2. Authenticate securely with central academic services                 |       |
+|       | 3. Query courses, authentication, and report payloads                   |       |
+|       | 4. Return sanitized data to Angular frontend                            |       |
+|       +-------------------------------------------------------------------------+       |
++-----------------------------------------------------------------------------------------+
 ```
 
-#### Technology Inventory
-- **Core Framework**: Angular 21.2 (Zoneless-ready, Standalone Components, Signal State)
-- **Language**: TypeScript 5.9.2 (Strict type-checking)
-- **Styling & UI**: Tailwind CSS v4 (`@tailwindcss/postcss`), FontAwesome 7.3
-- **Networking & API**: Angular `HttpClient`, RxJS 7.8, Functional Interceptors
-- **PDF & Canvas Processing**: `jspdf` 4.2, `html2canvas` 1.4, `html-to-image` 1.11, `qrcode` 1.5
-- **BFF / Proxy Middleware**: Node.js, Express 4.18, Vercel Serverless Functions
-- **Testing Engine**: Vitest 4.0, JSDOM 28.0
+### Technical Stack Matrix
+
+| Domain | Technology | Version | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Frontend Framework** | **Angular** | `21.2.0` | Standalone components, Zoneless change detection, Signals. |
+| **Language & Typings** | **TypeScript** | `~5.9.2` | Strict mode typing for zero runtime surprises. |
+| **Styling Engine** | **Tailwind CSS** | `^4.1.12` | Modern styling via `@tailwindcss/postcss` and CSS variables. |
+| **Document Processing** | **jsPDF & html2canvas** | `^4.2` / `^1.4` | Client-side vector PDF compilation and image capture. |
+| **QR Code Engine** | **QRCode.js** | `^1.5.4` | Dynamic SVG/Canvas token QR generation. |
+| **Server Runtime** | **Node.js / Express** | `20+` / `4.18` | Application serving and internal proxy endpoint. |
+| **Serverless Engine** | **Vercel Functions** | ES Modules | Edge-ready serverless execution for `/api/proxy`. |
 
 ---
 
-### 4. Security & Reverse Proxy Architecture
+## 5. Reverse Proxy & Security Architecture
 
-To safeguard proprietary endpoints and eliminate client-side credential leakage, Knoz Academy applies a **Reverse Proxy / BFF architecture**:
-
-1. **GitHub Leak Prevention**: The base URL (`KNOZ_API_BASE_URL`) is never hardcoded. It resides exclusively in an ignored `.env` file.
-2. **Network Tab Masking**: Browsers only communicate with `/api/proxy/*`. The upstream domain and port remain invisible to end-users and malicious actors.
-3. **CORS Elimination**: By dispatching requests to the same origin, browser CORS preflight friction is completely eliminated.
-4. **Session Guard (`errorInterceptor`)**: Automatically captures `401 Unauthorized` responses across all streams, purges cached JWT credentials, and routes the client to `/login`.
+To eliminate client-side credential exposure and bypass CORS restrictions:
+- **No Upstream Leaks:** Browser requests travel exclusively to `/api/proxy/*`.
+- **Credential Masking:** Remote endpoints reside solely in server environment variables.
+- **Session Protection:** Automated 401 interceptor captures expired JWT tokens and redirects clients securely to `/login`.
 
 ---
 
-### 5. Directory & File Structure
+## 6. Project Directory & File Structure
 
 ```
-knoz-academy/
-├── api/                             # Serverless edge runtime functions
-│   └── proxy.js                     # Vercel production reverse proxy handler
-├── public/                          # Static public web assets
+academic-management/
+├── api/
+│   └── proxy.js                      # Vercel serverless reverse proxy handler
+├── public/
+│   ├── assets/                       # Brand logo and signature assets
+│   └── favicon.ico                   # Browser favicon
 ├── src/
 │   ├── app/
-│   │   ├── core/                    # Singleton services, interceptors, and guards
-│   │   │   ├── guards/              # authGuard, guestGuard
-│   │   │   ├── interceptors/        # errorInterceptor (401 catch & redirection)
-│   │   │   ├── mock/                # Mock datasets for offline development
-│   │   │   ├── models/              # TypeScript contracts and domain interfaces
-│   │   │   ├── services/            # AuthService, CertificateService, ReportService, etc.
-│   │   │   └── utils/               # Common helper utilities
-│   │   ├── features/                # Domain-driven feature modules
-│   │   │   ├── certificate-preview/ # Certificate visual inspection canvas
-│   │   │   ├── certificates-list/   # Certificate inventory and management
-│   │   │   ├── create-certificate/  # Form-driven certificate generation
-│   │   │   ├── dashboard/           # Administrative overview metrics
-│   │   │   ├── expired-courses/     # Expired courses compliance reporting
-│   │   │   ├── login/               # Secure credential entry and validation
-│   │   │   ├── profile/             # User settings and credential management
-│   │   │   └── settings/            # Academy-wide system preferences
-│   │   ├── app.config.ts            # Application providers and routing registration
-│   │   ├── app.css                  # Global styles and Tailwind v4 import
-│   │   ├── app.html                 # Shell layout with router-outlet & spinner
-│   │   ├── app.routes.ts            # Declarative route configuration
-│   │   └── app.ts                   # Root application standalone component
-│   ├── index.html                   # HTML document root
-│   ├── main.ts                      # Application bootstrap entry point
-│   └── styles.css                   # Core stylesheet entry
-├── .env.example                     # Environment template for secrets
-├── angular.json                     # Angular CLI build & workspace configurations
-├── package.json                     # Project manifest and dependency matrix
-├── server.mjs                       # Local Express development proxy server
-├── tsconfig.json                    # Strict TypeScript compiler options
-└── vercel.json                      # Vercel edge rewrite rules
+│   │   ├── core/
+│   │   │   ├── config/
+│   │   │   │   └── academy.config.ts # Central White-Label branding configuration
+│   │   │   ├── guards/               # Route protection (authGuard, guestGuard)
+│   │   │   ├── interceptors/         # Error & loading HTTP interceptors
+│   │   │   ├── mock/
+│   │   │   │   └── dictionary.ts     # Bilingual dictionary (Arabic / English)
+│   │   │   ├── services/
+│   │   │   │   ├── branding.service.ts     # Dynamic branding & CSS custom properties
+│   │   │   │   ├── certificate.service.ts  # Certificate generation and persistence
+│   │   │   │   └── report.service.ts       # Expired courses compliance reporting
+│   │   │   └── utils/
+│   │   ├── features/
+│   │   │   ├── certificate-preview/  # Multi-template certificate canvas & PDF export
+│   │   │   ├── certificates-list/    # Historical certificate inventory
+│   │   │   ├── create-certificate/   # Certificate generation form
+│   │   │   ├── dashboard/            # Administrative KPI summary
+│   │   │   ├── expired-courses/      # Compliance audit data table
+│   │   │   ├── login/                # Authentication entry point
+│   │   │   ├── profile/              # Administrator identity badge
+│   │   │   └── settings/             # System and template preferences
+│   │   ├── app.config.ts             # Application providers and routing registration
+│   │   ├── app.html                  # Shell layout with router-outlet
+│   │   ├── app.routes.ts             # Declarative route configuration
+│   │   └── app.ts                    # Root standalone component
+│   ├── index.html                    # Application HTML shell
+│   ├── main.ts                       # Application entry point (Zoneless)
+│   └── styles.css                    # Tailwind CSS imports and brand CSS custom properties
+├── .env.example                      # Template for required environment variables
+├── angular.json                      # Angular workspace configuration
+├── package.json                      # Project dependencies and npm scripts
+├── server.mjs                        # Production Express server with proxy and static serving
+└── tsconfig.json                     # Base TypeScript configuration
 ```
 
 ---
 
-### 6. Getting Started & Installation
+## 7. Getting Started & Installation
 
-#### Prerequisites
-- **Node.js**: `v20.x` or `v22.x` (LTS recommended)
-- **Package Manager**: `npm` (v10+) or `bun`
-- **Angular CLI**: `npm install -g @angular/cli@21`
+### Prerequisites
+- **Node.js**: `v20.12.0` or higher
+- **npm**: `v10+`
+- **Git**
 
-#### Step-by-Step Setup
+### Installation Steps
 
-1. **Clone the repository:**
+1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/tasneemmostafa369/KnozCertificateTest.git
-   cd KnozCertificateTest
+   git clone https://github.com/YOUR_ORGANIZATION/academic-management.git
+   cd academic-management
    ```
 
-2. **Install dependencies:**
+2. **Install Dependencies:**
    ```bash
    npm install
    ```
 
 3. **Configure Environment Variables:**
-   Create a `.env` file in the root directory:
    ```bash
    cp .env.example .env
    ```
-   Populate your upstream API base URL:
+   Fill in your upstream service configuration in `.env`:
    ```env
-   KNOZ_API_BASE_URL=https://api.your-backend-domain.com
-   PORT=3000
+   KNOZ_API_BASE_URL=https://your-api-domain.example.com
    ```
 
-4. **Launch Local Development Server:**
+4. **Customize Your Branding:**
+   Open `src/app/core/config/academy.config.ts` and set your institution's name, logo URL, colors, and signature.
+
+5. **Start Development Server:**
    ```bash
-   # Starts the Express proxy with Angular compilation
    npm start
    ```
-   Navigate to `http://localhost:3000/`.
-
-5. **Execute Unit Tests:**
-   ```bash
-   npm test
+   The portal will run on:
+   ```
+   http://localhost:3000
    ```
 
-6. **Production Build:**
-   ```bash
-   npm run build
-   ```
-   Compiled distribution files will be generated in `dist/knoz-academy`.
-
 ---
 
-### 7. Engineering Best Practices & Quality
+## 8. Production Deployment (Vercel & Self-Hosted)
 
-- **Reactive State via Signals**: Signals (`signal()`, `computed()`) replace legacy reactive patterns for fine-grained DOM updates without zone overhead.
-- **Strict Forms**: Reactive Forms with rigorous validations (`Validators.required`, custom email validators) are used exclusively.
-- **AOT & Tree Shaking**: Standalone components enforce complete tree-shaking, producing minimal bundle footprints.
-- **Safe HTML & Sanitization**: QR code generation and certificate rendering execute through verified canvas pipelines to prevent XSS vulnerabilities.
+### Deployment Option A: Vercel (Recommended)
+1. Push your repository to **GitHub**.
+2. Import the project in **[Vercel](https://vercel.com)**.
+3. In **Project Settings > Environment Variables**, add:
+   - `KNOZ_API_BASE_URL`: Your backend API base URL
+4. Click **Deploy**.
 
----
-
-### 8. Roadmap & Future Enhancements
-
-- [ ] **Batch Certificate Generation**: Bulk upload via CSV/Excel with parallel background PDF generation.
-- [ ] **Blockchain Attestation**: Optional cryptographic proof anchoring on decentralized ledgers.
-- [ ] **Automated Email Dispatch**: Direct distribution of issued credentials to student inboxes.
-- [ ] **Progressive Web App (PWA)**: Offline caching of downloaded certificates with service workers.
-
----
-
-### 9. Contributing & License
-
-Contributions are restricted to authorized academy contributors.
-1. Create a feature branch: `git checkout -b feature/amazing-feature`
-2. Commit your changes with conventional messages: `git commit -m 'feat: add bulk verification'`
-3. Push to your branch: `git push origin feature/amazing-feature`
-4. Open a Pull Request for architectural review.
-
-**License**: Proprietary and confidential. All rights reserved by **Knoz Academy**.
-
----
-
-<br/>
-
-## Part 2 — الوثائق باللغة العربية
-
-### فهرس المحتويات
-- [1. الملخص التنفيذي والرؤية](#1-الملخص-التنفيذي-والرؤية)
-- [2. الميزات الرئيسية ومجالات العمل](#2-الميزات-الرئيسية-ومجالات-العمل)
-- [3. الهيكلية المعمارية والبنية التقنية](#3-الهيكلية-المعمارية-والبنية-التقنية)
-- [4. المعمارية الأمنية وخادم البروكسي العكسي](#4-المعمارية-الأمنية-وخادم-البروكسي-العكسي)
-- [5. الهيكل التنظيمي للمشروع والملفات](#5-الهيكل-التنظيمي-للمشروع-والملفات)
-- [6. دليل التثبيت والتشغيل](#6-دليل-التثبيت-والتشغيل)
-- [7. معايير الجودة وأفضل الممارسات الهندسية](#7-معايير-الجودة-وأفضل-الممارسات-الهندسية)
-- [8. خارطة الطريق والتطوير المستقبلي](#8-خارطة-الطريق-والتطوير-المستقبلي)
-- [9. المساهمة والترخيص](#9-المساهمة-والترخيص)
-
----
-
-### 1. الملخص التنفيذي والرؤية
-
-منصة **أكاديمية كنوز (Knoz Academy)** هي نظام مؤسسي متكامل صُمم لإدارة السجلات الأكاديمية، متابعة تقارير الدورات، وإصدار وتوثيق الشهادات الرقمية بأعلى معايير الدقة والأمان.
-
-تم بناء المنصة باستخدام أحدث إصدارات إطار العمل **Angular 21** بالاعتماد الكامل على نمط المكونات المستقلة (Standalone Components) وإدارة الحالة التفاعلية عبر (Angular Signals)، مما يوفر:
-- **حماية متقدمة للروابط (Zero-Trust API Protection)**: إخفاء تام لخوادم الباك إند عبر خادم وسيط (BFF / Reverse Proxy).
-- **تجربة ثنائية اللغة فائقة السلاسة**: دعم فوري وكامل للغتين العربية (RTL) والإنجليزية (LTR).
-- **تصدير رقمي عالي الدقة**: توليد فوري لرموز التحقق السريع (QR Code) وتصدير الشهادات بتنسيق PDF دون إجهاد السيرفر.
-- **تقارير تدقيق شاملة**: لوحة مخصصة لمراقبة الدورات منتهية الصلاحية وحالات الطلاب.
-
----
-
-### 2. الميزات الرئيسية ومجالات العمل
-
-| الوحدة الوظيفية | الأثر التقني والتشغيلي |
-| :--- | :--- |
-| 🔐 **نظام المصادقة وإدارة الجلسات** | حماية المسارات بالحراس البرمجية (`authGuard` و `guestGuard`) مع إنهاء تلقائي للجلسات المنتهية عبر `errorInterceptor`. |
-| 📜 **مُنشئ ومعاين الشهادات التفاعلي** | واجهة تفاعلية لتصميم الشهادات مع إمكانية المعاينة الفورية المباشرة قبل الاعتماد. |
-| 🖨️ **تصدير فوري للشهادات (PDF & Image)** | تصدير الشهادات كملفات PDF وصور عالية الدقة مباشرة من المتصفح عبر مكتبات `jspdf` و `html2canvas`. |
-| 🔍 **نظام التحقق الذكي عبر الـ QR Code** | توليد باركود تفاعلي يوجه مباشرة لمنظومة التحقق المستقلة (`https://knoz-verification.vercel.app/:sspId`). |
-| 📊 **تقرير الدورات منتهية الصلاحية** | جداول بيانات متقدمة تدعم الفلترة، والترقيم، والبحث لمساعدة إدارة الأكاديمية في عمليات التدقيق. |
-| 🌐 **دعم كامل للغة العربية والاتجاه (RTL)** | تبديل فوري بين العربية والإنجليزية بواسطة خدمة `LanguageService` مع ضبط اتجاه الواجهة بالكامل. |
-| ⏳ **مؤشرات تحميل واضحة** | تغذية بصرية فورية للمستخدم أثناء معالجة الطلبات عبر `ngx-spinner`. |
-
----
-
-### 3. الهيكلية المعمارية والبنية التقنية
-
-```
-┌────────────────────────────────────────────────────────┐
-│                   متصفح العميل (Client)                 │
-│      (Angular 21 Standalone + Signals + Tailwind)      │
-└───────────────────────────┬────────────────────────────┘
-                            │ طلب محلي: /api/proxy/*
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│             طبقة الخادم الوسيط (Reverse Proxy)          │
-│   • أثناء التطوير: خادم Express محلي (server.mjs)       │
-│   • في بيئة الإنتاج: دالة Vercel السحابية (proxy.js)    │
-│   • جلب الرابط المشفر: process.env.KNOZ_API_BASE_URL    │
-└───────────────────────────┬────────────────────────────┘
-                            │ اتصال داخلي آمن بالسيرفر الحقيقي
-                            ▼
-┌────────────────────────────────────────────────────────┐
-│               سيرفر الباك إند الحقيقي للأكاديمية        │
-│             (Upstream API Services)                    │
-└───────────────────────────┴────────────────────────────┘
+### Deployment Option B: Self-Hosted Node.js Server
+```bash
+npm run build
+npm start
 ```
 
-#### جدول التقنيات المستخدمة:
-- **إطار العمل الرئيسي**: Angular 21.2 (مكونات مستقلة بالكامل Standalone، وإدارة حالة Signals)
-- **لغة البرمجة**: TypeScript 5.9.2 (مع تفعيل أعلى درجات التدقيق الصارم Strict Mode)
-- **التصميم وتنسيق الواجهات**: Tailwind CSS v4، ومكتبة الأيقونات FontAwesome 7.3
-- **إدارة الشبكة والمصادقة**: `HttpClient`، و RxJS 7.8، و Functional Interceptors
-- **معالجة المستندات والـ QR**: `jspdf` 4.2، و `html2canvas` 1.4، و `qrcode` 1.5
-- **طبقة الوسيط والحماية**: Node.js، و Express 4.18، و Vercel Serverless Functions
-- **منظومة الاختبارات الآلية**: Vitest 4.0، و JSDOM 28.0
+---
+
+## 9. Engineering Best Practices & Standards
+
+- **Strict Clean Architecture:** Pure Signals for branding tokens; zero hardcoded fallback strings.
+- **Fail-Fast Configuration:** Mandatory TypeScript contracts ensure complete institution branding before deployment.
+- **Client-Side Offloading:** PDF and image rendering handled purely on the client canvas, protecting server resources.
 
 ---
 
-### 4. المعمارية الأمنية وخادم البروكسي العكسي
+## 10. Product Roadmap
 
-حرصاً على سرية البنية التحتية لمنظومة الأكاديمية، يعتمد المشروع نمط **BFF (Backend-For-Frontend)**:
-
-1. **حماية الروابط من التسريب على GitHub**:
-   - لا يوجد أي رابط للسيرفر الحقيقي داخل ملفات الكود المرفوعة.
-   - الرابط الحقيقي يتم تخزينه حصراً في ملف `.env` المشفر والمستبعد تماماً عبر `.gitignore`.
-2. **إخفاء السيرفر داخل المتصفح (Network Tab)**:
-   - كافة طلبات الـ HTTP تذهب إلى مسار موحد وآمن هو `/api/proxy/*`.
-   - لا يستطيع المستخدم أو المهاجم معرفة عنوان IP أو دومين السيرفر الحقيقي.
-3. **معالجة أخطاء CORS جذرياً**:
-   - نظراً لأن المتصفح يرسل الطلبات لنفس النطاق (Same-Origin)، تختفي مشاكل تعارض النطاقات نهائياً.
-4. **حارس الجلسات (`errorInterceptor`)**:
-   - عند انتهاء صلاحية التوكن واستلام كود `401 Unauthorized`، يقوم فوراً بإنهاء الجلسة وتوجيه المستخدم لصفحة الدخول `/login`.
+- [ ] Bulk certificate generation via Excel/CSV import.
+- [ ] Direct email dispatch of issued certificates to learners.
+- [ ] Decentralized cryptographic verification anchors.
 
 ---
 
-### 5. الهيكل التنظيمي للمشروع والملفات
+## 11. Contributing & License
+
+Contributions are welcome via standard Pull Requests.
+
+**License:** Licensed under the **MIT License**. Open source for academic and enterprise use.
+
+---
+---
+
+## 📑 فهرس المحتويات العام
+- [الجزء الثاني: دليل التوثيق باللغة العربية](#-الجزء-الثاني-دليل-التوثيق-باللغة-العربية)
+  - [1. نظرة عامة ورؤية المنصة](#1-نظرة-عامة-ورؤية-المنصة)
+  - [2. نظام تخصيص الهوية للمؤسسات (White-Label)](#2-نظام-تخصيص-الهوية-للمؤسسات-white-label)
+  - [3. الميزات الرئيسية وإدارة الشهادات](#3-الميزات-الرئيسية-وإدارة-الشهادات)
+  - [4. المعمارية الهندسية وحزمة التقنيات](#4-المعمارية-الهندسية-وحزمة-التقنيات)
+  - [5. المعمارية الأمنية وخادم البروكسي العكسي](#5-المعمارية-الأمنية-وخادم-البروكسي-العكسي)
+  - [6. الهيكل التنظيمي للملفات والمجلدات](#6-الهيكل-التنظيمي-للملفات-والمجلدات)
+  - [7. دليل التثبيت والتشغيل المحلي](#7-دليل-التثبيت-والتشغيل-المحلي)
+  - [8. إعدادات النشر على السحابة](#8-إعدادات-النشر-على-السحابة)
+  - [9. معايير التطوير وجودة الكود](#9-معايير-التطوير-وجودة-الكود)
+  - [10. خارطة الطريق والتطوير المستقبلي](#10-خارطة-الطريق-والتطوير-المستقبلي)
+  - [11. المساهمة والترخيص](#11-المساهمة-والترخيص)
+
+---
+
+# الجزء الثاني: دليل التوثيق باللغة العربية
+
+## 1. نظرة عامة ورؤية المنصة
+
+**منظومة إدارة وإصدار الشهادات الأكاديمية (Academic Certificate Issuance & Management Platform)** هي منصة ويب مؤسسية متكاملة وفائقة السرعة، صُممت لصالح **الجامعات، الأكاديميات، والمراكز التعليمية والتدريبية**. الهدف الأساسي من المنظومة هو توفير بيئة عمل إدارية متكاملة لإنشاء وتوليد الشهادات الأكاديمية المعتمدة، معاينتها بتصاميم متعددة وراقية، تصديرها كملفات PDF عالية الدقة، وتوليد باركود (QR Code) ذكي يربط كل شهادة مباشرة ببوابة التحقق الإلكتروني المستقلة.
+
+تم بناء المنظومة بالاعتماد على أحدث إصدارات إطار العمل **Angular 21** بنظام **الإشارات التفاعلية (Signals)** وبمعمارية خالية من Zone.js (**Zoneless Architecture**)، مع واجهة بصرية عصرية مبنية بـ **Tailwind CSS v4**، وخادم وسيط آمن لحماية الـ APIs (**Reverse Proxy Gateway**).
+
+### ركائز المنظومة:
+- **نظام هوية قابل للتخصيص الكامل (White-Label):** إمكانية ضبط اسم الأكاديمية، شعارها، ألوانها، وتوقيعها المعتمد من ملف كود مركزي واحد في ثوانٍ معدودة.
+- **تصدير فوري دون إجهاد السيرفر:** توليد ملفات الـ PDF عالية الدقة وتجهيز الطباعة مباشرة من المتصفح عبر مكتبات معالجة الرسوميات.
+- **توليد رموز تحقق ذكية:** ربط كل شهادة صادرة برمز QR آمن يوجه مباشرة لبوابة التحقق المستقلة.
+- **متابعة وتدقيق الدورات:** لوحة بيانات متقدمة لمراقبة الدورات منتهية الصلاحية وسجلات التزام الطلاب.
+- **دعم كامل للغتين (العربية والإنجليزية):** تبديل فوري بين واجهة RTL و LTR بضغطة زر وبدون إعادة تحميل الصفحة.
+
+---
+
+## 2. نظام تخصيص الهوية للمؤسسات (White-Label)
+
+المنظومة مهيأة كحل متكامل جاهز لإعادة التسمية (**Turnkey White-Label Solution**) لأي مؤسسة تعليمية دون الحاجة لتعديل المكونات البرمجية أو إعدادات السيرفر.
+
+### ملف الإعدادات المركزي: `src/app/core/config/academy.config.ts`
+
+```typescript
+export interface AcademyConfig {
+  nameAr: string;
+  nameEn: string;
+  logoUrl: string;
+  primaryColor: string;
+  secondaryColor: string;
+  signatureUrl: string;
+  signatoryTitleAr: string;
+  signatoryTitleEn: string;
+  signatoryNameAr?: string;
+  signatoryNameEn?: string;
+}
+
+export const ACADEMY_CONFIG: AcademyConfig = {
+  nameAr: 'أكاديمية التعليم الحديث',
+  nameEn: 'Modern Learning Academy',
+  logoUrl: '/assets/logo.jpeg',
+  primaryColor: '#1E3A8A',    // اللون الأساسي للأزرار والقوائم والشهادات
+  secondaryColor: '#FBBF24',  // اللون الثانوي (الذهبي للإطارات والزخارف)
+  signatureUrl: '/assets/Signature.png',
+  signatoryTitleAr: 'المدير الأكاديمي',
+  signatoryTitleEn: 'Academic Director',
+  signatoryNameAr: '',
+  signatoryNameEn: '',
+};
+```
+
+### كيف يعمل النظام برمجياً؟
+- تتولى خدمة **`BrandingService`** قراءة هذه القيم وحقن متغيرات CSS مباشرة داخل `:root` (`--brand-primary` و `--brand-secondary`).
+- يتغير عنوان الصفحة (`document.title`) وأيقونة الموقع (`favicon`) والترويسة وتوقيع الشهادات تلقائياً بحسب الإعدادات.
+- ترتبط ألوان الواجهة تلقائياً بـ Tailwind CSS v4 دون الحاجة لإعادة بناء ملفات الـ CSS يدوياً.
+
+---
+
+## 3. الميزات الرئيسية وإدارة الشهادات
+
+### 📜 1. قوالب شهادات متعددة وراقية
+- **القالب الكلاسيكي الأكاديمي (Classic):** تصميم رسمي موثق يناسب الدورات والشهادات الجامعية والمهنية.
+- **القالب الملكي الذهبي (Elegant):** تصميم فاخر بلمسات ذهبية متناسقة للبرامج التدريبية المتقدمة.
+- **القالب القرآني والإسلامي (Quranic):** إطارات وزخارف إسلامية أصيلة مخصصة لحلقات ودورات القرآن الكريم والتجويد.
+
+### 🖨️ 2. محرك تصدير الـ PDF والطباعة المباشرة
+- تصدير متجهي عالي الدقة للشهادة بضغطة زر بصيغة PDF عبر `jspdf` و `html-to-image`.
+- إمكانية الطباعة الفيزيائية المباشرة من المتصفح مع ضبط مقاس A4 بالعرض وبدون هوامش مزعجة.
+
+### 🔍 3. الربط الذكي مع بوابة التحقق الإلكتروني
+- كل شهادة تحمل باركود توثيق خاص، يوجه مباشرة إلى بوابة التحقق الرسمية للمنظومة للتأكد من مصداقية الوثيقة.
+
+### 📊 4. تدقيق الدورات منتهية الصلاحية (Expired Courses)
+- جداول بيانات تفاعلية تدعم البحث والفرز والترقيم لمتابعة الدورات التي تجاوزت مدتها الزمنية ومراجعة حالات المعلمين والمشرفين.
+
+### 🌐 5. دعم كامل لثنائية اللغة والاتجاه (RTL / LTR)
+- تحول لحظي وسلس بين العربية والإنجليزية لواجهة الاستخدام بالكامل مع ضبط خطوط (الأميري وتجوّل).
+
+---
+
+## 4. المعمارية الهندسية وحزمة التقنيات
+
+### جدول حزمة التقنيات البرمجية
+
+| المجال | التقنية المستخدمة | الإصدار | الوظيفة والدور الهندسي |
+| :--- | :--- | :--- | :--- |
+| **إطار عمل الواجهة** | **Angular** | `21.2.0` | مكونات مستقلة (Standalone)، إدارة الحالة عبر الإشارات (Signals)، كشف تغيير بدون Zone.js. |
+| **لغة البرمجة** | **TypeScript** | `~5.9.2` | تدقيق صارم لضمان خلو النظام من الأخطاء أثناء التشغيل. |
+| **محرك التنسيق** | **Tailwind CSS** | `^4.1.12` | أحدث جيل من تيلويند باستخدام محرك PostCSS وتطبيق متغيرات ألوان المؤسسة التفاعلية. |
+| **معالجة المستندات** | **jsPDF & html2canvas** | `^4.2` / `^1.4` | تصدير الشهادات بدقة متناهية على طرف العميل. |
+| **توليد الباركود** | **QRCode.js** | `^1.5.4` | رسم وتوليد رموز الاستجابة السريعة للتحقق. |
+| **خادم التطوير والإنتاج** | **Express.js / Node.js** | `4.18` / `20+` | خادم لاستضافة التطبيق وتوفير مسار الـ Proxy الآمن. |
+| **الدوال السحابية** | **Vercel Serverless** | ES Modules | تشغيل دالة البروكسي الخلفية سحابياً عبر `/api/proxy.js`. |
+
+---
+
+## 5. المعمارية الأمنية وخادم البروكسي العكسي
+
+- **إخفاء السيرفر الداخلي:** كافة الاتصالات تمر عبر مسار موحد `/api/proxy/*`.
+- **حماية بيانات الدخول:** الروابط السرية وبيانات الربط تعيش حصراً على السيرفر في ملف `.env`.
+- **حارس الجلسات الذكي (`errorInterceptor`):** إنهاء فوري للجلسة عند استقبال كود 401 وإعادة توجيه المستخدم لصفحة تسجيل الدخول.
+
+---
+
+## 6. الهيكل التنظيمي للملفات والمجلدات
 
 ```
-knoz-academy/
-├── api/                             # دوال السيرفر السحابية في بيئة الإنتاج
-│   └── proxy.js                     # البروكسي الوسيط الخاص بمنصة Vercel
-├── public/                          # الملفات العامة والثابتة (الصور والأيقونات)
+academic-management/
+├── api/
+│   └── proxy.js                      # دالة Vercel السحابية للبروكسي الوسيط
+├── public/
+│   ├── assets/                       # شعار الأكاديمية وصورة التوقيع
+│   └── favicon.ico                   # أيقونة الموقع للمتصفح
 ├── src/
 │   ├── app/
-│   │   ├── core/                    # الخدمات المركزية والحراس والمعترضات
-│   │   │   ├── guards/              # حراس التوجيه (authGuard و guestGuard)
-│   │   │   ├── interceptors/        # معترضات الطلبات (errorInterceptor للتعامل مع 401)
-│   │   │   ├── mock/                # بيانات وهمية للاختبار والتطوير المنفصل
-│   │   │   ├── models/              # عقود البيانات وواجهات TypeScript (Interfaces)
-│   │   │   ├── services/            # خدمات البيانات (Auth, Certificate, Report, Language)
-│   │   │   └── utils/               # دوال المساعدة العامة
-│   │   ├── features/                # وحدات النظام وشاشات المستخدم الرئيسية
-│   │   │   ├── certificate-preview/ # شاشة فحص ومعاينة الشهادة
-│   │   │   ├── certificates-list/   # قائمة وسجل الشهادات المصدرة
-│   │   │   ├── create-certificate/  # نموذج إنشاء وتوليد شهادة جديدة
-│   │   │   ├── dashboard/           # لوحة التحكم والإحصائيات العامة
-│   │   │   ├── expired-courses/     # تقرير الدورات التدريبية منتهية الصلاحية
-│   │   │   ├── login/               # بوابة تسجيل الدخول الآمن
-│   │   │   ├── profile/             # الملف الشخصي وإعدادات الحساب
-│   │   │   └── settings/            # الإعدادات العامة للنظام
-│   │   ├── app.config.ts            # تهيئة مزودات الخدمة والتوجيه في Angular
-│   │   ├── app.css                  # التنسيقات العامة واستيراد Tailwind v4
-│   │   ├── app.html                 # الهيكل العام للتطبيق مع شاشة التحميل والموجه
-│   │   ├── app.routes.ts            # جدول توجيه المسارات وحمايتها
-│   │   └── app.ts                   # المكون الأساسي للتطبيق (Root Component)
-│   ├── index.html                   # ملف الـ HTML الأساسي
-│   ├── main.ts                      # نقطة الإقلاع وبدء تشغيل التطبيق
-│   └── styles.css                   # ملف الأنماط الأساسي
-├── .env.example                     # نموذج استرشادي للمتغيرات البيئية
-├── angular.json                     # إعدادات البناء وأوامر Angular CLI
-├── package.json                     # سجل الاعتماديات وحزم المشروع
-├── server.mjs                       # خادم Express الوسيط للبيئة المحلية
-├── tsconfig.json                    # إعدادات مترجم TypeScript الصارمة
-└── vercel.json                      # قواعد توجيه مسارات Vercel
+│   │   ├── core/
+│   │   │   ├── config/
+│   │   │   │   └── academy.config.ts # إعدادات تخصيص الهوية (White-Label)
+│   │   │   ├── guards/               # حراس التوجيه (authGuard و guestGuard)
+│   │   │   ├── interceptors/         # معترضات الطلبات وأخطاء 401
+│   │   │   ├── mock/                # قاموس النصوص للغتين العربية والإنجليزية
+│   │   │   ├── services/
+│   │   │   │   ├── branding.service.ts     # خدمة إدارة الهوية وحقن الألوان
+│   │   │   │   ├── certificate.service.ts  # خدمة إدارة وحفظ وتوليد الشهادات
+│   │   │   │   └── report.service.ts       # خدمة تقارير الدورات المنتهية
+│   │   │   └── utils/
+│   │   ├── features/
+│   │   │   ├── certificate-preview/  # شاشة فحص ومعاينة وتصدير الشهادة (PDF)
+│   │   │   ├── certificates-list/    # سجل وقائمة الشهادات الصادرة
+│   │   │   ├── create-certificate/   # نموذج إنشاء شهادة جديدة
+│   │   │   ├── dashboard/            # لوحة المؤشرات والإحصائيات
+│   │   │   ├── expired-courses/      # تقرير الدورات التدريبية المنتهية
+│   │   │   ├── login/                # بوابة تسجيل الدخول الآمن
+│   │   │   ├── profile/              # الملف التعريفي للمشرف
+│   │   │   └── settings/             # الإعدادات واختيار القالب الافتراضي
+│   │   ├── app.config.ts             # إعدادات التطبيق وتوفير مسارات التوجيه
+│   │   ├── app.html                  # حاوية التوجيه الجذرية
+│   │   ├── app.routes.ts             # مسارات التوجيه وحمايتها
+│   │   └── app.ts                    # المكون الرئيسي للتطبيق
+│   ├── index.html                    # ملف الـ HTML الرئيسي مع خطوط جوجل
+│   ├── main.ts                       # نقطة انطلاق التطبيق بدون Zone.js
+│   └── styles.css                    # إعدادات Tailwind ومتغيرات الألوان التفاعلية
+├── .env.example                      # نموذج استرشادي للمتغيرات البيئية
+├── angular.json                      # إعدادات بناء Angular
+├── package.json                      # الحزم والتبعيات والأوامر البرمجية
+├── server.mjs                        # سيرفر Express للتشغيل المحلي والإنتاج
+└── tsconfig.json                     # إعدادات TypeScript العامة
 ```
 
 ---
 
-### 6. دليل التثبيت والتشغيل
+## 7. دليل التثبيت والتشغيل المحلي
 
-#### المتطلبات الأساسية
-- **Node.js**: إصدار `v20.x` أو `v22.x` (يفضل إصدار الدعم الطويل LTS).
-- **مدير الحزم**: `npm` (الإصدار 10 وما بعده) أو `bun`.
-- **أداة Angular CLI**:
-  ```bash
-  npm install -g @angular/cli@21
-  ```
-
-#### خطوات التشغيل خطوة بخطوة
+### خطوات التشغيل:
 
 1. **استنساخ المستودع (Clone):**
    ```bash
-   git clone https://github.com/tasneemmostafa369/KnozCertificateTest.git
-   cd KnozCertificateTest
+   git clone https://github.com/YOUR_ORGANIZATION/academic-management.git
+   cd academic-management
    ```
 
-2. **تثبيت حزم المشروع:**
+2. **تثبيت الحزم التابعة:**
    ```bash
    npm install
    ```
 
 3. **إعداد المتغيرات البيئية:**
-   قم بإنشاء ملف `.env` في المجلد الرئيسي للمشروع:
    ```bash
    cp .env.example .env
    ```
-   ثم حدد رابط السيرفر المشفر:
+   ثم ضعي رابط الـ API في ملف `.env`:
    ```env
-   KNOZ_API_BASE_URL=https://api.your-backend-domain.com
-   PORT=3000
+   KNOZ_API_BASE_URL=https://your-api-domain.example.com
    ```
 
-4. **تشغيل بيئة التطوير المحلية:**
+4. **تخصيص هوية الأكاديمية:**
+   عدلي ملف `src/app/core/config/academy.config.ts` وضعي اسم وشعار وألوان وتوقيع المؤسسة التعليمية.
+
+5. **تشغيل خادم التطوير:**
    ```bash
    npm start
    ```
-   افتح المتصفح وتوجه إلى: `http://localhost:3000/`.
-
-5. **تشغيل الاختبارات البرمجية:**
-   ```bash
-   npm test
+   سيعمل التطبيق محلياً على:
+   ```
+   http://localhost:3000
    ```
 
-6. **بناء المشروع للإنتاج (Production Build):**
-   ```bash
-   npm run build
-   ```
-   سيتم تجهيز ملفات الإنتاج النهائية المضغوطة داخل مجلد `dist/knoz-academy`.
+---
+
+## 8. إعدادات النشر على السحابة
+
+### النشر عبر Vercel (موصى به)
+1. ارفعي الكود إلى مستودعك على **GitHub**.
+2. توجهي إلى **[Vercel](https://vercel.com)** واضغطي **Add New Project**.
+3. في قسم **Environment Variables**، أضيفي:
+   - **`KNOZ_API_BASE_URL`**: الرابط الأساسي للخدمة
+4. اضغطي **Deploy**.
 
 ---
 
-### 7. معايير الجودة وأفضل الممارسات الهندسية
+## 9. معايير التطوير وجودة الكود
 
-- **الاعتماد الكلي على Signals**: يتم إدارة البيانات التفاعلية من خلال `signal()` و `computed()` مما يضمن تحديث أجزاء الصفحة المطلوبة فقط دون إهدار موارد الجهاز.
-- **النماذج التفاعلية الصارمة (Reactive Forms)**: كافة النماذج مدعمة بفلاتر تدقيق وحماية لمنع إدخال بيانات غير مكتملة أو غير صالحة.
-- **عزل المكونات (Standalone Paradigm)**: إلغاء الـ NgModules القديمة لتقليل حجم ملفات الجافاسكريبت وتحسين سرعة التحميل الأولى.
-- **معايير الأمان ضد الـ XSS**: يتم فحص وتمرير نصوص الشهادات ورموز الـ QR عبر طبقات حماية مخصصة في Canvas.
-
----
-
-### 8. خارطة الطريق والتطوير المستقبلي
-
-- [ ] **إصدار الشهادات المجمع (Bulk Generation)**: إمكانية رفع ملف إكسل وإصدار مئات الشهادات دفعة واحدة في الخلفية.
-- [ ] **التوثيق الرقمي عبر البلوكتشين (Blockchain Verification)**: إضافة طبقة توثيق لامركزية غير قابلة للتزوير.
-- [ ] **الإرسال التلقائي عبر البريد الإلكتروني**: تسليم الشهادات فور إصدارها مباشرة لبريد الطالب.
-- [ ] **تطبيق ويب تقدمي (PWA)**: إمكانية حفظ واستعراض الشهادات المصدرة بدون اتصال بالإنترنت.
+- **معمارية الكود النظيف الصارمة (Strict Clean Architecture):** حقول إجبارية تمنع النشر غير المكتمل (Fail-Fast).
+- **إدارة الحالة عبر Signals:** كفاءة وسرعة فائقة دون Zone.js.
+- **تصدير مستندات آمن:** حماية ضد ثغرات الحقن ومعالجة رسومية على طرف العميل.
 
 ---
 
-### 9. المساهمة والترخيص
+## 10. خارطة الطريق والتطوير المستقبلي
 
-المساهمات البرمجية مخصصة لفريق عمل ومطوري أكاديمية كنوز:
-1. أنشئ فرعاً جديداً للخاصية: `git checkout -b feature/new-capability`
-2. دوّن التعديلات برسائل واضحة: `git commit -m 'feat: enhance certificate preview'`
-3. ارفع التعديلات للفرع: `git push origin feature/new-capability`
-4. افتح طلب دمج (Pull Request) للمراجعة المعمارية.
+- [ ] التوليد المجمع للشهادات عبر رفع ملف Excel/CSV.
+- [ ] الإرسال المباشر للشهادات لبريد الطلاب.
+- [ ] التوثيق اللامركزي عبر تقنية البلوكتشين.
 
-**حقوق النشر والترخيص**: جميع الحقوق محفوظة لـ **أكاديمية كنوز (Knoz Academy)** © 2026. الاستخدام مقتصر على الأغراض المصرح بها رسمياً.
+---
+
+## 11. المساهمة والترخيص
+
+المشروع مرخص تحت رخصة **MIT**. مفتوح المصدر للاستخدام الأكاديمي والمؤسسي.
