@@ -9,7 +9,11 @@ import { guestGuard } from './core/guards/guest.guard';
 const redirectToNewVerification = (route: ActivatedRouteSnapshot) => {
     const sspId = route.paramMap.get('sspId') || '';
     if (typeof window !== 'undefined') {
-        window.location.replace(`https://knoz-verification.vercel.app/${sspId}`);
+        const hostname = window.location.hostname;
+        const baseUrl = (hostname === 'localhost' || hostname === '127.0.0.1')
+            ? 'http://localhost:3001'
+            : 'https://knoz-verification.vercel.app';
+        window.location.replace(`${baseUrl}/${sspId}`);
     }
     return false;
 };

@@ -84,7 +84,9 @@ app.all('/api/proxy/*', async (req, res) => {
 });
 
 app.get(['/certificates/Verification/:sspId', '/certificates/verification/:sspId'], (req, res) => {
-  res.redirect(302, `https://knoz-verification.vercel.app/${req.params.sspId}`);
+  const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+  const baseUrl = isLocal ? 'http://localhost:3001' : (process.env.VERIFICATION_URL || 'https://knoz-verification.vercel.app');
+  res.redirect(302, `${baseUrl}/${req.params.sspId}`);
 });
 
 app.use(express.static(path.join(__dirname, 'dist/knoz-academy/browser')));
@@ -93,6 +95,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/knoz-academy/browser/index.html'));
 });
 
-app.listen(3000, '0.0.0.0', () => {
-  console.log('Server is running on http://0.0.0.0:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n  ➜  Local:   http://localhost:${PORT}/`);
+  console.log(`  ➜  Network: http://127.0.0.1:${PORT}/\n`);
 });

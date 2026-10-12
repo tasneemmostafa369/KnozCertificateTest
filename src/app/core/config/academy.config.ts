@@ -16,8 +16,8 @@ export const ACADEMY_CONFIG: AcademyConfig = {
   nameEn: 'Knoz Academy',
 
   logoUrl: '/assets/logo.jpeg',
-  primaryColor: '#0F392B',    
-  secondaryColor: '#C8A559',  
+  primaryColor: '#0F392B',
+  secondaryColor: '#C8A559',
 
   signatureUrl: '/assets/Signature.png',
   signatoryTitleAr: 'المدير الأكاديمي',

@@ -44,6 +44,12 @@ export class CertificatePreview implements OnInit {
   }
 
   get verificationUrl(): string {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return `http://localhost:3001/${this.encodedSspId}`;
+      }
+    }
     return `https://knoz-verification.vercel.app/${this.encodedSspId}`;
   }
 
